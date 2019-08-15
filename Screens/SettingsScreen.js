@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import colors from '../Constants/colors';
-import container from '../Constants/container';
 
 const SettingsScreen = () => {
+
   return (
     <View style={styles.container}>
       <Text>settings screen</Text>
@@ -12,7 +12,10 @@ const SettingsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: container,
+  container: {
+    flex: 1,
+    backgroundColor: colors.primary
+  }
 });
 
 export default SettingsScreen;

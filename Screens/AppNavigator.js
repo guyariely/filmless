@@ -3,12 +3,12 @@ import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import DiscoverScreen from './DiscoverScreen';
+import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import WatchListScreen from './WatchListScreen';  
 import SettingsScreen from './SettingsScreen';
 import Colors from '../Constants/colors';
 
-const MainNavigator = createMaterialBottomTabNavigator(
+const AppNavigator = createMaterialBottomTabNavigator(
   {
     Discover: { 
       screen: DiscoverScreen,
@@ -50,4 +50,4 @@ const MainNavigator = createMaterialBottomTabNavigator(
   }
 );
 
-export default createAppContainer(MainNavigator);
+export default createAppContainer(AppNavigator);

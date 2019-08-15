@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import colors from '../Constants/colors';
-import container from '../Constants/container';
 
 const WatchListScreen = () => {
   return (
@@ -12,7 +11,10 @@ const WatchListScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: container,
+  container: {
+    flex: 1,
+    backgroundColor: colors.primary
+  }
 });
 
 export default WatchListScreen;
