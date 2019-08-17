@@ -3,7 +3,7 @@ import { StyleSheet, View, Button } from "react-native";
 import FormContainer from './FormNavigator';
 import colors from '../../../Constants/colors';
 
-const Form = () => {
+const Form = props => {
 
   const [rating, setRating] = useState(null);
   const [time, setTime] = useState(null);
@@ -13,19 +13,6 @@ const Form = () => {
   const [languages, setLanguages] = useState([]);
   const [showWatchedMovies, setShowWatchedMovies] = useState(false);
   const [netflixOnly, setNetflixOnly] = useState(false);
-
-  const test = () => {
-    console.log(`
-      rating: ${rating},
-      time: ${time},
-      fromYear: ${fromYear},
-      toYear: ${toYear},
-      genres: ${genres},
-      languages: ${languages},
-      showWatchedMovies: ${showWatchedMovies},
-      netflixOnly: ${netflixOnly}
-    `);
-  };
 
   return (
     <View style={styles.container}>
@@ -45,7 +32,7 @@ const Form = () => {
         <Button 
           title="Search"
           color={colors.text}
-          onPress={() => test()}
+          onPress={() => props.loadMovies({rating, time, fromYear, toYear, genres, languages, showWatchedMovies, netflixOnly})}
         />
       </View>
     </View>
