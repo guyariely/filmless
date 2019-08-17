@@ -2,67 +2,65 @@ import React from 'react';
 import { StyleSheet, View, Text, Button } from "react-native";
 import colors from '../../../Constants/colors';
 
-class Options extends React.Component {
+const Options = props => {
 
-  constructor(props) {
-    super(props);
-    this.updateShowWatchedMovies = this.updateShowWatchedMovies.bind(this);
-    this.updateNetflixOnly = this.updateNetflixOnly.bind(this);
-    this.state = {
-      showWatchedMovies: false,
-      netflixOnly: false
-    }
-  }
+  const { showWatchedMovies, setShowWatchedMovies, netflixOnly, setNetflixOnly } = props.screenProps; 
 
-  updateShowWatchedMovies(bool) {
-    this.setState({showWatchedMovies: bool})
-  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>SHOW WATCHED MOVIES</Text>
+      <View style={styles.buttonsContainer}>
+        <View style={
+          showWatchedMovies ?
+          [styles.button, styles.buttonActive] :
+          styles.button
+        }>
+          <Button 
+            title="YES" 
+            color={colors.text} 
+            onPress={() => setShowWatchedMovies(true)} 
+          />
+        </View>
+        <View style={
+          showWatchedMovies ?
+          styles.button :
+          [styles.button, styles.buttonActive]
+        }>
+          <Button 
+            title="NO" 
+            color={colors.text} 
+            onPress={() => setShowWatchedMovies(false)} 
+          />
+        </View>
+      </View> 
 
-  updateNetflixOnly(bool) {
-    this.setState({netflixOnly: bool})
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.label}>SHOW WATCHED MOVIES</Text>
-        <View style={styles.buttonsContainer}>
-          <View style={
-            this.state.showWatchedMovies ?
-            [styles.button, styles.buttonActive] :
-            styles.button
-          }>
-            <Button title="YES" color={colors.text} onPress={() => this.updateShowWatchedMovies(true)} />
-          </View>
-          <View style={
-            this.state.showWatchedMovies ?
-            styles.button :
-            [styles.button, styles.buttonActive]
-          }>
-            <Button title="NO" color={colors.text} onPress={() => this.updateShowWatchedMovies(false)} />
-          </View>
-        </View> 
-
-        <Text style={styles.label}>NETFLIX ONLY</Text>
-        <View style={styles.buttonsContainer}>
-          <View style={
-            this.state.netflixOnly ?
-            [styles.button, styles.buttonActive] :
-            styles.button
-          }>
-            <Button title="YES" color={colors.text} onPress={() => this.updateNetflixOnly(true)} />
-          </View>
-          <View style={
-            this.state.netflixOnly ?
-            styles.button :
-            [styles.button, styles.buttonActive]
-          }>
-            <Button title="NO" color={colors.text} onPress={() => this.updateNetflixOnly(false)} />
-          </View>
+      <Text style={styles.label}>NETFLIX ONLY</Text>
+      <View style={styles.buttonsContainer}>
+        <View style={
+          netflixOnly ?
+          [styles.button, styles.buttonActive] :
+          styles.button
+        }>
+          <Button 
+            title="YES" 
+            color={colors.text} 
+            onPress={() => setNetflixOnly(true)} 
+          />
+        </View>
+        <View style={
+          netflixOnly ?
+          styles.button :
+          [styles.button, styles.buttonActive]
+        }>
+          <Button 
+            title="NO" 
+            color={colors.text} 
+            onPress={() => setNetflixOnly(false)} 
+          />
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

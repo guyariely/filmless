@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput } from "react-native";
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import SelectInput from 'react-native-sectioned-multi-select';
 import colors from '../../../Constants/colors';
 import fonts from '../../../Constants/fonts';
 
-const genres = [{
+const genresList = [{
   name: 'Genres',
   id: 0,
   children: [ 
@@ -30,7 +30,7 @@ const genres = [{
   ]
 }];
 
-const languages = [{
+const languagesList = [{
   name: 'Languages',
   id: 0,
   children: [ 
@@ -223,99 +223,75 @@ const languages = [{
   ]
 }];
 
-const parseIDsToGenresString = IDs => {
-  return IDs.map(ID => genres[0].children.find(
-    genre => genre.id == ID
+const parseIDsToString = (IDs, categories) => {
+  return IDs.map(ID => categories[0].children.find(
+    categorie => categorie.id == ID
   ).name).join(', ');
 };
 
-const parseIDsToLanguagesString = IDs => {
-  return IDs.map(ID => languages[0].children.find(
-    language => language.id == ID
-  ).name).join(', ');
-};
+const Categories = props => {
 
-class Categories extends React.Component {
+  const { genres, setGenres, languages, setLanguages } = props.screenProps;
 
-  constructor(props) {
-    super(props);
-    this.updateGenres = this.updateGenres.bind(this);
-    this.updateLanguages = this.updateLanguages.bind(this);
-    this.state = {
-      genres: [],
-      languages: []
-    }
-  }
-
-  updateGenres(genres) {
-    this.setState({ genres });
-  };
-
-  updateLanguages(languages) {
-    this.setState({ languages });
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>GENRES</Text>
-          <SectionedMultiSelect
-          items={genres}
-          uniqueKey="id"
-          subKey="children"
-          selectText={
-            this.state.genres.length == 0 ?
-            "ALL GENRES" :
-            parseIDsToGenresString(this.state.genres)
-          }
-          alwaysShowSelectText={true}
-          showDropDowns={false}
-          readOnlyHeadings={true}
-          hideSearch={true}
-          showChips={false}
-          modalWithSafeAreaView={true}
-          onSelectedItemsChange={this.updateGenres}
-          selectedItems={this.state.genres}
-          colors={sectionedMultiSelectColors}
-          styles={
-            this.state.genres.length == 0 ?
-            sectionedMultiSelectStyles :
-            [sectionedMultiSelectStyles, sectionedMultiSelectStyles__active]
-          }
-        />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>LANGUAGES</Text>
-          <SectionedMultiSelect
-          items={languages}
-          uniqueKey="id"
-          subKey="children"
-          selectText={
-            this.state.languages.length == 0 ?
-            "ALL LANGUAGES" :
-            parseIDsToLanguagesString(this.state.languages)
-          }
-          searchPlaceholderText="Search languages..."
-          alwaysShowSelectText={true}
-          showDropDowns={false}
-          readOnlyHeadings={true}
-          showChips={false}
-          modalWithSafeAreaView={true}
-          onSelectedItemsChange={this.updateLanguages}
-          selectedItems={this.state.languages}
-          colors={sectionedMultiSelectColors}
-          styles={
-            this.state.languages.length == 0 ?
-            sectionedMultiSelectStyles :
-            [sectionedMultiSelectStyles, sectionedMultiSelectStyles__active]
-          }
-        />
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>GENRES</Text>
+        <SelectInput
+        items={genresList}
+        uniqueKey="id"
+        subKey="children"
+        selectText={
+          genres.length == 0 ?
+          "ALL GENRES" :
+          parseIDsToString(genres, genresList)
+        }
+        alwaysShowSelectText={true}
+        showDropDowns={false}
+        readOnlyHeadings={true}
+        hideSearch={true}
+        showChips={false}
+        modalWithSafeAreaView={true}
+        onSelectedItemsChange={genres => setGenres(genres)}
+        selectedItems={genres}
+        colors={selectInputColors}
+        styles={
+          genres.length == 0 ?
+          selectInputStyles :
+          [selectInputStyles, SelectInputStyles__active]
+        }
+      />
       </View>
-    );
-  }
-}
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>LANGUAGES</Text>
+        <SelectInput
+        items={languagesList}
+        uniqueKey="id"
+        subKey="children"
+        selectText={
+          languages.length == 0 ?
+          "ALL LANGUAGES" :
+          parseIDsToString(languages, languagesList)
+        }
+        searchPlaceholderText="Search languages..."
+        alwaysShowSelectText={true}
+        showDropDowns={false}
+        readOnlyHeadings={true}
+        showChips={false}
+        modalWithSafeAreaView={true}
+        onSelectedItemsChange={languages => setLanguages(languages)}
+        selectedItems={languages}
+        colors={selectInputColors}
+        styles={
+          languages.length == 0 ?
+          selectInputStyles :
+          [selectInputStyles, SelectInputStyles__active]
+        }
+      />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -332,13 +308,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const sectionedMultiSelectColors = {
+const selectInputColors = {
   primary: colors.text,
   subItemBackground: colors.primary,
   searchSelectionColor: colors.text
 }
 
-const sectionedMultiSelectStyles = {
+const selectInputStyles = {
   container: {
     backgroundColor: colors.primary,
     borderRadius: 15,
@@ -398,7 +374,7 @@ const sectionedMultiSelectStyles = {
   }
 };
 
-const sectionedMultiSelectStyles__active = {
+const SelectInputStyles__active = {
   selectToggleText: {
     color: colors.text,
   }

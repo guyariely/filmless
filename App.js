@@ -10,7 +10,7 @@ const App = () => {
   
     return (
       <View style={styles.container}>
-        <AppContainer screenProps={{test: 'this is a test'}}/>
+        <AppContainer />
       </View>
     );
 };

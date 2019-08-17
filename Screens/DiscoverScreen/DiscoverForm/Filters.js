@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput } from "react-native";
-import RNPickerSelect from 'react-native-picker-select';
+import WheelInput from 'react-native-picker-select';
 import colors from '../../../Constants/colors';
 
 const timeDurations = [
@@ -24,106 +24,91 @@ const validateYear = year => {
   return year.replace(/\./g,'');
 };
 
-class Filters extends React.Component {
+const Filters = props => {
 
-  constructor(props) {
-    super(props);
-    this.updateRating = this.updateRating.bind(this);
-    this.state = {
-      rating: null,
-      time: null,
-      fromYear: null,
-      toYear: null,
-      focusedInput: null
-    }
-  }
+  const [focusedInput, setFocusedInput] = useState(null);
 
-  updateRating(value) {
-    if (value > 9.9) value = '9.9';
-    this.setState({rating: value});
-  }
+  const { rating, setRating, time, setTime, fromYear, setFromYear, toYear, setToYear } = props.screenProps;
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>MIN RATING</Text>
-          <TextInput
-          style={
-              this.state.focusedInput === 'rating' ?
-              [styles.input, styles.inputFocused] :
-              styles.input
-            }
-            placeholder="NO FILTER"
-            onFocus={ () => this.setState({focusedInput: 'rating'}) }
-            onBlur={ () => this.setState({focusedInput: ''})}
-            placeholderTextColor={colors.lightText}
-            selectionColor={colors.highlight}
-            onChangeText={rating => this.updateRating(rating)}
-            keyboardType="numeric"
-            maxLength={3}
-            value={this.state.rating}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>MAX TIME</Text>
-          <RNPickerSelect
-            style={
-              this.state.focusedInput === 'time' ?
-              pickerSelectStylesFocused :
-              pickerSelectStyles            
-            }
-            onOpen={ () => this.setState({focusedInput: 'time'}) }
-            onClose={ () => this.setState({focusedInput: ''})} 
-            placeholder={{label: 'NO FILTER'}}
-            placeholderTextColor={colors.lightText}
-            items={timeDurations}
-            value={this.state.time}
-            onValueChange={value => this.setState({time: value})}
-          />
-        </View> 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>FROM YEAR</Text>
-          <TextInput
-            style={
-              this.state.focusedInput === 'fromYear' ?
-              [styles.input, styles.inputFocused] :
-              styles.input
-            }
-            placeholder="NO FILTER"
-            onFocus={ () => this.setState({focusedInput: 'fromYear'}) }
-            onBlur={ () => this.setState({focusedInput: ''})}
-            placeholderTextColor={colors.lightText}
-            selectionColor={colors.highlight}
-            onChangeText={year => this.setState({fromYear: validateYear(year)})}
-            keyboardType="numeric"
-            maxLength={4}
-            value={this.state.fromYear}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>TO YEAR</Text>
-          <TextInput
-          style={
-              this.state.focusedInput === 'toYear' ?
-              [styles.input, styles.inputFocused] :
-              styles.input
-            }
-            onFocus={ () => this.setState({focusedInput: 'toYear'}) }
-            onBlur={ () => this.setState({focusedInput: ''})}
-            placeholder="NO FILTER"
-            placeholderTextColor={colors.lightText}
-            selectionColor={colors.highlight}
-            onChangeText={year => this.setState({toYear: validateYear(year)})}
-            keyboardType="numeric"
-            maxLength={4}
-            value={this.state.toYear}
-          />
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>MIN RATING</Text>
+        <TextInput
+        style={
+            focusedInput === 'rating' ?
+            [styles.input, styles.inputFocused] :
+            styles.input
+          }
+          placeholder="NO FILTER"
+          onFocus={() => setFocusedInput('rating')}
+          onBlur={() => setFocusedInput('')}
+          placeholderTextColor={colors.lightText}
+          selectionColor={colors.highlight}
+          onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
+          keyboardType="numeric"
+          maxLength={3}
+          value={rating}
+      />
       </View>
-    );
-  }
-}
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>MAX TIME</Text>
+        <WheelInput
+          style={
+            focusedInput === 'time' ?
+            WheelInputStyles__focused :
+            WheelInputStyles            
+          }
+          onOpen={() => setFocusedInput('time')}
+          onClose={() => setFocusedInput('')} 
+          placeholder={{label: 'NO FILTER'}}
+          placeholderTextColor={colors.lightText}
+          items={timeDurations}
+          value={time}
+          onValueChange={time => setTime(time)}
+        />
+        </View> 
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>FROM YEAR</Text>
+        <TextInput
+          style={
+            focusedInput === 'fromYear' ?
+            [styles.input, styles.inputFocused] :
+            styles.input
+          }
+          placeholder="NO FILTER"
+          onFocus={() => setFocusedInput('fromYear')}
+          onBlur={() => setFocusedInput('')}
+          placeholderTextColor={colors.lightText}
+          selectionColor={colors.highlight}
+          onChangeText={year => setFromYear(validateYear(year))}
+          keyboardType="numeric"
+          maxLength={4}
+          value={fromYear}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>TO YEAR</Text>
+        <TextInput
+        style={
+            focusedInput === 'toYear' ?
+            [styles.input, styles.inputFocused] :
+            styles.input
+          }
+          onFocus={() => setFocusedInput('toYear')}
+          onBlur={() => setFocusedInput('')}
+          placeholder="NO FILTER"
+          placeholderTextColor={colors.lightText}
+          selectionColor={colors.highlight}
+          onChangeText={year => setToYear(validateYear(year))}
+          keyboardType="numeric"
+          maxLength={4}
+          value={toYear}
+        />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -157,7 +142,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const pickerSelectStyles = StyleSheet.create({
+const WheelInputStyles = StyleSheet.create({
   inputIOS: {
     height: 45,
     backgroundColor: colors.primary,
@@ -177,7 +162,7 @@ const pickerSelectStyles = StyleSheet.create({
   }
 });
 
-const pickerSelectStylesFocused = StyleSheet.create({
+const WheelInputStyles__focused = StyleSheet.create({
   inputIOS: {
     height: 45,
     backgroundColor: colors.primary,
