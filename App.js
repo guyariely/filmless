@@ -3,6 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import colors from './Constants/colors';
 import AppContainer from './Screens/AppNavigator';
 
+import { YellowBox } from 'react-native'
+YellowBox.ignoreWarnings(['You should only render one navigator']);
+
 const App = () => {
   
     return (

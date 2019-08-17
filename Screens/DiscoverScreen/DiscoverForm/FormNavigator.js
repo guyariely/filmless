@@ -1,4 +1,3 @@
-import React from 'react';
 import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
 import colors from '../../../Constants/colors';
 import Filters from './Filters';
