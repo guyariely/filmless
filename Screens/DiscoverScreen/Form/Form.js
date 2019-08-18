@@ -32,7 +32,10 @@ const Form = props => {
         <Button 
           title="Search"
           color={colors.text}
-          onPress={() => props.loadMovies({rating, time, fromYear, toYear, genres, languages, showWatchedMovies, netflixOnly})}
+          onPress={() => props.loadMovies(
+            { rating, time, fromYear, toYear, genres, 
+              languages, showWatchedMovies, netflixOnly
+            })}
         />
       </View>
     </View>

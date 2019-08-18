@@ -26,8 +26,6 @@ const validateYear = year => {
 
 const Filters = props => {
 
-  const [focusedInput, setFocusedInput] = useState(null);
-
   const { rating, setRating, time, setTime, fromYear, setFromYear, toYear, setToYear } = props.screenProps;
 
   return (
@@ -36,13 +34,11 @@ const Filters = props => {
         <Text style={styles.label}>MIN RATING</Text>
         <TextInput
         style={
-            focusedInput === 'rating' ?
-            [styles.input, styles.inputFocused] :
+            rating ?
+            [styles.input, styles.input__active] :
             styles.input
           }
           placeholder="NO FILTER"
-          onFocus={() => setFocusedInput('rating')}
-          onBlur={() => setFocusedInput('')}
           placeholderTextColor={colors.lightText}
           selectionColor={colors.highlight}
           onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
@@ -54,31 +50,19 @@ const Filters = props => {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>MAX TIME</Text>
         <WheelInput
-          style={
-            focusedInput === 'time' ?
-            WheelInputStyles__focused :
-            WheelInputStyles            
-          }
-          onOpen={() => setFocusedInput('time')}
-          onClose={() => setFocusedInput('')} 
+          style={time ? wheelInputStyles__active : wheelInputStyles}
           placeholder={{label: 'NO FILTER'}}
           placeholderTextColor={colors.lightText}
           items={timeDurations}
           value={time}
           onValueChange={time => setTime(time)}
         />
-        </View> 
+      </View> 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>FROM YEAR</Text>
         <TextInput
-          style={
-            focusedInput === 'fromYear' ?
-            [styles.input, styles.inputFocused] :
-            styles.input
-          }
+          style={fromYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
-          onFocus={() => setFocusedInput('fromYear')}
-          onBlur={() => setFocusedInput('')}
           placeholderTextColor={colors.lightText}
           selectionColor={colors.highlight}
           onChangeText={year => setFromYear(validateYear(year))}
@@ -90,13 +74,7 @@ const Filters = props => {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>TO YEAR</Text>
         <TextInput
-        style={
-            focusedInput === 'toYear' ?
-            [styles.input, styles.inputFocused] :
-            styles.input
-          }
-          onFocus={() => setFocusedInput('toYear')}
-          onBlur={() => setFocusedInput('')}
+          style={toYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
           placeholderTextColor={colors.lightText}
           selectionColor={colors.highlight}
@@ -130,22 +108,25 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 45,
-    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+    borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
     color: colors.text,
     fontSize: 16
   },
-  inputFocused: {
+  input__active: {
     borderWidth: 1,
+    backgroundColor: colors.primary,
     borderColor: colors.highlight
   }
 });
 
-const WheelInputStyles = StyleSheet.create({
+const wheelInputStyles = StyleSheet.create({
   inputIOS: {
     height: 45,
-    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+    borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
     color: colors.text,
@@ -153,7 +134,8 @@ const WheelInputStyles = StyleSheet.create({
   },
   inputAndroid: {
     height: 45,
-    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+    borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 15,
     textAlign: 'center',
@@ -162,10 +144,12 @@ const WheelInputStyles = StyleSheet.create({
   }
 });
 
-const WheelInputStyles__focused = StyleSheet.create({
+const wheelInputStyles__active = StyleSheet.create({
   inputIOS: {
     height: 45,
     backgroundColor: colors.primary,
+    borderColor: colors.highlight,
+    borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
     color: colors.text,
@@ -176,6 +160,8 @@ const WheelInputStyles__focused = StyleSheet.create({
   inputAndroid: {
     height: 45,
     backgroundColor: colors.primary,
+    borderColor: colors.highlight,
+    borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 15,
     textAlign: 'center',

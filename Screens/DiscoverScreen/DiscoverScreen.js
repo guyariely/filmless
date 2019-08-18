@@ -1,10 +1,13 @@
+import { API_KEY } from '../../env';
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
+import axios from 'axios';
 import colors from '../../Constants/colors';
-import Form from './DiscoverForm/Form';
+import Form from './Form/Form';
 
 const DiscoverScreen = () => {
 
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,32 +23,37 @@ const DiscoverScreen = () => {
       showWatchedMovies, netflixOnly 
     } = inputs;
 
-    if (fromYear > toYear) {
+    // inputs validation
+    if (!Number(rating) && rating) {
+      return setError("Rating number is invalid.");
+    }
+    if (Number(fromYear) > Number(toYear) && toYear && fromYear) {
       return setError("You can't select a start year that is bigger then the end year.")
     }
-
-    if (toYear < fromYear) {
+    if (Number(toYear) < Number(fromYear) && toYear && fromYear) {
       return setError("You can't select an end year that is smaller then the start year.")
     }
 
+    // fetching the movies
     setIsLoading(true);
-
-    setTimeout(() => {
-      console.log(`
-      rating: ${rating},
-      time: ${time},
-      fromYear: ${fromYear},
-      toYear: ${toYear},
-      genres: ${genres},
-      languages: ${languages},
-      showWatchedMovies: ${showWatchedMovies},
-      netflixOnly: ${netflixOnly}
-    `);
-
-    }, 3000);
-
+    try {
+      const result = await axios.get(
+        'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
+        '&language=en-US&sort_by=popularity.desc&include_video=false&page=1' + 
+        (fromYear ? '&primary_release_date.gte=' + fromYear : '') +
+        (toYear ? '&primary_release_date.lte=' + toYear : '') +
+        '&vote_count.gte=1500' +
+        (rating ? '&vote_average.gte=' + rating : '') +
+        (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
+        (time ? '&with_runtime.lte=' + time : '') +
+        (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
+      );
+      setMovies(result.data.results); 
+    } 
+    catch (error) {
+      console.log(error);
+    }
     setIsLoading(false);
-
   };
 
   return (
@@ -105,7 +113,6 @@ const styles = StyleSheet.create({
   }, 
   error: {
     paddingHorizontal: 30,
-    flex: 6,
     alignSelf: 'center',
     paddingVertical: 15,
     fontSize: 20, 

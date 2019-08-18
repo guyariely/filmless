@@ -4,6 +4,173 @@ import SelectInput from 'react-native-sectioned-multi-select';
 import colors from '../../../Constants/colors';
 import fonts from '../../../Constants/fonts';
 
+const parseIDsToString = (IDs, categories) => {
+  return IDs.map(ID => categories[0].children.find(
+    categorie => categorie.id == ID
+  ).name).join(', ');
+};
+
+const Categories = props => {
+
+  const { genres, setGenres, languages, setLanguages } = props.screenProps;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>GENRES</Text>
+        <SelectInput
+        items={genresList}
+        uniqueKey="id"
+        subKey="children"
+        selectText={
+          genres.length == 0 ?
+          "ALL GENRES" :
+          parseIDsToString(genres, genresList)
+        }
+        alwaysShowSelectText={true}
+        showDropDowns={false}
+        readOnlyHeadings={true}
+        hideSearch={true}
+        showChips={false}
+        modalWithSafeAreaView={true}
+        onSelectedItemsChange={genres => setGenres(genres)}
+        selectedItems={genres}
+        colors={selectInputColors}
+        styles={
+          genres.length == 0 ?
+          selectInputStyles :
+          [selectInputStyles, SelectInputStyles__active]
+        }
+      />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>LANGUAGES</Text>
+        <SelectInput
+        items={languagesList}
+        uniqueKey="id"
+        subKey="children"
+        selectText={
+          languages.length == 0 ?
+          "ALL LANGUAGES" :
+          parseIDsToString(languages, languagesList)
+        }
+        searchPlaceholderText="Search languages..."
+        alwaysShowSelectText={true}
+        showDropDowns={false}
+        readOnlyHeadings={true}
+        showChips={false}
+        modalWithSafeAreaView={true}
+        onSelectedItemsChange={languages => setLanguages(languages)}
+        selectedItems={languages}
+        colors={selectInputColors}
+        styles={
+          languages.length == 0 ?
+          selectInputStyles :
+          [selectInputStyles, SelectInputStyles__active]
+        }
+      />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 26,
+    paddingVertical: 20
+  },
+  inputContainer: {
+    paddingBottom: 20
+  },
+  label: {
+    color: colors.inputLabel, 
+    fontSize: 18,
+    marginBottom: 10
+  }
+});
+
+const selectInputColors = {
+  primary: colors.text,
+  subItemBackground: colors.primary,
+  searchSelectionColor: colors.text
+}
+
+const selectInputStyles = {
+  container: {
+    backgroundColor: colors.primary,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: colors.highlight
+  },
+  searchBar: {
+    backgroundColor: colors.darkPrimary,
+    paddingVertical: 10,
+  },
+  searchTextInput: {
+    color: colors.text
+  },
+  scrollView: {
+    padding: 15,
+  },
+  item: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 15,
+    paddingBottom: 15
+  },
+  itemText: {
+    color: colors.text,
+    fontWeight: '600',
+    fontFamily: fonts.primary,
+    fontSize: 34
+  },
+  subItem: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 15,
+    paddingBottom: 25,
+    paddingTop: 0
+  },
+  subItemText: {
+    color: colors.text,
+    fontSize: 20
+  },
+  activeOpacity: {
+    backgroundColor: colors.primary,
+  },
+  button: {
+    backgroundColor: colors.highlight,
+    paddingVertical: 15
+  },  
+  confirmText: {
+    fontFamily: 'Helvetica Neue',
+  },
+  selectToggle: {
+    height: 45,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    fontSize: 16
+  },
+  selectToggleText: {
+    color: colors.lightText,
+  }
+};
+
+const SelectInputStyles__active = {
+  selectToggle: {
+    backgroundColor: colors.primary,
+    borderColor: colors.highlight,
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 45,
+    paddingHorizontal: 15,
+    fontSize: 16
+  },
+  selectToggleText: {
+    color: colors.text,
+  }
+};
+
 const genresList = [{
   name: 'Genres',
   id: 0,
@@ -222,162 +389,5 @@ const languagesList = [{
     { id: 'yo', name: 'Yoruba' } 
   ]
 }];
-
-const parseIDsToString = (IDs, categories) => {
-  return IDs.map(ID => categories[0].children.find(
-    categorie => categorie.id == ID
-  ).name).join(', ');
-};
-
-const Categories = props => {
-
-  const { genres, setGenres, languages, setLanguages } = props.screenProps;
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>GENRES</Text>
-        <SelectInput
-        items={genresList}
-        uniqueKey="id"
-        subKey="children"
-        selectText={
-          genres.length == 0 ?
-          "ALL GENRES" :
-          parseIDsToString(genres, genresList)
-        }
-        alwaysShowSelectText={true}
-        showDropDowns={false}
-        readOnlyHeadings={true}
-        hideSearch={true}
-        showChips={false}
-        modalWithSafeAreaView={true}
-        onSelectedItemsChange={genres => setGenres(genres)}
-        selectedItems={genres}
-        colors={selectInputColors}
-        styles={
-          genres.length == 0 ?
-          selectInputStyles :
-          [selectInputStyles, SelectInputStyles__active]
-        }
-      />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>LANGUAGES</Text>
-        <SelectInput
-        items={languagesList}
-        uniqueKey="id"
-        subKey="children"
-        selectText={
-          languages.length == 0 ?
-          "ALL LANGUAGES" :
-          parseIDsToString(languages, languagesList)
-        }
-        searchPlaceholderText="Search languages..."
-        alwaysShowSelectText={true}
-        showDropDowns={false}
-        readOnlyHeadings={true}
-        showChips={false}
-        modalWithSafeAreaView={true}
-        onSelectedItemsChange={languages => setLanguages(languages)}
-        selectedItems={languages}
-        colors={selectInputColors}
-        styles={
-          languages.length == 0 ?
-          selectInputStyles :
-          [selectInputStyles, SelectInputStyles__active]
-        }
-      />
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 26,
-    paddingVertical: 20
-  },
-  inputContainer: {
-    paddingBottom: 20
-  },
-  label: {
-    color: colors.inputLabel, 
-    fontSize: 18,
-    marginBottom: 10
-  }
-});
-
-const selectInputColors = {
-  primary: colors.text,
-  subItemBackground: colors.primary,
-  searchSelectionColor: colors.text
-}
-
-const selectInputStyles = {
-  container: {
-    backgroundColor: colors.primary,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: colors.highlight
-  },
-  searchBar: {
-    backgroundColor: colors.darkPrimary,
-    paddingVertical: 10,
-  },
-  searchTextInput: {
-    color: colors.text
-  },
-  scrollView: {
-    padding: 15,
-  },
-  item: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 15,
-    paddingBottom: 15
-  },
-  itemText: {
-    color: colors.text,
-    fontWeight: '600',
-    fontFamily: fonts.primary,
-    fontSize: 34
-  },
-  subItem: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 15,
-    paddingBottom: 25,
-    paddingTop: 0
-  },
-  subItemText: {
-    color: colors.text,
-    fontSize: 20
-  },
-  activeOpacity: {
-    backgroundColor: colors.primary,
-  },
-  button: {
-    backgroundColor: colors.highlight,
-    paddingVertical: 15
-  },  
-  confirmText: {
-    fontFamily: 'Helvetica Neue',
-  },
-  selectToggle: {
-    height: 45,
-    backgroundColor: colors.primary,
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    fontSize: 16
-  },
-  selectToggleText: {
-    color: colors.lightText,
-  }
-};
-
-const SelectInputStyles__active = {
-  selectToggleText: {
-    color: colors.text,
-  }
-};
 
 export default Categories;
