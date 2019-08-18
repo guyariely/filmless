@@ -10,4 +10,4 @@ npm-debug.*
 web-build/
 web-report/
 
-./env.js
+env.*
