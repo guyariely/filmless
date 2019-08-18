@@ -1,9 +1,11 @@
 import { API_KEY } from '../../env';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
+import Form from './Form/Form';
+import MoviesPreviews from './MoviesPreviews';
 import axios from 'axios';
 import colors from '../../Constants/colors';
-import Form from './Form/Form';
+import { Button } from 'react-native-paper';
 
 const DiscoverScreen = () => {
 
@@ -56,13 +58,25 @@ const DiscoverScreen = () => {
     setIsLoading(false);
   };
 
+  // once we fetched the movies, get their runtimes
+  useEffect(() => { getMoviesRuntimes() }, [movies]);
+
+  const getMoviesRuntimes = async () => {
+  
+    const updatedMovies = movies;
+    for (let movie of updatedMovies) {
+      const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=892cde11c20c56c0ab558d99d0410892`);
+      movie.runtime = movieDetails.data.runtime;
+    }
+    setMovies(updatedMovies);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Find Your Film</Text>
       <View style={styles.form}>
         <Form loadMovies={loadMovies} />  
       </View>
-      <View style={styles.movies}>
       { 
         isLoading && 
         <View style={styles.activityIndicator}>
@@ -78,7 +92,10 @@ const DiscoverScreen = () => {
           {error}
         </Text> 
       }
-      </View>
+      {
+        (!error && !isLoading) &&
+        <MoviesPreviews movies={movies} />
+      }
     </View>
   );
 };
@@ -101,9 +118,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     paddingVertical: 20, 
   },
-  movies: {
-    flex: 6,
-  },
   activityIndicator: {
     justifyContent: 'center',
     flex: 6
@@ -112,6 +126,7 @@ const styles = StyleSheet.create({
     color: colors.highlight
   }, 
   error: {
+    flex: 6,
     paddingHorizontal: 30,
     alignSelf: 'center',
     paddingVertical: 15,
