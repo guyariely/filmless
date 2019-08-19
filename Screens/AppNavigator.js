@@ -44,7 +44,7 @@ const AppNavigator = createMaterialBottomTabNavigator(
     activeColor: Colors.text,
     inactiveColor: Colors.lightText,
     barStyle: { 
-      backgroundColor: Colors.primary,
+      backgroundColor: Colors.base01,
       shadowOpacity: 0
     },
   }

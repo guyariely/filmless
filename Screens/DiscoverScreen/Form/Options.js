@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 3,
     width: 125,
-    borderColor: colors.primary,
+    borderColor: colors.base01,
     borderWidth: 1,
     borderRadius: 5
   },
   buttonActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.highlight
+    backgroundColor: colors.base01,
+    borderColor: colors.primary
   }
 });
 

@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleText: {
-    color: colors.darkPrimary,
+    color: colors.base02,
     fontSize: 18,
     fontWeight: '700',
   },
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
   rating: {
     fontWeight: 'bold',
     opacity: 0.6,
-    color: colors.darkPrimary
+    color: colors.base02
   },
   time: {
     marginLeft: 'auto',
-    color: colors.darkPrimary,
+    color: colors.base02,
     opacity: 0.6,
     fontWeight: 'bold'
   }

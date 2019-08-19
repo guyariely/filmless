@@ -40,7 +40,7 @@ const Filters = props => {
           }
           placeholder="NO FILTER"
           placeholderTextColor={colors.lightText}
-          selectionColor={colors.highlight}
+          selectionColor={colors.primary}
           onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
           keyboardType="numeric"
           maxLength={3}
@@ -64,7 +64,7 @@ const Filters = props => {
           style={fromYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
           placeholderTextColor={colors.lightText}
-          selectionColor={colors.highlight}
+          selectionColor={colors.primary}
           onChangeText={year => setFromYear(validateYear(year))}
           keyboardType="numeric"
           maxLength={4}
@@ -77,7 +77,7 @@ const Filters = props => {
           style={toYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
           placeholderTextColor={colors.lightText}
-          selectionColor={colors.highlight}
+          selectionColor={colors.primary}
           onChangeText={year => setToYear(validateYear(year))}
           keyboardType="numeric"
           maxLength={4}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 45,
-    borderColor: colors.primary,
+    borderColor: colors.base01,
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
@@ -117,15 +117,15 @@ const styles = StyleSheet.create({
   },
   input__active: {
     borderWidth: 1,
-    backgroundColor: colors.primary,
-    borderColor: colors.highlight
+    backgroundColor: colors.base01,
+    borderColor: colors.primary
   }
 });
 
 const wheelInputStyles = StyleSheet.create({
   inputIOS: {
     height: 45,
-    borderColor: colors.primary,
+    borderColor: colors.base01,
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
@@ -134,7 +134,7 @@ const wheelInputStyles = StyleSheet.create({
   },
   inputAndroid: {
     height: 45,
-    borderColor: colors.primary,
+    borderColor: colors.base01,
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 15,
@@ -147,20 +147,20 @@ const wheelInputStyles = StyleSheet.create({
 const wheelInputStyles__active = StyleSheet.create({
   inputIOS: {
     height: 45,
-    backgroundColor: colors.primary,
-    borderColor: colors.highlight,
+    backgroundColor: colors.base01,
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
     color: colors.text,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: colors.highlight
+    borderColor: colors.primary
   },
   inputAndroid: {
     height: 45,
-    backgroundColor: colors.primary,
-    borderColor: colors.highlight,
+    backgroundColor: colors.base01,
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 15,
@@ -168,7 +168,7 @@ const wheelInputStyles__active = StyleSheet.create({
     color: colors.text,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: colors.highlight
+    borderColor: colors.primary
   }
 });
 

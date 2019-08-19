@@ -31,7 +31,7 @@ const Form = props => {
       <View style={styles.button}>
         <Button 
           title="Search"
-          color={colors.text}
+          color={colors.search}
           onPress={() => props.loadMovies(
             { rating, time, fromYear, toYear, genres, 
               languages, showWatchedMovies, netflixOnly
@@ -45,12 +45,12 @@ const Form = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.darkPrimary,
+    backgroundColor: colors.base02,
     borderRadius: 15,
     paddingTop: 15
   },
   button: {
-    backgroundColor: colors.highlight,
+    backgroundColor: colors.primary,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     paddingVertical: 6 

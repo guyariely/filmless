@@ -90,20 +90,20 @@ const styles = StyleSheet.create({
 });
 
 const selectInputColors = {
-  primary: colors.text,
-  subItemBackground: colors.primary,
+  base01: colors.text,
+  subItemBackground: colors.base01,
   searchSelectionColor: colors.text
 }
 
 const selectInputStyles = {
   container: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.base01,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: colors.highlight
+    borderColor: colors.primary
   },
   searchBar: {
-    backgroundColor: colors.darkPrimary,
+    backgroundColor: colors.base02,
     paddingVertical: 10,
   },
   searchTextInput: {
@@ -113,18 +113,18 @@ const selectInputStyles = {
     padding: 15,
   },
   item: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.base01,
     paddingHorizontal: 15,
     paddingBottom: 15
   },
   itemText: {
     color: colors.text,
     fontWeight: '600',
-    fontFamily: fonts.primary,
+    fontFamily: fonts.base01,
     fontSize: 34
   },
   subItem: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.base01,
     paddingHorizontal: 15,
     paddingBottom: 25,
     paddingTop: 0
@@ -134,10 +134,10 @@ const selectInputStyles = {
     fontSize: 20
   },
   activeOpacity: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.base01,
   },
   button: {
-    backgroundColor: colors.highlight,
+    backgroundColor: colors.primary,
     paddingVertical: 15
   },  
   confirmText: {
@@ -145,7 +145,7 @@ const selectInputStyles = {
   },
   selectToggle: {
     height: 45,
-    borderColor: colors.primary,
+    borderColor: colors.base01,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 15,
@@ -158,8 +158,8 @@ const selectInputStyles = {
 
 const SelectInputStyles__active = {
   selectToggle: {
-    backgroundColor: colors.primary,
-    borderColor: colors.highlight,
+    backgroundColor: colors.base01,
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 5,
     height: 45,

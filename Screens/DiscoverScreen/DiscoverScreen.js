@@ -5,7 +5,6 @@ import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
 import axios from 'axios';
 import colors from '../../Constants/colors';
-import { Button } from 'react-native-paper';
 
 const DiscoverScreen = () => {
 
@@ -62,7 +61,8 @@ const DiscoverScreen = () => {
   useEffect(() => { getMoviesRuntimes() }, [movies]);
 
   const getMoviesRuntimes = async () => {
-  
+
+    alert('updating runtimes...')
     const updatedMovies = movies;
     for (let movie of updatedMovies) {
       const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=892cde11c20c56c0ab558d99d0410892`);
@@ -103,7 +103,7 @@ const DiscoverScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary
+    backgroundColor: colors.base01
   },
   title: {
     flex: 1,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 6
   },
   errorKeyword: {
-    color: colors.highlight
+    color: colors.primary
   }, 
   error: {
     flex: 6,

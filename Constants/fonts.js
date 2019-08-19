@@ -1,6 +1,6 @@
 
 const fonts = {
-  primary: 'Helvetica Neue'
+  base01: 'Helvetica Neue'
 };
 
 export default fonts;
