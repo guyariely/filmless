@@ -1,5 +1,5 @@
 import { API_KEY } from '../../env';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
@@ -55,20 +55,6 @@ const DiscoverScreen = () => {
       console.log(error);
     }
     setIsLoading(false);
-  };
-
-  // once we fetched the movies, get their runtimes
-  useEffect(() => { getMoviesRuntimes() }, [movies]);
-
-  const getMoviesRuntimes = async () => {
-
-    alert('updating runtimes...')
-    const updatedMovies = movies;
-    for (let movie of updatedMovies) {
-      const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=892cde11c20c56c0ab558d99d0410892`);
-      movie.runtime = movieDetails.data.runtime;
-    }
-    setMovies(updatedMovies);
   };
 
   return (
