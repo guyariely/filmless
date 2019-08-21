@@ -12,28 +12,27 @@ const MoviesCarousel = props => {
 
   const [movies, setMovies] = useState(moviesDD);
 
+  // load movies images
   useEffect(() => {
     const getMoviesImages = async () => {
-      console.log('getting images...');
       const moviesWithImages = movies;
-  
       try {
         for (let movie of moviesWithImages) {
-          const images = await axios.get(
-              `https://api.themoviedb.org/3/movie/${movie.id}/images?api_key=${API_KEY}`
-            );
+          const images = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/images?api_key=${API_KEY}`);
           movie.images = images.data.backdrops;
         }
-        console.log(moviesWithImages);
         setMovies(moviesWithImages);
       } 
       catch (error) {
         console.log(error);
       }
     };
-
     getMoviesImages();
   }, []);
+
+  // load runtimes
+
+  // load reviews
 
   return (
     <View style={styles.container}>

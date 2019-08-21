@@ -10,7 +10,7 @@ const MoviePhotos = props => {
       <Text style={styles.heading}>PHOTOS</Text>
       {
         props.movie.images &&
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
           props.movie.images.map(image => {
             return (
@@ -36,7 +36,12 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: 'bold',
     fontSize: 20,
+    paddingHorizontal: 20,
     paddingVertical: 15
+  },
+  scrollView: {
+    paddingLeft: 5,
+    paddingRight: 20
   },
   imageShadow: {
     shadowColor: colors.shadow,
@@ -44,8 +49,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
-    marginVertical: 15,
-    marginRight: 15,
+    marginVertical: 10,
+    marginLeft: 15,
     height: 160,
     width: 260,
   },
@@ -61,25 +66,3 @@ const styles = StyleSheet.create({
 });
 
 export default MoviePhotos;
-
-/**
- * {
-      props.movie.images &&
-      <FlatList
-        contentContainerStyle={styles.flatList}
-        horizontal={true}
-        keyExtractor={image => image.file_path}
-        data={props.movie.images || []} 
-        renderItem={({item: image}) => (
-          <View style={styles.imageShadow}>
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={{uri: 'https://image.tmdb.org/t/p/w500' + image.file_path}} 
-              />
-            </View>
-          </View>
-        )}
-      />
-      }
- */
