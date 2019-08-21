@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import colors from './Constants/colors';
 import AppContainer from './Screens/AppNavigator';
 
@@ -10,6 +10,7 @@ const App = () => {
   
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
         <AppContainer />
       </View>
     );

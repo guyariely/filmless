@@ -1,55 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Modal, Text, View, Image, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../Constants/colors';
-import parseIDsToGenres from '../../../utils/parseIDsToGenres';
 import Carousel from 'react-native-snap-carousel';
 import CarouselHeader from './CarouselHeader';
+import CarouselSlide from './CarouselSlide/CarouselSlide';
 import { Dimensions } from "react-native";
 
 const MoviesCarousel = props => {
 
   const [movies, setMovies] = useState(moviesDD);
-
-  const slide = ({item: movie, index}) => {
-    return (
-      <View style={styles.slide}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <View style={styles.mainContent}>
-            <View style={styles.posterContainer} >
-              <View style={styles.poster}>
-                <Image
-                  style={styles.posterImage}
-                  source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
-                />
-              </View>
-            </View>
-            <View style={styles.infoContainer}>
-              <View style={styles.info}>
-                <Icon color={colors.primary} name="star" size={24} />
-                <Text style={styles.infoText}>{movie.vote_average}</Text>
-              </View>
-              <View style={styles.info}>
-                <Icon color={colors.primary} name="schedule" size={24} />
-                <Text style={styles.infoText}>1h 23min</Text>
-                </View>
-              <View style={styles.info}>
-                <Icon color={colors.primary} name="date-range" size={24} />
-                <Text style={styles.infoText}>21.3.18</Text>
-                </View>
-              <View style={styles.info}>
-                <Icon color={colors.primary} name="movie-creation" size={24} />
-                <Text style={styles.infoText}>{parseIDsToGenres(movie.genre_ids)}</Text>
-              </View>
-            </View>
-          </View>
-          <Text style={styles.heading}>PLOT SUMMARY</Text>
-          <Text style={styles.plotSummary}>{movie.overview}</Text>
-          <Text style={styles.heading}>PHOTOS</Text>
-      </View>
-
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -61,7 +20,7 @@ const MoviesCarousel = props => {
         <CarouselHeader closeCarousel={props.closeCarousel} />
         <Carousel
           data={movies}
-          renderItem={slide}
+          renderItem={({item}) => <CarouselSlide movie={item} />}
           sliderWidth={ Math.round(Dimensions.get('window').width) }
           itemWidth={ Math.round(Dimensions.get('window').width) }
           firstItem={props.index}
@@ -79,70 +38,6 @@ const styles = StyleSheet.create({
   },
   carousel: {
     backgroundColor: colors.base01,
-  },
-  slide: {
-    flex: 1,
-    backgroundColor: colors.base01,
-    padding: 20,
-    paddingTop: 10,
-    borderRadius: 15,
-    marginTop: 'auto',
-  },
-  mainContent: {
-    flexDirection: 'row',
-    paddingBottom: 15
-  },
-  posterContainer: {
-    width: 135,
-    flex: 3,
-    height: 220,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-  },
-  poster: {
-    flex: 1,
-    borderRadius: 15,
-    overflow: 'hidden',
-  },
-  posterImage: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  infoContainer:{
-    flex: 4,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    justifyContent: 'space-around'
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    color: colors.text,
-    textAlign: 'center',
-    marginBottom: 20
-  },
-  info: {
-    flexDirection: 'row'
-  },
-  infoText: {
-    color: colors.text,
-    fontSize: 20,
-    marginLeft: 10,
-    justifyContent: 'flex-end',
-    alignSelf: 'center',
-  },
-  heading: {
-    color: colors.text,
-    fontWeight: 'bold',
-    fontSize: 20,
-    paddingVertical: 15
-  },
-  plotSummary: {
-    color: colors.inputLabel,
-    fontSize: 16,
   }
 });
 

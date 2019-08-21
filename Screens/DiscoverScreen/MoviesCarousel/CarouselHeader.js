@@ -9,15 +9,12 @@ const CarouselHeader = props => {
       <TouchableOpacity onPress={props.closeCarousel} style={styles.closeButton}>
         <Icon color={colors.text} name="keyboard-arrow-down" size={32} />
       </TouchableOpacity>
-      <Text style={styles.headerText}></Text>
-      <View style={styles.movieToggles}>
-        <TouchableOpacity style={styles.watchedButton}>
-          <Icon color={colors.text} name="visibility" size={26} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon color={colors.text} name="bookmark-border" size={26} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.watchedButton}>
+        <Icon color={colors.text} name="visibility" size={26} />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Icon color={colors.text} name="bookmark-border" size={26} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -25,28 +22,13 @@ const CarouselHeader = props => {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingTop: 50,
     backgroundColor: colors.base01,
-  },  
-  closeButton: {
-    flex: 1
-  },
-  headerText: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: colors.text,
-  },
-  movieToggles: {
-    flex: 1,
-    flexDirection: 'row',
   },
   watchedButton: {
     marginLeft: 'auto',
-    marginRight: 12
+    marginRight: 14
   },
 });
 
