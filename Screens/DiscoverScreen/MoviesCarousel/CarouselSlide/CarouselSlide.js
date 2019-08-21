@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
 import MovieInfo from './MovieInfo';
 import MoviePoster from './MoviePoster';
@@ -7,7 +7,7 @@ import MoviePhotos from './MoviePhotos';
 
 const Slide = props => {
   return (
-    <View style={styles.slide}>
+    <ScrollView style={styles.slide}>
       <Text style={styles.title}>{props.movie.title}</Text>
       <View style={styles.mainContent}>
         <MoviePoster movie={props.movie} />
@@ -16,7 +16,11 @@ const Slide = props => {
       <Text style={styles.heading}>PLOT SUMMARY</Text>
       <Text style={styles.plotSummary}>{props.movie.overview}</Text>
       <MoviePhotos movie={props.movie} />
-    </View>
+      <Text style={styles.heading}>PLOT SUMMARY</Text>
+      <Text style={styles.plotSummary}>{props.movie.overview}</Text>
+      <Text style={styles.heading}>PLOT SUMMARY</Text>
+      <Text style={styles.plotSummary}>{props.movie.overview}</Text>
+    </ScrollView>
   );
 };
 

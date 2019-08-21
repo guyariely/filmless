@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { API_KEY } from '../../../env';
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Modal, Text, View, Image, ScrollView } from 'react-native';
+import axios from 'axios';
 import colors from '../../../Constants/colors';
 import Carousel from 'react-native-snap-carousel';
 import CarouselHeader from './CarouselHeader';
@@ -9,6 +11,29 @@ import { Dimensions } from "react-native";
 const MoviesCarousel = props => {
 
   const [movies, setMovies] = useState(moviesDD);
+
+  useEffect(() => {
+    const getMoviesImages = async () => {
+      console.log('getting images...');
+      const moviesWithImages = movies;
+  
+      try {
+        for (let movie of moviesWithImages) {
+          const images = await axios.get(
+              `https://api.themoviedb.org/3/movie/${movie.id}/images?api_key=${API_KEY}`
+            );
+          movie.images = images.data.backdrops;
+        }
+        console.log(moviesWithImages);
+        setMovies(moviesWithImages);
+      } 
+      catch (error) {
+        console.log(error);
+      }
+    };
+
+    getMoviesImages();
+  }, []);
 
   return (
     <View style={styles.container}>
