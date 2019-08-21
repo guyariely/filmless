@@ -6,7 +6,7 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>settings screen</Text>
+      <Text>Settings screen</Text>
     </View>
   )
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, FlatList } from "react-native";
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../Constants/colors';
 
@@ -11,30 +11,30 @@ const MoviesPreviews = props => {
         horizontal={true}
         keyExtractor={movie => movie.id.toString()}
         data={props.movies}
-        renderItem={({item: movie}) => (
-          <View style={styles.movie}>
-          <View style={styles.imageShadow}>
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
-              />
-              <View style={styles.ratingContainer}>
-                <Icon name="star" color={colors.rating} size={15} />
-                <Text style={styles.rating}>
-                  {movie.vote_average}
-                </Text>
+        renderItem={({item: movie, index}) => (
+          <TouchableOpacity style={styles.movie} onPress={() => props.openCarousel(index)}>
+            <View style={styles.imageShadow}>
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
+                />
+                <View style={styles.ratingContainer}>
+                  <Icon name="star" color={colors.rating} size={15} />
+                  <Text style={styles.rating}>
+                    {movie.vote_average}
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.title}>
-            <Text 
-              style={styles.titleText} 
-              numberOfLines={1}>
-                {movie.title}
-            </Text>
-          </View>
-          </View>
+            <View style={styles.title}>
+              <Text 
+                style={styles.titleText} 
+                numberOfLines={1}>
+                  {movie.title}
+              </Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>

@@ -1,16 +1,20 @@
 import { API_KEY } from '../../env';
 import React, { useState } from "react";
+import axios from 'axios';
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
+import colors from '../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
-import axios from 'axios';
-import colors from '../../Constants/colors';
+import MoviesCarousel from './MoviesCarousel/MoviesCarousel';
 
 const DiscoverScreen = () => {
 
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [showCarousel, setShowCarousel] = useState(true);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const loadMovies = async inputs => {
 
@@ -80,7 +84,22 @@ const DiscoverScreen = () => {
       }
       {
         (!error && !isLoading) &&
-        <MoviesPreviews movies={movies} />
+        <MoviesPreviews 
+          movies={movies} 
+          openCarousel={index => { 
+            setCarouselIndex(index)
+            setShowCarousel(true); 
+          }} 
+        />
+      }
+      {
+        showCarousel &&
+       <MoviesCarousel 
+        visible={showCarousel} 
+        index={carouselIndex}
+        movies={movies} 
+        closeCarousel={() => setShowCarousel(false)}
+      /> 
       }
     </View>
   );
