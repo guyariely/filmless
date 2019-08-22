@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../../Constants/colors';
+import runtimeText from '../../../../utils/runtimeText';
 
 const MovieInfo = props => {
 
@@ -16,7 +17,7 @@ const MovieInfo = props => {
       <View style={styles.info}>
         <Icon color={colors.primary} name="schedule" size={24} />
         <Text style={styles.infoText}>
-          1h 23min
+          {runtimeText(props.movie.runtime) || ''}
         </Text>
         </View>
       <View style={styles.info}>

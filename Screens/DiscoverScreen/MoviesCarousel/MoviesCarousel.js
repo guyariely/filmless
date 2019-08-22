@@ -1,6 +1,6 @@
 import { API_KEY } from '../../../env';
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Modal, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Modal, View } from 'react-native';
 import axios from 'axios';
 import colors from '../../../Constants/colors';
 import Carousel from 'react-native-snap-carousel';
@@ -10,11 +10,25 @@ import { Dimensions } from "react-native";
 
 const MoviesCarousel = props => {
 
-  const [movies, setMovies] = useState(moviesDD);
+  const [movies, setMovies] = useState(props.movies);
 
-  // load movies images
   useEffect(() => {
-    const getMoviesImages = async () => {
+    const getMovieDetails = async () => {
+
+      // get runtimes
+      const moviesWithRuntimes = movies;
+      try {
+        for (let movie of moviesWithRuntimes) {
+          const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}`);
+          movie.runtime = movieDetails.data.runtime;
+        }
+        setMovies(moviesWithRuntimes);
+      } 
+      catch (error) {
+        console.log(error);
+      }
+
+      // get images
       const moviesWithImages = movies;
       try {
         for (let movie of moviesWithImages) {
@@ -26,13 +40,22 @@ const MoviesCarousel = props => {
       catch (error) {
         console.log(error);
       }
+
+      // get reviews
+      const moviesWithReviews = movies;
+      try {
+        for (let movie of moviesWithReviews) {
+          const movieReviews = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=${API_KEY}`);
+          movie.reviews = movieReviews.data.results;
+        }
+        setMovies(moviesWithReviews);
+      } 
+      catch (error) {
+        console.log(error);
+      }
     };
-    getMoviesImages();
+    getMovieDetails();
   }, []);
-
-  // load runtimes
-
-  // load reviews
 
   return (
     <View style={styles.container}>

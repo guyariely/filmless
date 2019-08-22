@@ -13,7 +13,7 @@ const DiscoverScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [showCarousel, setShowCarousel] = useState(true);
+  const [showCarousel, setShowCarousel] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
 
   const loadMovies = async inputs => {

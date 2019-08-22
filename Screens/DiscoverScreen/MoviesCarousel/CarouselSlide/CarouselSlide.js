@@ -4,6 +4,7 @@ import colors from '../../../../Constants/colors';
 import MovieInfo from './MovieInfo';
 import MoviePoster from './MoviePoster';
 import MoviePhotos from './MoviePhotos';
+import MovieReviews from "./MovieReviews";
 
 const Slide = props => {
   return (
@@ -16,10 +17,7 @@ const Slide = props => {
       <Text style={styles.heading}>PLOT SUMMARY</Text>
       <Text style={styles.plotSummary}>{props.movie.overview}</Text>
       <MoviePhotos movie={props.movie} />
-      <Text style={styles.heading}>PLOT SUMMARY</Text>
-      <Text style={styles.plotSummary}>{props.movie.overview}</Text>
-      <Text style={styles.heading}>PLOT SUMMARY</Text>
-      <Text style={styles.plotSummary}>{props.movie.overview}</Text>
+      <MovieReviews movie={props.movie} />
     </ScrollView>
   );
 };

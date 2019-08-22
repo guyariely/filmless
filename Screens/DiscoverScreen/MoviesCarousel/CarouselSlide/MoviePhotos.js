@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
-import { ScrollView } from "react-native-gesture-handler";
 
 const MoviePhotos = props => {
 
