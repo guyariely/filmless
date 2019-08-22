@@ -11,7 +11,7 @@ const MoviePhotos = props => {
         props.movie.images &&
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.movie.images.map(image => {
+          props.movie.images.slice(0, 11).map(image => {
             return (
               <View style={styles.imageShadow} key={image.file_path}>
                 <View style={styles.imageContainer}>
@@ -32,7 +32,7 @@ const MoviePhotos = props => {
 
 const styles = StyleSheet.create({
   heading: {
-    color: colors.text,
+    color: colors.primary,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginLeft: 15,
     height: 160,
-    width: 260,
+    width: 280,
   },
   imageContainer: {
     flex: 1,

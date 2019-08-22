@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
 import MovieInfo from './MovieInfo';
@@ -7,6 +7,7 @@ import MoviePhotos from './MoviePhotos';
 import MovieReviews from "./MovieReviews";
 
 const Slide = props => {
+
   return (
     <ScrollView style={styles.slide}>
       <Text style={styles.title}>{props.movie.title}</Text>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   heading: {
-    color: colors.text,
+    color: colors.primary,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,

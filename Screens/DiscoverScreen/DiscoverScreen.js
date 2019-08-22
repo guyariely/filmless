@@ -1,5 +1,5 @@
 import { API_KEY } from '../../env';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
 import colors from '../../Constants/colors';
@@ -61,6 +61,31 @@ const DiscoverScreen = () => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    console.log('fetching movies details');
+    const getMovieDetails = async () => {
+  
+      const moviesExtended = movies;
+      try {
+        console.log('fetching...');
+        for (let movie of moviesExtended) {
+          const movieDetails = await axios.get(
+            `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews`
+          );
+          movie.runtime = movieDetails.data.runtime;
+          movie.images = movieDetails.data.images.backdrops;
+          movie.reviews = movieDetails.data.reviews.results;
+        }
+        setMovies(moviesExtended);
+        console.log('done');
+      } 
+      catch (error) {
+        console.log(error);
+      }
+    };
+    getMovieDetails();
+  }, [movies]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Find Your Film</Text>
@@ -95,10 +120,10 @@ const DiscoverScreen = () => {
       {
         showCarousel &&
        <MoviesCarousel 
-        visible={showCarousel} 
-        index={carouselIndex}
-        movies={movies} 
-        closeCarousel={() => setShowCarousel(false)}
+          visible={showCarousel} 
+          firstItem={carouselIndex}
+          movies={movies} 
+          closeCarousel={() => setShowCarousel(false)}
       /> 
       }
     </View>

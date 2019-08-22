@@ -18,7 +18,7 @@ const MoviePoster = props => {
 const styles = StyleSheet.create({
   posterContainer: {
     width: 135,
-    flex: 3,
+    flex: 4,
     height: 220,
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 4 },

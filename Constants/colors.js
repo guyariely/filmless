@@ -50,4 +50,4 @@ const themes = {
   }
 }
 
-export default themes.default;
+export default themes.dark;
