@@ -48,8 +48,7 @@ const DiscoverScreen = () => {
         '&language=en-US&sort_by=popularity.desc&include_video=false&page=1' + 
         (fromYear ? '&primary_release_date.gte=' + fromYear : '') +
         (toYear ? '&primary_release_date.lte=' + toYear : '') +
-        '&vote_count.gte=1500' +
-        (rating ? '&vote_average.gte=' + rating : '') +
+        (rating ? '&vote_count.gte=1500&vote_average.gte=' + rating : '') +
         (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
         (time ? '&with_runtime.lte=' + time : '') +
         (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
@@ -76,8 +75,8 @@ const DiscoverScreen = () => {
           movie.reviews = movieDetails.data.reviews.results;
           movie.videos = movieDetails.data.videos.results;
         }
-        setMovies(moviesExtended);
         setIsLoadingSwiper(false);
+        setMovies(moviesExtended);
       } 
       catch (error) {
         console.log(error);
