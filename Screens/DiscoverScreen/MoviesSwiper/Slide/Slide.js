@@ -1,28 +1,30 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
-import MovieInfo from './MovieInfo';
-import MoviePoster from './MoviePoster';
-import MovieOverview from './MovieOverview';
-import MoviePhotos from './MoviePhotos';
-import MovieReviews from "./MovieReviews";
-import MovieVideos from "./MovieVideos";
+import Info from './Info';
+import Poster from './Poster';
+import Overview from './Overview';
+import Photos from './Photos';
+import Reviews from "./Reviews";
+import Videos from "./Videos";
+import Actors from './Actors';
 
 const Slide = props => {
 
-  const { title, overview, images, videos, reviews } = props.movie;
+  const { title, overview, images, videos, actors, reviews } = props.movie;
 
   return (
     <ScrollView style={styles.slide}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.mainContent}>
-        <MoviePoster poster={props.movie.poster_path} />
-        <MovieInfo movie={props.movie} />
+        <Poster poster={props.movie.poster_path} />
+        <Info movie={props.movie} />
       </View>
-      <MovieOverview overview={overview} />
-      {images.length > 0 &&<MoviePhotos images={images} />}
-      {videos.length > 0 &&<MovieVideos videos={videos} />}
-      {reviews.length > 0 && <MovieReviews reviews={reviews} />}
+      <Overview overview={overview} />
+      {images.length > 0 &&<Photos images={images} />}
+      {videos.length > 0 &&<Videos videos={videos} />}
+      {actors.length > 0 &&<Actors actors={actors} />}
+      {reviews.length > 0 && <Reviews reviews={reviews} />}
       <View style={styles.bottomBuffer}></View>
     </ScrollView>
   );

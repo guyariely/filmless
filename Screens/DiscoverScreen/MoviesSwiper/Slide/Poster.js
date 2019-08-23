@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
 import colors from '../../../../Constants/colors';
 
-const MoviePoster = props => {
+const Poster = props => {
   return (
     <View style={styles.posterContainer} >
       <View style={styles.poster}>
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoviePoster;
+export default Poster;

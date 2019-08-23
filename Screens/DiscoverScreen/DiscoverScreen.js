@@ -68,15 +68,15 @@ const DiscoverScreen = () => {
       try {
         for (let movie of moviesExtended) {
           const movieDetails = await axios.get(
-            `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos`
+            `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`
           );
           movie.runtime = movieDetails.data.runtime;
           movie.images = movieDetails.data.images.backdrops;
           movie.reviews = movieDetails.data.reviews.results;
           movie.videos = movieDetails.data.videos.results;
+          movie.actors = movieDetails.data.credits.cast;
         }
         setIsLoadingSwiper(false);
-        console.log(moviesExtended[5]);
         setMovies(moviesExtended);
       } 
       catch (error) {

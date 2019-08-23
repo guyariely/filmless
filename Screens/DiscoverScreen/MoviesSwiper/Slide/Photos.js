@@ -1,16 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
-import { ActivityIndicator } from "react-native";
 
-const MoviePhotos = props => {
+const Photos = props => {
 
   return (
     <View>
       <Text style={styles.heading}>PHOTOS</Text>
-      {
-        props.images 
-        ?
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
           props.images.slice(0, 11).map(image => {
@@ -27,9 +23,6 @@ const MoviePhotos = props => {
           })
         }
         </ScrollView>
-        :
-        <ActivityIndicator />
-      }
     </View>
   );
 };
@@ -69,4 +62,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoviePhotos;
+export default Photos;

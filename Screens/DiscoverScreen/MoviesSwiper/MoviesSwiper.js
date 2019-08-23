@@ -3,7 +3,7 @@ import { StyleSheet, Modal, View, ActivityIndicator } from 'react-native';
 import colors from '../../../Constants/colors';
 import Swiper from 'react-native-swiper';
 import SwiperHeader from './SwiperHeader';
-import SwiperSlide from './SwiperSlide/SwiperSlide';
+import Slide from './Slide/Slide';
 
 const MoviesSwiper = props => {
 
@@ -29,7 +29,7 @@ const MoviesSwiper = props => {
             containerStyle={styles.swiper}
             > 
             {props.movies.map(movie =>
-              <SwiperSlide movie={movie} key={movie.id} />
+              <Slide movie={movie} key={movie.id} />
             )}
           </Swiper>
         }

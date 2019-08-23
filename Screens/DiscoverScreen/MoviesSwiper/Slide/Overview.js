@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from 'react-native';
 import colors from '../../../../Constants/colors';
 
-const MovieOverview = props => {
+const Overview = props => {
   return (
     <View>
       <Text style={styles.heading}>PLOT SUMMARY</Text>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieOverview;
+export default Overview;

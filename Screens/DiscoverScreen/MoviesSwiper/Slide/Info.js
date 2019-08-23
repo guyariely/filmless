@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../../Constants/colors';
 import runtimeText from '../../../../utils/runtimeText';
 
-const MovieInfo = props => {
+const Info = props => {
 
   return (
     <View style={styles.infoContainer}>
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieInfo;
+export default Info;

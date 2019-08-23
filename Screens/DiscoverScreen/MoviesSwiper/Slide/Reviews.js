@@ -4,7 +4,7 @@ import colors from '../../../../Constants/colors';
 import Carousel from 'react-native-snap-carousel';
 import { Dimensions } from "react-native";
 
-const MovieReviews = props => {
+const Reviews = props => {
 
   const review = ({item: review}) => {
     return (
@@ -76,5 +76,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieReviews;
+export default Reviews;
 

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, WebView } from 'react-native';
 import colors from '../../../../Constants/colors';
 import { ActivityIndicator } from "react-native";
 
-const MovieVideos = props => {
+const Videos = props => {
 
   return (
     <View>
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MovieVideos;
+export default Videos;
