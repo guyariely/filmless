@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-nativ
 import colors from '../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
-import MoviesCarousel from './MoviesCarousel/MoviesCarousel';
+import MoviesSwiper from './MoviesSwiper/MoviesSwiper';
 
 const DiscoverScreen = () => {
 
@@ -62,12 +62,10 @@ const DiscoverScreen = () => {
   };
 
   useEffect(() => {
-    console.log('fetching movies details');
     const getMovieDetails = async () => {
   
       const moviesExtended = movies;
       try {
-        console.log('fetching...');
         for (let movie of moviesExtended) {
           const movieDetails = await axios.get(
             `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews`
@@ -77,7 +75,6 @@ const DiscoverScreen = () => {
           movie.reviews = movieDetails.data.reviews.results;
         }
         setMovies(moviesExtended);
-        console.log('done');
       } 
       catch (error) {
         console.log(error);
@@ -119,7 +116,7 @@ const DiscoverScreen = () => {
       }
       {
         showCarousel &&
-       <MoviesCarousel 
+       <MoviesSwiper 
           visible={showCarousel} 
           firstItem={carouselIndex}
           movies={movies} 

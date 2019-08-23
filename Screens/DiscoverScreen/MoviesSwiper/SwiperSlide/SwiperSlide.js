@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
 import MovieInfo from './MovieInfo';
 import MoviePoster from './MoviePoster';
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.base01,
     paddingBottom: 20,
     paddingTop: 10,
-    borderRadius: 15,
     marginTop: 'auto',
   },
   title: {

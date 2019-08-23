@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../Constants/colors';
 
-const CarouselHeader = props => {
+const SwiperHeader = props => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={props.closeCarousel} style={styles.closeButton}>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CarouselHeader;
+export default SwiperHeader;
