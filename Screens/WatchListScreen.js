@@ -5,7 +5,7 @@ import colors from '../Constants/colors';
 const WatchListScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>watch list scree</Text>
+      <Text style={styles.title}>WATCH LIST</Text>
     </View>
   )
 };
@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: colors.base01
+  },
+  title: {
+    textAlign: 'center',
+    color: colors.text01,
+    fontWeight: '600'
   }
 });
 

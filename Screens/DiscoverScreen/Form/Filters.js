@@ -39,7 +39,7 @@ const Filters = props => {
             styles.input
           }
           placeholder="NO FILTER"
-          placeholderTextColor={colors.lightText}
+          placeholderTextColor={colors.text02}
           selectionColor={colors.primary}
           onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
           keyboardType="numeric"
@@ -52,7 +52,7 @@ const Filters = props => {
         <WheelInput
           style={time ? wheelInputStyles__active : wheelInputStyles}
           placeholder={{label: 'NO FILTER'}}
-          placeholderTextColor={colors.lightText}
+          placeholderTextColor={colors.text02}
           items={timeDurations}
           value={time}
           onValueChange={time => setTime(time)}
@@ -63,7 +63,7 @@ const Filters = props => {
         <TextInput
           style={fromYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
-          placeholderTextColor={colors.lightText}
+          placeholderTextColor={colors.text02}
           selectionColor={colors.primary}
           onChangeText={year => setFromYear(validateYear(year))}
           keyboardType="numeric"
@@ -76,7 +76,7 @@ const Filters = props => {
         <TextInput
           style={toYear ? [styles.input, styles.input__active] : styles.input}
           placeholder="NO FILTER"
-          placeholderTextColor={colors.lightText}
+          placeholderTextColor={colors.text02}
           selectionColor={colors.primary}
           onChangeText={year => setToYear(validateYear(year))}
           keyboardType="numeric"
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: 125
   },
   label: {
-    color: colors.inputLabel, 
+    color: colors.text03, 
     fontSize: 18,
     marginBottom: 10
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 16
   },
   input__active: {
@@ -129,7 +129,7 @@ const wheelInputStyles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 16
   },
   inputAndroid: {
@@ -139,7 +139,7 @@ const wheelInputStyles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 15,
     textAlign: 'center',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 16
   }
 });
@@ -152,7 +152,7 @@ const wheelInputStyles__active = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     textAlign: 'center',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 16,
     borderWidth: 1,
     borderColor: colors.primary
@@ -165,7 +165,7 @@ const wheelInputStyles__active = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 15,
     textAlign: 'center',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 16,
     borderWidth: 1,
     borderColor: colors.primary

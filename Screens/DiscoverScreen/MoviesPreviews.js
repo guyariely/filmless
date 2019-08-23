@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   titleText: {
-    color: colors.text,
+    color: colors.text01,
     fontSize: 18,
     fontWeight: '700',
   }

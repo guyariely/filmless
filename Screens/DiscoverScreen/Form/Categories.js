@@ -83,16 +83,16 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   label: {
-    color: colors.inputLabel, 
+    color: colors.text03, 
     fontSize: 18,
     marginBottom: 10
   }
 });
 
 const selectInputColors = {
-  base01: colors.text,
+  base01: colors.text01,
   subItemBackground: colors.base01,
-  searchSelectionColor: colors.text
+  searchSelectionColor: colors.text01
 }
 
 const selectInputStyles = {
@@ -107,7 +107,7 @@ const selectInputStyles = {
     paddingVertical: 10,
   },
   searchTextInput: {
-    color: colors.text
+    color: colors.text01
   },
   scrollView: {
     padding: 15,
@@ -118,7 +118,7 @@ const selectInputStyles = {
     paddingBottom: 15
   },
   itemText: {
-    color: colors.text,
+    color: colors.text01,
     fontWeight: '600',
     fontFamily: fonts.base01,
     fontSize: 34
@@ -130,7 +130,7 @@ const selectInputStyles = {
     paddingTop: 0
   },
   subItemText: {
-    color: colors.text,
+    color: colors.text01,
     fontSize: 20
   },
   activeOpacity: {
@@ -152,7 +152,7 @@ const selectInputStyles = {
     fontSize: 16
   },
   selectToggleText: {
-    color: colors.lightText,
+    color: colors.text02,
   }
 };
 
@@ -167,7 +167,7 @@ const SelectInputStyles__active = {
     fontSize: 16
   },
   selectToggleText: {
-    color: colors.text,
+    color: colors.text01,
   }
 };
 

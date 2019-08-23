@@ -17,7 +17,7 @@ const Options = props => {
         }>
           <Button 
             title="YES" 
-            color={colors.text} 
+            color={colors.text01} 
             onPress={() => setShowWatchedMovies(true)} 
           />
         </View>
@@ -28,7 +28,7 @@ const Options = props => {
         }>
           <Button 
             title="NO" 
-            color={colors.text} 
+            color={colors.text01} 
             onPress={() => setShowWatchedMovies(false)} 
           />
         </View>
@@ -43,7 +43,7 @@ const Options = props => {
         }>
           <Button 
             title="YES" 
-            color={colors.text} 
+            color={colors.text01} 
             onPress={() => setNetflixOnly(true)} 
           />
         </View>
@@ -54,7 +54,7 @@ const Options = props => {
         }>
           <Button 
             title="NO" 
-            color={colors.text} 
+            color={colors.text01} 
             onPress={() => setNetflixOnly(false)} 
           />
         </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20
   },
   label: {
-    color: colors.inputLabel, 
+    color: colors.text03, 
     fontSize: 18,
     marginBottom: 10
   },

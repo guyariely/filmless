@@ -6,7 +6,7 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Settings screen</Text>
+      <Text style={styles.title}>SETTINGS</Text>
     </View>
   )
 };
@@ -14,7 +14,13 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     backgroundColor: colors.base01
+  },
+  title: {
+    textAlign: 'center',
+    color: colors.text01,
+    fontWeight: '600'
   }
 });
 

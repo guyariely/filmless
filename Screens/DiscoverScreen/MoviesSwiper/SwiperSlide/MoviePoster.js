@@ -8,7 +8,7 @@ const MoviePoster = props => {
       <View style={styles.poster}>
         <Image
           style={styles.posterImage}
-          source={{uri: 'https://image.tmdb.org/t/p/w500' + props.movie.poster_path}} 
+          source={{uri: 'https://image.tmdb.org/t/p/w500' + props.poster}} 
         />
       </View>
     </View>

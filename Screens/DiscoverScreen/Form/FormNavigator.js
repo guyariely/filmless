@@ -22,8 +22,8 @@ const FormNavigator = createMaterialTopTabNavigator(
         fontSize: 15,
         fontWeight: '600'
       },
-      activeTintColor: colors.text,
-      inactiveTintColor: colors.lightText,
+      activeTintColor: colors.text01,
+      inactiveTintColor: colors.text02,
       indicatorStyle: {
         display: 'none'
       }

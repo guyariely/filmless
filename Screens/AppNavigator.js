@@ -41,8 +41,8 @@ const AppNavigator = createMaterialBottomTabNavigator(
   {
     initialRouteName: 'Discover',
     labeled: false,
-    activeColor: Colors.text,
-    inactiveColor: Colors.lightText,
+    activeColor: Colors.text01,
+    inactiveColor: Colors.text02,
     barStyle: { 
       backgroundColor: Colors.base01,
       shadowOpacity: 0

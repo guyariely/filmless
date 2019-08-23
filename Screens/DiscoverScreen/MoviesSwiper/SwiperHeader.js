@@ -7,13 +7,13 @@ const SwiperHeader = props => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={props.closeSwiper} style={styles.closeButton}>
-        <Icon color={colors.text} name="keyboard-arrow-down" size={32} />
+        <Icon color={colors.text01} name="keyboard-arrow-down" size={32} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.watchedButton}>
-        <Icon color={colors.text} name="visibility" size={26} />
+        <Icon color={colors.text01} name="visibility" size={26} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Icon color={colors.text} name="bookmark-border" size={26} />
+        <Icon color={colors.text01} name="bookmark-border" size={26} />
       </TouchableOpacity>
     </View>
   );

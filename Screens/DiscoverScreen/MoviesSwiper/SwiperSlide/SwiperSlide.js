@@ -3,24 +3,26 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
 import MovieInfo from './MovieInfo';
 import MoviePoster from './MoviePoster';
+import MovieOverview from './MovieOverview';
 import MoviePhotos from './MoviePhotos';
 import MovieReviews from "./MovieReviews";
 import MovieVideos from "./MovieVideos";
 
 const Slide = props => {
 
+  const { title, overview, images, videos, reviews } = props.movie;
+
   return (
     <ScrollView style={styles.slide}>
-      <Text style={styles.title}>{props.movie.title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.mainContent}>
-        <MoviePoster movie={props.movie} />
+        <MoviePoster poster={props.movie.poster_path} />
         <MovieInfo movie={props.movie} />
       </View>
-      <Text style={styles.heading}>PLOT SUMMARY</Text>
-      <Text style={styles.plotSummary}>{props.movie.overview}</Text>
-      <MoviePhotos movie={props.movie} />
-      <MovieVideos movie={props.movie} />
-      <MovieReviews movie={props.movie} />
+      <MovieOverview overview={overview} />
+      <MoviePhotos images={images} />
+      <MovieVideos videos={videos} />
+      <MovieReviews reviews={reviews} />
     </ScrollView>
   );
 };
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 28,
-    color: colors.text,
+    color: colors.text01,
     textAlign: 'center',
     paddingHorizontal: 20,
     marginBottom: 20
@@ -45,18 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingBottom: 15
-  },
-  heading: {
-    color: colors.text,
-    fontWeight: 'bold',
-    fontSize: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 15
-  },
-  plotSummary: {
-    color: colors.inputLabel,
-    paddingHorizontal: 20,
-    fontSize: 16,
   }
 });
 

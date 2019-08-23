@@ -19,9 +19,9 @@ const MovieReviews = props => {
     <View>
       <Text style={styles.heading}>REVIEWS</Text>
       {
-        props.movie.reviews &&
+        props.reviews &&
         <Carousel
-          data={props.movie.reviews}
+          data={props.reviews}
           renderItem={review}
           sliderWidth={ Math.round(Dimensions.get('window').width) }
           itemWidth={ Math.round(Dimensions.get('window').width)  }
@@ -37,7 +37,7 @@ const MovieReviews = props => {
 
 const styles = StyleSheet.create({
   heading: {
-    color: colors.text,
+    color: colors.heading,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   content: {
-    color: colors.text,
+    color: colors.text01,
     lineHeight: 25,
     fontSize: 16,
     paddingVertical: 0,

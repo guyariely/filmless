@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   infoText: {
-    color: colors.text,
+    color: colors.text01,
     fontSize: 20,
     marginLeft: 10,
     justifyContent: 'flex-end',

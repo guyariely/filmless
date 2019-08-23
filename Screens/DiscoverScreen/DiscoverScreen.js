@@ -12,13 +12,14 @@ const DiscoverScreen = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  
+  const [isLoadingSwiper, setIsLoadingSwiper] = useState(false);
   const [showSwiper, setShowSwiper] = useState(false);
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   const loadMovies = async inputs => {
 
-    // remove keyboard and any error message
+    // remove keyboard and any error message 
     setError(null);
     Keyboard.dismiss();
 
@@ -63,7 +64,7 @@ const DiscoverScreen = () => {
 
   useEffect(() => {
     const getMovieDetails = async () => {
-  
+      setIsLoadingSwiper(true);
       const moviesExtended = movies;
       try {
         for (let movie of moviesExtended) {
@@ -76,6 +77,7 @@ const DiscoverScreen = () => {
           movie.videos = movieDetails.data.videos.results;
         }
         setMovies(moviesExtended);
+        setIsLoadingSwiper(false);
       } 
       catch (error) {
         console.log(error);
@@ -93,7 +95,7 @@ const DiscoverScreen = () => {
       { 
         isLoading && 
         <View style={styles.activityIndicator}>
-          <ActivityIndicator size='small' color={colors.text} />
+          <ActivityIndicator size='small' color={colors.text01} />
         </View> 
       }
       { 
@@ -121,6 +123,7 @@ const DiscoverScreen = () => {
           visible={showSwiper} 
           firstItem={swiperIndex}
           movies={movies} 
+          isLoading={isLoadingSwiper}
           closeSwiper={() => setShowSwiper(false)}
       /> 
       }
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     justifyContent: 'flex-end',
-    color: colors.text,
+    color: colors.text01,
     fontSize: 38,
     paddingHorizontal: 28,
     paddingTop: 54,
@@ -159,7 +162,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingVertical: 15,
     fontSize: 20, 
-    color: colors.text,
+    color: colors.text01,
     fontStyle: 'italic'
   }
 });

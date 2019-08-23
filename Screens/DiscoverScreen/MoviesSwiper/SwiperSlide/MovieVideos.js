@@ -8,10 +8,10 @@ const MovieVideos = props => {
     <View>
       <Text style={styles.heading}>VIDEOS</Text>
       {
-        props.movie.videos &&
+        props.videos &&
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.movie.videos.slice(0, 4).map(video => {
+          props.videos.slice(0, 4).map(video => {
             return (
               <View style={styles.videoShadow} key={video.id}>
                 <View style={styles.videoContainer}>
@@ -33,7 +33,7 @@ const MovieVideos = props => {
 
 const styles = StyleSheet.create({
   heading: {
-    color: colors.text,
+    color: colors.heading,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,
