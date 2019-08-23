@@ -16,24 +16,22 @@ const MoviesSwiper = props => {
       >
         <SwiperHeader closeSwiper={props.closeSwiper} />
         {
-          !props.isLoading
+          props.isLoading 
           ?
+          <View style={styles.loadingScreen}>
+            <ActivityIndicator />
+          </View> 
+          :
           <Swiper 
             showsPagination={false} 
             index={props.firstItem}
             loadMinimal={true}
-            containerStyle={styles.container}
-          >
-          {
-            props.movies.map(movie =>
+            containerStyle={styles.swiper}
+            > 
+            {props.movies.map(movie =>
               <SwiperSlide movie={movie} key={movie.id} />
-            )
-          }
+            )}
           </Swiper>
-          :
-          <View style={styles.loadingScreen}>
-            <ActivityIndicator />
-          </View>
         }
       </Modal>
     </View>
@@ -42,7 +40,10 @@ const MoviesSwiper = props => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.base01
+    backgroundColor: colors.base01,
+  },
+  swiper: {
+    backgroundColor: colors.base01,
   },
   loadingScreen: {
     backgroundColor: colors.base01,

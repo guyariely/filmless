@@ -14,12 +14,15 @@ const MovieInfo = props => {
           {props.movie.vote_average}
         </Text>
       </View>
+      {
+      props.movie.runtime &&
       <View style={styles.info}>
         <Icon color={colors.primary} name="schedule" size={24} />
         <Text style={styles.infoText}>
-          {runtimeText(props.movie.runtime) || ''}
+          {runtimeText(props.movie.runtime)}
         </Text>
-        </View>
+      </View>
+      }
       <View style={styles.info}>
         <Icon color={colors.primary} name="date-range" size={24} />
         <Text style={styles.infoText}>

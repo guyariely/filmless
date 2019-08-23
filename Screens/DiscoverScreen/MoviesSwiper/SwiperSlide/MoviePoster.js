@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
 import colors from '../../../../Constants/colors';
 
 const MoviePoster = props => {
@@ -8,6 +8,11 @@ const MoviePoster = props => {
       <View style={styles.poster}>
         <Image
           style={styles.posterImage}
+          loadingIndicatorSource={() => 
+            <View style={styles.loadingScreen}>
+              <ActivityIndicator />
+            </View>
+          }
           source={{uri: 'https://image.tmdb.org/t/p/w500' + props.poster}} 
         />
       </View>
@@ -30,10 +35,16 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 15,
     overflow: 'hidden',
+    backgroundColor: colors.base02
   },
   posterImage: {
     flex: 1,
     resizeMode: 'cover',
+  },
+  loadingScreen: {
+    backgroundColor: colors.base02,
+    justifyContent: 'center',
+    flex: 1
   }
 });
 

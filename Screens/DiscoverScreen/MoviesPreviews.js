@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../Constants/colors';
+import { ActivityIndicator } from 'react-native';
 
 const MoviesPreviews = props => {
   return (
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 15,
     overflow: 'hidden',
+    backgroundColor: colors.base02
   },
   image: {
     flex: 1,

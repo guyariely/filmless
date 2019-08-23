@@ -20,9 +20,10 @@ const Slide = props => {
         <MovieInfo movie={props.movie} />
       </View>
       <MovieOverview overview={overview} />
-      <MoviePhotos images={images} />
-      <MovieVideos videos={videos} />
-      <MovieReviews reviews={reviews} />
+      {images.length > 0 &&<MoviePhotos images={images} />}
+      {videos.length > 0 &&<MovieVideos videos={videos} />}
+      {reviews.length > 0 && <MovieReviews reviews={reviews} />}
+      <View style={styles.bottomBuffer}></View>
     </ScrollView>
   );
 };
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingBottom: 15
+  },
+  bottomBuffer: {
+    marginBottom: 50
   }
 });
 

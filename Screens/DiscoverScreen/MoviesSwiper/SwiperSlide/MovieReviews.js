@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15
   },
   carousel: {
-    marginBottom: 50,
     overflow: 'visible',
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 4 },
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     color: colors.text01,
     lineHeight: 25,
     fontSize: 16,
-    paddingVertical: 0,
     marginBottom: 30
   }
 });

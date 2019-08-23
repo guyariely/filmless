@@ -76,6 +76,7 @@ const DiscoverScreen = () => {
           movie.videos = movieDetails.data.videos.results;
         }
         setIsLoadingSwiper(false);
+        console.log(moviesExtended[5]);
         setMovies(moviesExtended);
       } 
       catch (error) {

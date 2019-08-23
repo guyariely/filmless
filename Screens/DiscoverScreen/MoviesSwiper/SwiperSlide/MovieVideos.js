@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, WebView } from 'react-native';
 import colors from '../../../../Constants/colors';
+import { ActivityIndicator } from "react-native";
 
 const MovieVideos = props => {
 
@@ -18,6 +19,12 @@ const MovieVideos = props => {
                   <WebView
                     style={styles.video}
                     javaScriptEnabled={true}
+                    renderLoading={() => 
+                      <View style={styles.loadingScreen}>
+                        <ActivityIndicator />
+                      </View>
+                    }
+                    startInLoadingState
                     source={{uri: 'https://www.youtube.com/embed/' + video.key + '?&modestbranding=1'}}
                   />
               </View>
@@ -63,6 +70,11 @@ const styles = StyleSheet.create({
   video: {
     flex: 1,
   },
+  loadingScreen: {
+    backgroundColor: colors.base02,
+    justifyContent: 'center',
+    flex: 1
+  }
 });
 
 export default MovieVideos;
