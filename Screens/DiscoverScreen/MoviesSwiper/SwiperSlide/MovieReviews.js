@@ -37,7 +37,7 @@ const MovieReviews = props => {
 
 const styles = StyleSheet.create({
   heading: {
-    color: colors.primary,
+    color: colors.text,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,

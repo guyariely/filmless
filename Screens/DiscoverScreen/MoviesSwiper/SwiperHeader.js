@@ -6,7 +6,7 @@ import colors from '../../../Constants/colors';
 const SwiperHeader = props => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={props.closeCarousel} style={styles.closeButton}>
+      <TouchableOpacity onPress={props.closeSwiper} style={styles.closeButton}>
         <Icon color={colors.text} name="keyboard-arrow-down" size={32} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.watchedButton}>

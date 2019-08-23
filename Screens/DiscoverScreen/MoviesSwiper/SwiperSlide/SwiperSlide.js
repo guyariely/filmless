@@ -5,6 +5,7 @@ import MovieInfo from './MovieInfo';
 import MoviePoster from './MoviePoster';
 import MoviePhotos from './MoviePhotos';
 import MovieReviews from "./MovieReviews";
+import MovieVideos from "./MovieVideos";
 
 const Slide = props => {
 
@@ -18,6 +19,7 @@ const Slide = props => {
       <Text style={styles.heading}>PLOT SUMMARY</Text>
       <Text style={styles.plotSummary}>{props.movie.overview}</Text>
       <MoviePhotos movie={props.movie} />
+      <MovieVideos movie={props.movie} />
       <MovieReviews movie={props.movie} />
     </ScrollView>
   );
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   heading: {
-    color: colors.primary,
+    color: colors.text,
     fontWeight: 'bold',
     fontSize: 20,
     paddingHorizontal: 20,

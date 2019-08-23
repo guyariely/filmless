@@ -14,13 +14,12 @@ const MoviesSwiper = props => {
         transparent={false}
         visible={props.visible}
       >
-        <SwiperHeader closeCarousel={props.closeCarousel} />
+        <SwiperHeader closeSwiper={props.closeSwiper} />
         <Swiper 
           showsPagination={false} 
           index={props.firstItem}
           loadMinimal={true}
           containerStyle={styles.container}
-          onIndexChanged={index => console.log(index)}
         >
         {
           props.movies.map(movie =>

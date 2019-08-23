@@ -13,8 +13,8 @@ const DiscoverScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [showCarousel, setShowCarousel] = useState(false);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [showSwiper, setShowSwiper] = useState(false);
+  const [swiperIndex, setSwiperIndex] = useState(0);
 
   const loadMovies = async inputs => {
 
@@ -68,11 +68,12 @@ const DiscoverScreen = () => {
       try {
         for (let movie of moviesExtended) {
           const movieDetails = await axios.get(
-            `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews`
+            `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos`
           );
           movie.runtime = movieDetails.data.runtime;
           movie.images = movieDetails.data.images.backdrops;
           movie.reviews = movieDetails.data.reviews.results;
+          movie.videos = movieDetails.data.videos.results;
         }
         setMovies(moviesExtended);
       } 
@@ -108,19 +109,19 @@ const DiscoverScreen = () => {
         (!error && !isLoading) &&
         <MoviesPreviews 
           movies={movies} 
-          openCarousel={index => { 
-            setCarouselIndex(index)
-            setShowCarousel(true); 
+          openSwiper={index => { 
+            setSwiperIndex(index)
+            setShowSwiper(true); 
           }} 
         />
       }
       {
-        showCarousel &&
+        showSwiper &&
        <MoviesSwiper 
-          visible={showCarousel} 
-          firstItem={carouselIndex}
+          visible={showSwiper} 
+          firstItem={swiperIndex}
           movies={movies} 
-          closeCarousel={() => setShowCarousel(false)}
+          closeSwiper={() => setShowSwiper(false)}
       /> 
       }
     </View>

@@ -1,25 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, WebView } from 'react-native';
 import colors from '../../../../Constants/colors';
 
-const MoviePhotos = props => {
+const MovieVideos = props => {
 
   return (
     <View>
-      <Text style={styles.heading}>PHOTOS</Text>
+      <Text style={styles.heading}>VIDEOS</Text>
       {
-        props.movie.images &&
+        props.movie.videos &&
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.movie.images.slice(0, 11).map(image => {
+          props.movie.videos.slice(0, 4).map(video => {
             return (
-              <View style={styles.imageShadow} key={image.file_path}>
-                <View style={styles.imageContainer}>
-                  <Image
-                    style={styles.image}
-                    source={{uri: 'https://image.tmdb.org/t/p/w500' + image.file_path}} 
+              <View style={styles.videoShadow} key={video.id}>
+                <View style={styles.videoContainer}>
+                  <WebView
+                    style={styles.video}
+                    javaScriptEnabled={true}
+                    source={{uri: 'https://www.youtube.com/embed/' + video.key + '?&modestbranding=1'}}
                   />
-                </View>
+              </View>
             </View>
             );
           })
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 20
   },
-  imageShadow: {
+  videoShadow: {
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.8,
@@ -53,15 +54,15 @@ const styles = StyleSheet.create({
     height: 160,
     width: 280,
   },
-  imageContainer: {
-    flex: 1,
+  videoContainer: {
     borderRadius: 15,
-    overflow: 'hidden'
+    height: 160,
+    width: 280,
+    overflow: 'hidden',
   },
-  image: {
+  video: {
     flex: 1,
-    resizeMode: 'cover',
-  }
+  },
 });
 
-export default MoviePhotos;
+export default MovieVideos;
