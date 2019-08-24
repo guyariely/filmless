@@ -2,7 +2,7 @@
   "expo": {
     "name": "Filmless",
     "slug": "filmless",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "platforms": [
       "ios",

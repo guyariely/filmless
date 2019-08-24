@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator, createAppContainer } from "react-navigat
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
-import WatchListScreen from './WatchListScreen';  
+import WatchlistScreen from './WatchlistScreen';  
 import SettingsScreen from './SettingsScreen';
 import colors from '../Constants/colors';
 
@@ -18,8 +18,8 @@ const AppNavigator = createMaterialTopTabNavigator(
         )
       } 
     },
-    WatchList: { 
-      screen: WatchListScreen,
+    Watchlist: { 
+      screen: WatchlistScreen,
       navigationOptions: {
         tabBarLabel: "",
         tabBarIcon: ({tintColor}) => (
@@ -42,6 +42,7 @@ const AppNavigator = createMaterialTopTabNavigator(
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: false,
+    lazy: true,
     tabBarOptions: {
       activeTintColor: colors.text01,
       inactiveTintColor: colors.text02,

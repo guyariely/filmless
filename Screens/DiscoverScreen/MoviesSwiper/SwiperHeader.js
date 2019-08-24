@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../Constants/colors';
 
@@ -7,13 +7,31 @@ const SwiperHeader = props => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={props.closeSwiper} style={styles.closeButton}>
-        <Icon color={colors.text01} name="keyboard-arrow-down" size={32} />
+        <Icon 
+          color={colors.text01} 
+          name="keyboard-arrow-down" 
+          size={32} 
+        />
       </TouchableOpacity>
       <TouchableOpacity style={styles.watchedButton}>
-        <Icon color={colors.text01} name="visibility" size={26} />
+        <Icon 
+          color={colors.text01} 
+          name="visibility" 
+          size={26} 
+        />
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Icon color={colors.text01} name="bookmark-border" size={26} />
+      <TouchableOpacity 
+        onPress={() => {
+          props.inWatchlist ? 
+          props.removeFromWatchlist() : 
+          props.saveToWatchlist() 
+        }}
+      >
+        <Icon 
+          color={props.inWatchlist ? colors.primary : colors.text01} 
+          name={props.inWatchlist ? "bookmark" : "bookmark-border"}
+          size={26} 
+        />
       </TouchableOpacity>
     </View>
   );

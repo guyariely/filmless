@@ -78,7 +78,7 @@ const DiscoverScreen = () => {
         }
         setIsLoadingSwiper(false);
         setMovies(moviesExtended);
-      } 
+      }
       catch (error) {
         console.log(error);
       }
