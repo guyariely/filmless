@@ -1,7 +1,7 @@
 import { API_KEY } from '../../env';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { StyleSheet, Text, View, ActivityIndicator, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
 import colors from '../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
@@ -10,6 +10,7 @@ import MoviesSwiper from './MoviesSwiper/MoviesSwiper';
 const DiscoverScreen = () => {
 
   const [movies, setMovies] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   
@@ -75,7 +76,21 @@ const DiscoverScreen = () => {
           movie.reviews = movieDetails.data.reviews.results;
           movie.videos = movieDetails.data.videos.results;
           movie.actors = movieDetails.data.credits.cast;
+          movie.inWatchlist = false;
         }
+
+        let watchlist = await AsyncStorage.getItem('watchlist');
+        if (watchlist) {
+          setWatchlist(JSON.parse(watchlist));
+          watchlist = JSON.parse(watchlist).map(movie => movie.id);
+          for (let i = 0; i < moviesExtended.length; i++) {
+            if (watchlist.indexOf(moviesExtended[i].id) != -1) {
+              moviesExtended[i].inWatchlist = true;
+            }
+          }         
+          setMovies(moviesExtended);
+        }
+         
         setIsLoadingSwiper(false);
         setMovies(moviesExtended);
       }
@@ -123,8 +138,10 @@ const DiscoverScreen = () => {
           visible={showSwiper} 
           firstItem={swiperIndex}
           movies={movies} 
+          watchlist={watchlist}
           isLoading={isLoadingSwiper}
           closeSwiper={() => setShowSwiper(false)}
+          setMovies={movies => setMovies(movies)}
       /> 
       }
     </View>

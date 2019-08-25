@@ -35,7 +35,7 @@ const MoviesPreviews = props => {
                 numberOfLines={1}
                 >
                   {movie.vote_average}
-                  <Text> • </Text>
+                  <Text>  •  </Text>
                   {movie.release_date.slice(0, 4)}
               </Text>
             </View>

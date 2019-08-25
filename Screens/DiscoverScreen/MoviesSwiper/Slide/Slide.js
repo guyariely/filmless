@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../../Constants/colors';
+import Header from './Header';
 import Info from './Info';
 import Poster from './Poster';
 import Overview from './Overview';
@@ -14,19 +15,27 @@ const Slide = props => {
   const { title, overview, images, videos, actors, reviews } = props.movie;
 
   return (
-    <ScrollView style={styles.slide}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.mainContent}>
-        <Poster poster={props.movie.poster_path} />
-        <Info movie={props.movie} />
-      </View>
-      <Overview overview={overview} />
-      {images.length > 0 &&<Photos images={images} />}
-      {videos.length > 0 &&<Videos videos={videos} />}
-      {actors.length > 0 &&<Actors actors={actors} />}
-      {reviews.length > 0 && <Reviews reviews={reviews} />}
-      <View style={styles.bottomBuffer}></View>
-    </ScrollView>
+    <View style={styles.slide}>
+      <Header 
+        closeSwiper={props.closeSwiper} 
+        inWatchlist={props.movie.inWatchlist}
+        removeFromWatchlist={props.removeFromWatchlist}
+        saveToWatchlist={props.saveToWatchlist}
+      />
+      <ScrollView >
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.mainContent}>
+          <Poster poster={props.movie.poster_path} />
+          <Info movie={props.movie} />
+        </View>
+        <Overview overview={overview} />
+        {images.length > 0 &&<Photos images={images} />}
+        {videos.length > 0 &&<Videos videos={videos} />}
+        {actors.length > 0 &&<Actors actors={actors} />}
+        {reviews.length > 0 && <Reviews reviews={reviews} />}
+        <View style={styles.bottomBuffer}></View>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -34,7 +43,6 @@ const styles = StyleSheet.create({
   slide: {
     flex: 1,
     backgroundColor: colors.base01,
-    paddingBottom: 20,
     paddingTop: 10,
     marginTop: 'auto',
   },
