@@ -47,10 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.base02,
     borderRadius: 15,
-    paddingTop: 15,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
+    paddingTop: 15
   },
   button: {
     backgroundColor: colors.primary,

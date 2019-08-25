@@ -12,6 +12,7 @@ const Info = props => {
         <Icon color={colors.primary} name="star" size={24} />
         <Text style={styles.infoText}>
           {props.movie.vote_average}
+          <Text style={styles.voteCount}>  {props.movie.vote_count}</Text>
         </Text>
       </View>
       {
@@ -86,6 +87,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: 'flex-end',
     alignSelf: 'center',
+  },
+  voteCount: {
+    color: colors.text02,
+    fontSize: 16
   }
 });
 
