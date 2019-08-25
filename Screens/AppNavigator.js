@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator, createAppContainer } from "react-navigat
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
-import WatchlistScreen from './WatchlistScreen';  
+import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
 import SettingsScreen from './SettingsScreen';
 import colors from '../Constants/colors';
 
@@ -38,7 +38,7 @@ const AppNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Discover',
+    initialRouteName: 'Watchlist',
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: false,

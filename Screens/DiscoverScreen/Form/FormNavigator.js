@@ -11,6 +11,7 @@ const FormNavigator = createMaterialTopTabNavigator(
     Options: { screen: Options }
   },
   {
+    swipeEnabled: false,
     tabBarOptions: {
       style: {
         backgroundColor: 'transparent',

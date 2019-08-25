@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
-import colors from '../Constants/colors';
+import colors from '../../Constants/colors';
 import { withNavigationFocus } from "react-navigation";
+import Header from './Header';
 
 const WatchlistScreen = props => {
 
   const [watchlist, setWatchlist] = useState([]);
+  const [sortMethod, setSortMethod] = useState('Date Added');
+  const [sortDirection, setSortDirection] = useState('des')
 
   useEffect(() => {
     const loadWatchlist = async () => {
@@ -23,14 +26,15 @@ const WatchlistScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>WATCH LIST</Text>
-      {
-        watchlist.map(movie => 
-          <Text style={{color: colors.text01, textAlign: 'center', marginVertical: 5}} key={movie.id}>
-            {movie.title}
-          </Text>
-        )
-      }
+      <Text style={styles.title}>Watchlist</Text>
+      <Header 
+        sortDirection={sortDirection}
+        sortMethod={sortMethod}
+        setSortMethod={sortMethod => setSortMethod(sortMethod)} 
+        setSortDirection={
+          () => setSortDirection(sortDirection == 'asc' ? 'des' : 'asc')
+        }
+      />
     </View>
   )
 };
@@ -38,13 +42,14 @@ const WatchlistScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: colors.base01
   },
   title: {
-    textAlign: 'center',
+    justifyContent: 'flex-end',
     color: colors.text01,
-    fontWeight: '600'
+    fontSize: 38,
+    paddingHorizontal: 28,
+    paddingTop: 54
   }
 });
 

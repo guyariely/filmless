@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../Constants/colors';
-import { ActivityIndicator } from 'react-native';
 
 const MoviesPreviews = props => {
   return (
