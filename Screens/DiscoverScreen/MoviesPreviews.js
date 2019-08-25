@@ -20,19 +20,23 @@ const MoviesPreviews = props => {
                   style={styles.image}
                   source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
                 />
-                <View style={styles.ratingContainer}>
-                  <Icon name="star" color={colors.rating} size={15} />
-                  <Text style={styles.rating}>
-                    {movie.vote_average}
-                  </Text>
-                </View>
               </View>
             </View>
-            <View style={styles.title}>
+            <View style={styles.text}>
               <Text 
-                style={styles.titleText} 
+                style={styles.title} 
                 numberOfLines={1}>
                   {movie.title}
+              </Text>
+            </View>
+            <View style={styles.text}>
+              <Text 
+                style={styles.rating} 
+                numberOfLines={1}
+                >
+                  {movie.vote_average}
+                  <Text> • </Text>
+                  {movie.release_date.slice(0, 4)}
               </Text>
             </View>
           </TouchableOpacity>
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
   movie: {
     flex: 1,
     width: 135,
-    marginVertical: 10, 
+    marginVertical: 8, 
     marginRight: 15,
   },
   imageShadow: {
@@ -73,32 +77,22 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
   },
-  ratingContainer: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    flexDirection: 'row',
-    padding: 5,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: colors.primary,
-    backgroundColor: colors.transparentPrimary
-  },  
-  rating :{
-    color: colors.rating,
-    fontWeight: '600',
-    paddingHorizontal: 2
-  },  
-  title: {
-    flex: 1,
+  text: {
     paddingHorizontal: 10,
     justifyContent: 'center',
     alignSelf: 'center'
   },
-  titleText: {
+  title: {
+    marginTop: 12,
+    marginBottom: 4,
     color: colors.text01,
     fontSize: 18,
     fontWeight: '700',
+  },
+  rating: {
+    color: colors.text03,
+    fontSize: 16,
+    fontWeight: '600',
   }
 });
 
