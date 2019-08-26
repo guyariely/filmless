@@ -17,9 +17,11 @@ const WatchlistSwiper = props => {
     setWatchlist(updatedLocalWatchlist);
 
     // saving it in the original watchlist 
+    const savedMovie = watchlist[currentIndex];
+    savedMovie.dateAdded = new Date().getTime();
     const updatedWatchlist = props.watchlist;
-    updatedWatchlist.push(watchlist[currentIndex]);
-    props.setWatchlist(updatedWatchlist)
+    updatedWatchlist.push(savedMovie);
+    props.setWatchlist(updatedWatchlist);
 
     try {
       await AsyncStorage.setItem(

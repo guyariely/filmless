@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import colors from '../../Constants/colors';
+import sortMovies from '../../utils/sortMovies';
 import Header from './Header';
 import WatchlistPreviews from './WatchlistPreviews';
 import WatchlistSwiper from './WatchlistSwiper';
@@ -10,7 +11,7 @@ const WatchlistScreen = props => {
 
   const [watchlist, setWatchlist] = useState([]);
   const [sortMethod, setSortMethod] = useState(null);
-  const [sortDirection, setSortDirection] = useState('des')
+  const [sortDirection, setSortDirection] = useState('des');
 
   const [showSwiper, setShowSwiper] = useState(false);
   const [swiperIndex, setSwiperIndex] = useState(0);
@@ -22,7 +23,7 @@ const WatchlistScreen = props => {
         if (watchlist) {
           watchlist = JSON.parse(watchlist);
           watchlist.forEach(movie => movie.inWatchlist = true);
-          setWatchlist(watchlist);
+          setWatchlist(watchlist.reverse());
         }
       } catch (error) {
         console.log(error);
@@ -37,10 +38,15 @@ const WatchlistScreen = props => {
       <Header 
         sortDirection={sortDirection}
         sortMethod={sortMethod}
-        setSortMethod={sortMethod => setSortMethod(sortMethod)} 
+        setSortMethod={sortMethod => {
+          setSortMethod(sortMethod);
+          setWatchlist(sortMovies([...watchlist], sortMethod, sortDirection));
+        }} 
         setSortDirection={
-          () => setSortDirection(sortDirection == 'asc' ? 'des' : 'asc')
-        }
+          () => {
+            setSortDirection(sortDirection == 'asc' ? 'des' : 'asc');
+            setWatchlist([...watchlist].reverse());
+        }}
       />
       <WatchlistPreviews
         watchlist={watchlist} 

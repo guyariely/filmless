@@ -68,6 +68,7 @@ const DiscoverScreen = props => {
       setIsLoadingSwiper(true);
       const moviesExtended = movies;
       try {
+        // fetchs additional info about the movies
         for (let movie of moviesExtended) {
           const movieDetails = await axios.get(
             `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`
@@ -80,6 +81,7 @@ const DiscoverScreen = props => {
           movie.inWatchlist = false;
         }
 
+        // updates the fetched movies watchlist status
         let watchlist = await AsyncStorage.getItem('watchlist');
         if (watchlist) {
           setWatchlist(JSON.parse(watchlist));
@@ -89,9 +91,7 @@ const DiscoverScreen = props => {
               moviesExtended[i].inWatchlist = true;
             }
           }         
-          setMovies(moviesExtended);
-        }
-         
+        }         
         setIsLoadingSwiper(false);
         setMovies(moviesExtended);
       }
@@ -103,6 +103,7 @@ const DiscoverScreen = props => {
   }, [movies]);
 
   useEffect(() => {
+    // updates the fetched movies watchlist status
     const updateWatchlist = async () => {
       let watchlist = await AsyncStorage.getItem('watchlist');
       if (watchlist) {
@@ -111,8 +112,9 @@ const DiscoverScreen = props => {
         watchlist = JSON.parse(watchlist).map(movie => movie.id);
         const updatedMovies = movies;
         for (let i = 0; i < updatedMovies.length; i++) {
-          updatedMovies[i].inWatchlist =
-          watchlist.indexOf(updatedMovies[i].id) != -1 ? true : false
+          updatedMovies[i].inWatchlist = (
+            watchlist.indexOf(updatedMovies[i].id) != -1 ? true : false
+          );
         }         
         setMovies(updatedMovies);
       }
