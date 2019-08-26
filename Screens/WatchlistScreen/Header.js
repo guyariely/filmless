@@ -55,8 +55,8 @@ const Header = props => {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    paddingHorizontal: 28,
     marginVertical: 14,
+    paddingHorizontal: 28,
   },
   sortDirectionButtonContainer: {
     flexDirection: 'row'

@@ -38,12 +38,13 @@ const WatchlistPreviews = props => {
 
 const styles = StyleSheet.create({
   flatList: {
-    paddingHorizontal: 28,
-    paddingBottom: 150
+    paddingBottom: 150,
+    paddingHorizontal: 28
   },  
   movie: {
     flexDirection: 'row',
     marginVertical: 10, 
+    flex: 1
   },
   imageShadow: {
     shadowColor: colors.shadow,
@@ -64,13 +65,14 @@ const styles = StyleSheet.create({
     resizeMode: 'cover'
   },
   details: {
+    flex: 2,
     justifyContent: 'center',
     marginLeft: 15
   },
   title: {
-    marginBottom: 6,
+    marginBottom: 8,
     color: colors.text01,
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '700',
   },
   info: {

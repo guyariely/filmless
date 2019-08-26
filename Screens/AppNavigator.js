@@ -48,7 +48,8 @@ const AppNavigator = createMaterialTopTabNavigator(
       inactiveTintColor: colors.text02,
       style: { 
         backgroundColor: colors.base01,
-        paddingBottom: 30
+        paddingTop: 5,
+        paddingBottom: 25,
       },
       indicatorStyle: {
         height: 0

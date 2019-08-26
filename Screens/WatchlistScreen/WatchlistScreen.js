@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
-import colors from '../../Constants/colors';
 import { withNavigationFocus } from "react-navigation";
+import colors from '../../Constants/colors';
 import Header from './Header';
 import WatchlistPreviews from './WatchlistPreviews';
 
@@ -44,14 +44,14 @@ const WatchlistScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.base01
+    backgroundColor: colors.base01,
   },
   title: {
     justifyContent: 'flex-end',
     color: colors.text01,
     fontSize: 38,
+    paddingTop: 54,
     paddingHorizontal: 28,
-    paddingTop: 54
   }
 });
 
