@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../Constants/colors';
 
 const sortMethods = [
-  {label: 'Date Added', value: 'Date Added'},
   {label: 'Release Date', value: 'Release Date'},
   {label: 'Rating', value: 'Rating'},
   {label: 'Alphabetical', value: 'Alphabetical'},
@@ -41,6 +40,8 @@ const Header = props => {
           <Text style={styles.sortMethodPlaceHolder}>Sorted By </Text>
           <WheelInput
             style={wheelInputStyles}
+            placeholder={{label: 'Date Added'}}
+            placeholderTextColor={colors.primary}
             items={sortMethods}
             value={props.sortMethod}
             onValueChange={sortMethod => props.setSortMethod(sortMethod)}

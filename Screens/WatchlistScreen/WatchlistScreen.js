@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import colors from '../../Constants/colors';
 import { withNavigationFocus } from "react-navigation";
 import Header from './Header';
+import WatchlistPreviews from './WatchlistPreviews';
 
 const WatchlistScreen = props => {
 
   const [watchlist, setWatchlist] = useState([]);
-  const [sortMethod, setSortMethod] = useState('Date Added');
+  const [sortMethod, setSortMethod] = useState(null);
   const [sortDirection, setSortDirection] = useState('des')
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const WatchlistScreen = props => {
           () => setSortDirection(sortDirection == 'asc' ? 'des' : 'asc')
         }
       />
+      <WatchlistPreviews watchlist={watchlist} />
     </View>
   )
 };

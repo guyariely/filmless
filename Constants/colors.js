@@ -47,6 +47,7 @@ const themes = {
     text01: '#F5F5F7',
     text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    heading: 'rgb(235, 195, 37)',
     rating: '#F5F5F7',
     shadow: '#000',
     search: '#F5F5F7'

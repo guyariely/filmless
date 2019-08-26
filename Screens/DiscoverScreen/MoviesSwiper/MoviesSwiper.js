@@ -12,11 +12,9 @@ const MoviesSwiper = props => {
   const saveToWatchlist = async () => {
     const updatedMovies = props.movies;
     updatedMovies[currentIndex].inWatchlist = true;
-    updatedMovies[currentIndex].dateAdded = Date.now();
     props.setMovies(updatedMovies);
 
     const updatedWatchlist = watchlist;
-    updatedWatchlist[currentIndex].dateAdded = Date.now();
     updatedWatchlist.push(props.movies[currentIndex]);
     setWatchlist(updatedWatchlist)
 

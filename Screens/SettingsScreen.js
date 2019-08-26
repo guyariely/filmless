@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, Button, AsyncStorage, Image } from 'react-native';
 import colors from '../Constants/colors';
 
 const SettingsScreen = () => {
