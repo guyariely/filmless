@@ -1,11 +1,11 @@
-import { API_KEY } from '../../env';
+import { API_KEY } from '../../../env';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
 import colors from '../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
-import MoviesSwiper from './MoviesSwiper/MoviesSwiper';
+import MoviesSwiper from '../../Swiper/MoviesSwiper';
 
 const DiscoverScreen = () => {
 

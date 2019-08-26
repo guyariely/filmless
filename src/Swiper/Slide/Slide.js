@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 import Header from './Header';
 import Info from './Info';
 import Poster from './Poster';

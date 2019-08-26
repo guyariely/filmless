@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Modal, View, ActivityIndicator, AsyncStorage } from 'react-native';
-import colors from '../../../Constants/colors';
-import Swiper from '../../../utils/Swiper';
+import colors from '../Constants/colors';
+import Swiper from './Swiper';
 import Slide from './Slide/Slide';
 
 const MoviesSwiper = props => {

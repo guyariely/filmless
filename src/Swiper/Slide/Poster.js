@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 
 const Poster = props => {
   return (

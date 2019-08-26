@@ -11,7 +11,7 @@ const WatchlistPreviews = props => {
         contentContainerStyle={styles.flatList}
         keyExtractor={movie => movie.id.toString()}
         data={props.watchlist}
-        renderItem={({item: movie}) => (
+        renderItem={({item: movie, index}) => (
           <TouchableOpacity style={styles.movie} onPress={() => props.openSwiper(index)}>
             <View style={styles.imageShadow}>
               <View style={styles.imageContainer}>

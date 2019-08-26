@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '../../../../Constants/colors';
-import runtimeText from '../../../../utils/runtimeText';
+import colors from '../../Constants/colors';
+import runtimeText from '../../utils/runtimeText';
 
 const Info = props => {
 

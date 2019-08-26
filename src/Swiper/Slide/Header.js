@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 
 const Header = props => {
 

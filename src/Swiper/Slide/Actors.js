@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 
 const Actors = props => {
 

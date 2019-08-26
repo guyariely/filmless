@@ -11,6 +11,9 @@ const WatchlistScreen = props => {
   const [sortMethod, setSortMethod] = useState(null);
   const [sortDirection, setSortDirection] = useState('des')
 
+  const [showSwiper, setShowSwiper] = useState(false);
+  const [swiperIndex, setSwiperIndex] = useState(0);
+
   useEffect(() => {
     const loadWatchlist = async () => {
       try {
@@ -36,7 +39,13 @@ const WatchlistScreen = props => {
           () => setSortDirection(sortDirection == 'asc' ? 'des' : 'asc')
         }
       />
-      <WatchlistPreviews watchlist={watchlist} />
+      <WatchlistPreviews
+        watchlist={watchlist} 
+        openSwiper={index => { 
+          setSwiperIndex(index)
+          setShowSwiper(true); 
+        }} 
+      />
     </View>
   )
 };

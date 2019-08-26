@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, WebView } from 'react-native';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 import { ActivityIndicator } from "react-native";
 
 const Videos = props => {

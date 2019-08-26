@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import colors from '../../../../Constants/colors';
+import colors from '../../Constants/colors';
 import Carousel from 'react-native-snap-carousel';
 import { Dimensions } from "react-native";
 
