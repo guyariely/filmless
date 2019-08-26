@@ -1,13 +1,14 @@
 import { API_KEY } from '../../../env';
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
+import { withNavigationFocus } from "react-navigation";
+import axios from 'axios';
 import colors from '../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
-import MoviesSwiper from '../../Swiper/MoviesSwiper';
+import MoviesSwiper from './MoviesSwiper';
 
-const DiscoverScreen = () => {
+const DiscoverScreen = props => {
 
   const [movies, setMovies] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
@@ -101,6 +102,24 @@ const DiscoverScreen = () => {
     getMovieDetails();
   }, [movies]);
 
+  useEffect(() => {
+    const updateWatchlist = async () => {
+      let watchlist = await AsyncStorage.getItem('watchlist');
+      if (watchlist) {
+        setWatchlist(JSON.parse(watchlist));
+
+        watchlist = JSON.parse(watchlist).map(movie => movie.id);
+        const updatedMovies = movies;
+        for (let i = 0; i < updatedMovies.length; i++) {
+          updatedMovies[i].inWatchlist =
+          watchlist.indexOf(updatedMovies[i].id) != -1 ? true : false
+        }         
+        setMovies(updatedMovies);
+      }
+    };
+    updateWatchlist();
+  }, [props.isFocused]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Find Your Film</Text>
@@ -184,4 +203,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DiscoverScreen;
+export default withNavigationFocus(DiscoverScreen);

@@ -4,6 +4,7 @@ import { withNavigationFocus } from "react-navigation";
 import colors from '../../Constants/colors';
 import Header from './Header';
 import WatchlistPreviews from './WatchlistPreviews';
+import WatchlistSwiper from './WatchlistSwiper';
 
 const WatchlistScreen = props => {
 
@@ -17,9 +18,11 @@ const WatchlistScreen = props => {
   useEffect(() => {
     const loadWatchlist = async () => {
       try {
-        const watchlist = await AsyncStorage.getItem('watchlist');
+        let watchlist = await AsyncStorage.getItem('watchlist');
         if (watchlist) {
-          setWatchlist(JSON.parse(watchlist));
+          watchlist = JSON.parse(watchlist);
+          watchlist.forEach(movie => movie.inWatchlist = true);
+          setWatchlist(watchlist);
         }
       } catch (error) {
         console.log(error);
@@ -46,6 +49,16 @@ const WatchlistScreen = props => {
           setShowSwiper(true); 
         }} 
       />
+      {
+      showSwiper &&
+      <WatchlistSwiper 
+        visible={showSwiper} 
+        firstItem={swiperIndex}
+        watchlist={watchlist}
+        closeSwiper={() => setShowSwiper(false)}
+        setWatchlist={movies => setWatchlist(movies)}
+      /> 
+      }
     </View>
   )
 };

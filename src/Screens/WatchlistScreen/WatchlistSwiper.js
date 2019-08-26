@@ -1,22 +1,25 @@
 import React, { useState } from "react";
-import { StyleSheet, Modal, View, ActivityIndicator, AsyncStorage } from 'react-native';
-import colors from '../Constants/colors';
-import Swiper from './Swiper';
-import Slide from './Slide/Slide';
+import { StyleSheet, Modal, View, AsyncStorage } from 'react-native';
+import colors from '../../Constants/colors';
+import Swiper from '../../Swiper/Swiper';
+import Slide from '../../Swiper/Slide/Slide';
 
-const MoviesSwiper = props => {
+const WatchlistSwiper = props => {
 
-  const [watchlist, setWatchlist] = useState(props.watchlist);
   const [currentIndex, setCurrentIndex] = useState(props.firstItem);
+  const [watchlist, setWatchlist] = useState(props.watchlist);
 
   const saveToWatchlist = async () => {
-    const updatedMovies = props.movies;
-    updatedMovies[currentIndex].inWatchlist = true;
-    props.setMovies(updatedMovies);
 
-    const updatedWatchlist = watchlist;
-    updatedWatchlist.push(props.movies[currentIndex]);
-    setWatchlist(updatedWatchlist)
+    // marking it as 'saved' locally in the swiper
+    const updatedLocalWatchlist = watchlist;
+    updatedLocalWatchlist[currentIndex].inWatchlist = true;
+    setWatchlist(updatedLocalWatchlist);
+
+    // saving it in the original watchlist 
+    const updatedWatchlist = props.watchlist;
+    updatedWatchlist.push(watchlist[currentIndex]);
+    props.setWatchlist(updatedWatchlist)
 
     try {
       await AsyncStorage.setItem(
@@ -28,15 +31,19 @@ const MoviesSwiper = props => {
   };
 
   const removeFromWatchlist = async () => {
-    const updatedMovies = props.movies;
-    updatedMovies[currentIndex].inWatchlist = false;
-    props.setMovies(updatedMovies);
+    
+    // marking it as 'removed' locally in the swiper
+    const updatedLocalWatchlist = watchlist;
+    updatedLocalWatchlist[currentIndex].inWatchlist = false;
+    setWatchlist(updatedLocalWatchlist);
 
-    const updatedWatchlist = watchlist.filter(
-      movie => movie.id != props.movies[currentIndex].id
+    // removing it from the original watchlist 
+    const updatedWatchlist = props.watchlist.filter(
+      movie => movie.id != watchlist[currentIndex].id
     );
-    setWatchlist(updatedWatchlist);
+    props.setWatchlist(updatedWatchlist);
 
+    // removing it from the local storage
     try {
       await AsyncStorage.setItem(
         'watchlist', JSON.stringify(updatedWatchlist)
@@ -54,13 +61,6 @@ const MoviesSwiper = props => {
         transparent={false}
         visible={props.visible}
       >
-        {
-          props.isLoading 
-          ?
-          <View style={styles.loadingScreen}>
-            <ActivityIndicator />
-          </View> 
-          :
           <Swiper 
             showsPagination={false} 
             index={props.firstItem}
@@ -68,7 +68,7 @@ const MoviesSwiper = props => {
             containerStyle={styles.swiper}
             onIndexChanged={index => setCurrentIndex(index)}
           > 
-            {props.movies.map(movie =>
+            {watchlist.map(movie =>
               <Slide 
                 movie={movie} 
                 key={movie.id} 
@@ -78,7 +78,6 @@ const MoviesSwiper = props => {
               />
             )}
           </Swiper>
-        }
       </Modal>
     </View>
   )
@@ -98,4 +97,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoviesSwiper;
+export default WatchlistSwiper;
