@@ -41,7 +41,8 @@ const Info = props => {
 };
 
 const formatDate = date => {
-  return date.split('-').reverse().join('.');
+  const stringDate =  new Date(date).toDateString();
+  return stringDate.slice(4, stringDate.length);
 };
 
 const parseIDsToGenres = IDs => {

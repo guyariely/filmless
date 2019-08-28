@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 
 const Header = props => {
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: isSmallScreen() ? 30 : 40,
     paddingBottom: 5,
     backgroundColor: colors.base01,
   },

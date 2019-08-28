@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 
 const MoviesPreviews = props => {
   return (
@@ -27,16 +28,19 @@ const MoviesPreviews = props => {
                   {movie.title}
               </Text>
             </View>
-            <View style={styles.text}>
-              <Text 
-                style={styles.rating} 
-                numberOfLines={1}
-                >
-                  {movie.vote_average}
-                  <Text>  •  </Text>
-                  {movie.release_date.slice(0, 4)}
-              </Text>
-            </View>
+            {
+              !isSmallScreen() &&
+              <View style={styles.text}>
+                <Text 
+                  style={styles.rating} 
+                  numberOfLines={1}
+                  >
+                    {movie.vote_average}
+                    <Text>  •  </Text>
+                    {movie.release_date.slice(0, 4)}
+                </Text>
+              </View>
+            }
           </TouchableOpacity>
         )}
       />
@@ -54,8 +58,9 @@ const styles = StyleSheet.create({
   movie: {
     flex: 1,
     width: 135,
-    marginVertical: 8, 
-    marginRight: 15,
+    marginTop: isSmallScreen() ? 5 : 8, 
+    marginBottom: isSmallScreen() ? 0 : 8, 
+    marginRight: isSmallScreen() ? 0 : 15,
   },
   imageShadow: {
     flex: 5,
@@ -64,12 +69,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
+    paddingHorizontal: isSmallScreen() ? 15 : 0
   },
   imageContainer: {
     flex: 1,
     borderRadius: 15,
     overflow: 'hidden',
-    backgroundColor: colors.base02
+    backgroundColor: colors.base02,
   },
   image: {
     flex: 1,

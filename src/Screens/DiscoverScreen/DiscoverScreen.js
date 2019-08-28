@@ -2,6 +2,7 @@ import { API_KEY } from '../../../env';
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
+import isSmallScreen from '../../utils/isSmallScreen';
 import axios from 'axios';
 import colors from '../../Constants/colors';
 import Form from './Form/Form';
@@ -48,14 +49,15 @@ const DiscoverScreen = props => {
       const result = await axios.get(
         'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
         '&language=en-US&sort_by=popularity.desc&include_video=false&page=1' + 
-        (fromYear ? '&primary_release_date.gte=' + fromYear : '') +
-        (toYear ? '&primary_release_date.lte=' + toYear : '') +
+        (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
+        (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
         (rating ? '&sort_by=vote_count.desc&vote_average.gte=' + rating : '') +
         (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
         (time ? '&with_runtime.lte=' + time : '') +
         (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
       );
       setMovies(result.data.results); 
+      console.log(result.data.results);
     } 
     catch (error) {
       console.log(error);
@@ -175,17 +177,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.base01
   },
   title: {
-    flex: 1,
     justifyContent: 'flex-end',
     color: colors.text01,
     fontSize: 38,
     paddingHorizontal: 28,
-    paddingTop: 54,
+    paddingTop: isSmallScreen() ? 32 : 54,
+    paddingBottom: isSmallScreen() ? 4 : 0
   },
   form: {
-    flex: 7,
+    height: isSmallScreen() ? 330 : 350,
     paddingHorizontal: 28,
-    paddingVertical: 20, 
+    paddingVertical: isSmallScreen() ? 10 : 20, 
   },
   activityIndicator: {
     justifyContent: 'center',

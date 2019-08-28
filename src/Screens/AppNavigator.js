@@ -6,6 +6,7 @@ import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
 import SettingsScreen from './SettingsScreen';
 import colors from '../Constants/colors';
+import isSmallScreen from '../utils/isSmallScreen';
 
 const AppNavigator = createMaterialTopTabNavigator(
   {
@@ -38,7 +39,7 @@ const AppNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Watchlist',
+    initialRouteName: 'Discover',
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: false,
@@ -49,7 +50,7 @@ const AppNavigator = createMaterialTopTabNavigator(
       style: { 
         backgroundColor: colors.base01,
         paddingTop: 5,
-        paddingBottom: 25,
+        paddingBottom: isSmallScreen() ? 10 : 25,
       },
       indicatorStyle: {
         height: 0

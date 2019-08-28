@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 import sortMovies from '../../utils/sortMovies';
 import Header from './Header';
 import WatchlistPreviews from './WatchlistPreviews';
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     color: colors.text01,
     fontSize: 38,
-    paddingTop: 54,
+    paddingTop: isSmallScreen() ? 44 : 54,
     paddingHorizontal: 28,
   }
 });
