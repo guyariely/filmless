@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
+import SearchScreen from './SearchScreen';
 import SettingsScreen from './SettingsScreen';
 import colors from '../Constants/colors';
 import isSmallScreen from '../utils/isSmallScreen';
@@ -28,6 +29,15 @@ const AppNavigator = createMaterialTopTabNavigator(
         )
       } 
     },
+    Search: { 
+      screen: SearchScreen,
+      navigationOptions: {
+        tabBarLabel: "",
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="search" color={tintColor} size={28} />
+        )
+      } 
+    },
     Settings: { 
       screen: SettingsScreen,
       navigationOptions: {
@@ -39,7 +49,7 @@ const AppNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Discover',
+    initialRouteName: 'Search',
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: false,

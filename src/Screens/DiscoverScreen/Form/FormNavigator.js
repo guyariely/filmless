@@ -20,7 +20,7 @@ const FormNavigator = createMaterialTopTabNavigator(
         padding: 0
       },
       labelStyle: {
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: '600'
       },
       activeTintColor: colors.text01,

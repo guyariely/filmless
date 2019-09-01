@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     color: colors.text01,
     fontSize: 38,
     paddingHorizontal: 28,
-    paddingTop: isSmallScreen() ? 32 : 54,
+    paddingTop: isSmallScreen() ? 44 : 54,
     paddingBottom: isSmallScreen() ? 4 : 0
   },
   form: {

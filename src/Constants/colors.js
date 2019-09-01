@@ -11,17 +11,6 @@ const themes = {
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
   },
-  default02: {
-    base01: 'rgb(30, 32, 49)',
-    base02: 'rgb(18, 20, 32)',
-    primary: 'rgb(89, 115, 243)',
-    text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
-    text03: 'rgba(245, 245, 247, 0.6)',
-    heading: '#F5F5F7',
-    shadow: 'rgba(0, 0, 0, 0.4)',
-    search: '#F5F5F7'
-  },
   light: {
     base01: '#dcdcdc',
     base02: '#f2f2f2',
@@ -43,6 +32,17 @@ const themes = {
     heading: '#0c0c0c',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#ffffff'
+  },
+  netflix: {
+    base01: '#f5f5f5',
+    base02: '#ffffff',
+    primary: '#e80000',
+    text01: '#0c0c0c',
+    text02: '#adb5c4',
+    text03: '#afb3c5',
+    heading: '#e80000',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#f5f5f5'
   },
   dark: {
     base01: '#000',

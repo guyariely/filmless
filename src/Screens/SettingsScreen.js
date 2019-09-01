@@ -1,44 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, AsyncStorage, Image } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Image } from 'react-native';
 import colors from '../Constants/colors';
+import TMDbLogo from '../../assets/TMDb-logo.png';
+import isSmallScreen from '../utils/isSmallScreen';
 
 const SettingsScreen = () => {
 
-  const [counter, setCounter] = useState(null);
-
-  useEffect(() => {
-    const getCounter = async () => {
-      try {
-        const counter =  await AsyncStorage.getItem('counter');
-        if (counter) {
-          return setCounter(JSON.parse(counter));
-        }
-        setCounter(0);
-      } 
-      catch (error) {
-        console.log(error);
-      }
-    };
-    getCounter();
-  },[])
-
-  const updateCounter = async () => {
-    setCounter(counter + 1);
-    try {
-      await AsyncStorage.setItem('counter', JSON.stringify(counter + 1));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>SETTINGS</Text>
-      <Button 
-        color={colors.text} 
-        title={"Counter: " + counter} 
-        onPress={updateCounter}
-      />
+      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.heading}>ATTRIBUTION</Text>
+      <Text style={styles.attribution}>
+        The app was built and designed by <Text style={styles.emphasis}>Guy Arieli</Text>. The API is powered by <Text style={styles.emphasis}>TMDb</Text>.
+      </Text>
+      {/** <Image style={styles.logo} source={TMDbLogo} />*/}
     </View>
   )
 };
@@ -46,13 +21,34 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: colors.base01
+    backgroundColor: colors.base01,
+    paddingHorizontal: 28,
   },
   title: {
-    textAlign: 'center',
+    justifyContent: 'flex-end',
     color: colors.text01,
-    fontWeight: '600'
+    fontSize: 38,
+    paddingTop: isSmallScreen() ? 44 : 54,
+  },
+  heading: {
+    color: colors.heading,
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingVertical: 15
+  },
+  attribution: {
+    color: colors.text01,
+    fontSize: 18
+  },
+  emphasis: {
+    color: colors.primary,
+    fontWeight: 'bold'
+  },
+  logo: {
+    opacity: 0.8,
+    marginVertical: 20,
+    width: 200,
+    height: 70,
   }
 });
 
