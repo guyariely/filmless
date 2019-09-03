@@ -1,4 +1,4 @@
-import { API_KEY } from '../../../env';
+import API_KEY from '../../../env';
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
 import { withNavigationFocus } from "react-navigation";

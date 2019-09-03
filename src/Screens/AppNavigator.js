@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
-import SearchScreen from './SearchScreen';
+import SearchScreen from './SearchScreen/SearchScreen';
 import SettingsScreen from './SettingsScreen';
 import colors from '../Constants/colors';
 import isSmallScreen from '../utils/isSmallScreen';

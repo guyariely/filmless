@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import runtimeText from '../../utils/runtimeText';
 import colors from '../../Constants/colors';
 
 const WatchlistPreviews = props => {
 
+  const [showBorder, setShowBorder] = useState(false);
+
   return (
-    <View style={styles.watchlistPreviews}>
+    <View style={showBorder ? [styles.watchlistPreviews, styles.watchlistPreviewsBorder] : styles.watchlistPreviews}>
       <FlatList
         contentContainerStyle={styles.flatList}
         keyExtractor={movie => movie.id.toString()}
+        onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1 && props.watchlist.length > 0)}
+        scrollEventThrottle={16}
         data={props.watchlist}
         renderItem={({item: movie, index}) => (
           <TouchableOpacity style={styles.movie} onPress={() => props.openSwiper(index)}>
@@ -37,9 +41,17 @@ const WatchlistPreviews = props => {
 };
 
 const styles = StyleSheet.create({
+  watchlistPreviews: {
+    marginTop: 5,
+    borderTopWidth: 1,
+    borderColor: colors.base01,
+  },
+  watchlistPreviewsBorder: {
+    borderColor: colors.base02,
+  },
   flatList: {
     paddingBottom: 150,
-    paddingHorizontal: 28
+    paddingHorizontal: 28,
   },  
   movie: {
     flexDirection: 'row',

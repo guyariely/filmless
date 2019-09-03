@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import API_KEY from '../../env';
-import { StyleSheet, Text, View, TextInput, Image, ScrollView } from 'react-native';
+import React, { useState, useEffect } from "react";
+import API_KEY from '../../../env';
+import { StyleSheet, Text, View, TextInput, ActivityIndicator } from 'react-native';
+import SearchResults from './SearchResults';
+import MovieModal from './MovieModal';
 import axios from 'axios';
-import colors from '../Constants/colors';
-import isSmallScreen from '../utils/isSmallScreen';
+import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 
 const SearchScreen = () => {
 
   const [input, setInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [showBorder, setShowBorder] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const getSearchResults = async () => {
     if (!input) return;
-    const searchResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input.split(' ').join('%20')}&include_adult=false`);
+    setShowBorder(false);
+    setIsLoading(true);
+    const searchResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${escape(input)}&include_adult=false`);
     setSearchResults(searchResults.data.results);
+    setIsLoading(false);
   }
   
   return (
@@ -33,34 +42,33 @@ const SearchScreen = () => {
           onChangeText={input => setInput(input)}
           value={input}
           returnKeyType="go"
+          keyboardType={'ascii-capable'}
           onSubmitEditing={getSearchResults}
         />
       </View>
-      <ScrollView 
-        contentContainerStyle={styles.scrollView}
-        onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1)}
-        scrollEventThrottle={16}
-      >
-        {
-          searchResults &&
-          searchResults.map(movie => 
-            <View style={styles.imageShadow} key={movie.id}>
-              <View style={styles.imageContainer}>
-                <Image
-                  style={styles.image}
-                  source={{uri: 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path}} 
-                />
-                <Text 
-                  style={styles.movieTitle} 
-                  numberOfLines={3}
-                 >
-                  {movie.title.toUpperCase()}
-                </Text>
-              </View>
-            </View>
-          )
-        }
-        </ScrollView>
+      { 
+        isLoading ?
+        <View style={styles.activityIndicator}>
+          <ActivityIndicator size='small' color={colors.text01} />
+        </View> 
+        :
+        <SearchResults 
+          searchResults={searchResults}
+          setShowBorder={setShowBorder}
+          selectMovie={movie => {
+            setSelectedMovie(movie);
+            setShowModal(true);
+          }}
+        />
+      }
+      {
+        showModal &&
+        <MovieModal 
+          visible={showModal} 
+          movie={selectedMovie}
+          closeModal={() => setShowModal(false)}
+        /> 
+      }
     </View>
   )
 };
@@ -81,10 +89,11 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingHorizontal: 28,
     paddingBottom: 30,
+    borderBottomWidth: 1,
+    borderColor: colors.base01,
   },
   searchButtonContainerBorder: {
     borderColor: colors.base02,
-    borderBottomWidth: 1,
   },
   searchButton: {
     backgroundColor: colors.base02,
@@ -102,35 +111,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 20,
   },
-  scrollview: {
-  },
-  imageShadow: {
-    paddingHorizontal: 32,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    paddingBottom: 30
-  },
-  imageContainer: {
+  activityIndicator: {
     flex: 1,
-    borderRadius: 15,
-    overflow: 'hidden',
-    backgroundColor: colors.base02,
-    height: 180,
-  },
-  image: {
-    flex: 1,
-    opacity: 0.8,
-    resizeMode: 'cover',
-  },
-  movieTitle: {
-    position: 'absolute',
-    bottom: 10,
-    left: 15,
-    width: 200,
-    color: colors.text01,
-    fontWeight: '800',
-    fontSize: 22
+    justifyContent: 'center'
   }
 });
 
