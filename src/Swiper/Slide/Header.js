@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    paddingTop: isSmallScreen() ? 30 : 40,
+    paddingTop: isSmallScreen() ? 25 : 40,
     paddingBottom: 5,
     backgroundColor: colors.base01,
   },

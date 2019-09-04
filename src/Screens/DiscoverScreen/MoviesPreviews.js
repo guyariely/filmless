@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 135,
     marginTop: isSmallScreen() ? 5 : 8, 
-    marginBottom: isSmallScreen() ? 0 : 8, 
+    marginBottom: isSmallScreen() ? 5 : 26, 
     marginRight: isSmallScreen() ? 0 : 15,
   },
   imageShadow: {

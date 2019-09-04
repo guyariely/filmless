@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     color: colors.text01,
     fontSize: 38,
-    paddingTop: isSmallScreen() ? 44 : 54,
+    paddingTop: isSmallScreen() ? 10 : 20,
     paddingHorizontal: 28,
   }
 });

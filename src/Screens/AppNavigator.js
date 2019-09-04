@@ -49,18 +49,16 @@ const AppNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Search',
-    tabBarPosition: 'bottom',
-    swipeEnabled: false,
-    animationEnabled: false,
-    lazy: true,
+    initialRouteName: 'Discover',
+    swipeEnabled: true,
+    animationEnabled: true,
     tabBarOptions: {
       activeTintColor: colors.text01,
       inactiveTintColor: colors.text02,
       style: { 
         backgroundColor: colors.base01,
-        paddingTop: 5,
-        paddingBottom: isSmallScreen() ? 10 : 25,
+        paddingTop: isSmallScreen() ? 25 : 40,
+        paddingBottom: isSmallScreen() ? 5 : 5,
       },
       indicatorStyle: {
         height: 0

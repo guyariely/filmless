@@ -10,7 +10,7 @@ const App = () => {
   
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" hidden={true} />
+      <StatusBar barStyle="light-content" />
       <AppContainer theme="light" />
     </View>
   );

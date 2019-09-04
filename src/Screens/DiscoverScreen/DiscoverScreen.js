@@ -57,7 +57,6 @@ const DiscoverScreen = props => {
         (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
       );
       setMovies(result.data.results); 
-      console.log(result.data.results);
     } 
     catch (error) {
       console.log(error);
@@ -181,8 +180,7 @@ const styles = StyleSheet.create({
     color: colors.text01,
     fontSize: 38,
     paddingHorizontal: 28,
-    paddingTop: isSmallScreen() ? 44 : 54,
-    paddingBottom: isSmallScreen() ? 4 : 0
+    paddingTop: isSmallScreen() ? 10 : 20
   },
   form: {
     height: isSmallScreen() ? 330 : 350,
