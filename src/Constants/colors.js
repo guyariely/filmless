@@ -1,9 +1,64 @@
 
 const themes = {
-  default: {
+  default00: {
     base01: '#2A2D41',
     base02: '#1C2033',
     primary: '#5F77EF',
+    text01: '#F5F5F7',
+    text02: 'rgba(245, 245, 247, 0.2)',
+    text03: 'rgba(245, 245, 247, 0.6)',
+    heading: '#F5F5F7',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#F5F5F7'
+  },
+  default: {
+    base01: '#2f2f4c',
+    base02: '#26263d',
+    primary: '#596fde',
+    text01: '#F5F5F7',
+    text02: 'rgba(245, 245, 247, 0.2)',
+    text03: 'rgba(245, 245, 247, 0.6)',
+    heading: '#F5F5F7',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#F5F5F7'
+  },
+  default02: {
+    base01: '#586284',
+    base02: '#3a4466',
+    primary: '#28a3d1',
+    text01: '#F5F5F7',
+    text02: 'rgba(245, 245, 247, 0.2)',
+    text03: 'rgba(245, 245, 247, 0.6)',
+    heading: '#F5F5F7',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#F5F5F7'
+  },
+  default03: {
+    base01: '#2b2e64',
+    base02: '#3d4287',
+    primary: '#5F77EF',
+    text01: '#F5F5F7',
+    text02: 'rgba(245, 245, 247, 0.2)',
+    text03: 'rgba(245, 245, 247, 0.6)',
+    heading: '#F5F5F7',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#F5F5F7'
+  },
+  default04: {
+    base01: '#26263d',
+    base02: '#1c1e30',
+    primary: '#5F77EF',
+    text01: '#F5F5F7',
+    text02: 'rgba(245, 245, 247, 0.2)',
+    text03: 'rgba(245, 245, 247, 0.6)',
+    heading: '#F5F5F7',
+    shadow: 'rgba(0, 0, 0, 0.4)',
+    search: '#F5F5F7'
+  },
+  default05: {
+    base01: '#263051',
+    base02: '#19233b',
+    primary: '#7592f1',
     text01: '#F5F5F7',
     text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
@@ -22,7 +77,7 @@ const themes = {
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#f2f2f2'
   },
-  purple: {
+  light02: {
     base01: '#ffffff',
     base02: '#fafcff',
     primary: '#7c73e2',
@@ -33,7 +88,7 @@ const themes = {
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#ffffff'
   },
-  netflix: {
+  light03: {
     base01: '#f5f5f5',
     base02: '#ffffff',
     primary: '#e80000',

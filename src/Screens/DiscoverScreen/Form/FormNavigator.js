@@ -11,8 +11,9 @@ const FormNavigator = createMaterialTopTabNavigator(
     Sorting: { screen: Sorting }
   },
   {
-    initialRouteName: 'Sorting',
+    initialRouteName: 'Filters',
     swipeEnabled: false,
+    animationEnabled: false,
     tabBarOptions: {
       style: {
         backgroundColor: 'transparent',

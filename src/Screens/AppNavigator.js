@@ -51,6 +51,7 @@ const AppNavigator = createMaterialTopTabNavigator(
   {
     initialRouteName: 'Discover',
     animationEnabled: true,
+    swipeEnabled: false,
     tabBarOptions: {
       activeTintColor: colors.text01,
       inactiveTintColor: colors.text02,
