@@ -2,15 +2,16 @@ import { createMaterialTopTabNavigator, createAppContainer } from "react-navigat
 import colors from '../../../Constants/colors';
 import Filters from './Filters';
 import Categories from './Categories';
-import Options from './Options';
+import Sorting from './Sorting';
 
 const FormNavigator = createMaterialTopTabNavigator(
   {
     Filters: { screen: Filters },
     Categories: { screen: Categories },
-    Options: { screen: Options }
+    Sorting: { screen: Sorting }
   },
   {
+    initialRouteName: 'Sorting',
     swipeEnabled: false,
     tabBarOptions: {
       style: {

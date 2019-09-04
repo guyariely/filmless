@@ -29,7 +29,7 @@ const DiscoverScreen = props => {
     const { 
       rating, time, fromYear, 
       toYear, genres, languages, 
-      showWatchedMovies, netflixOnly 
+      sortBy 
     } = inputs;
 
     // inputs validation
@@ -48,10 +48,10 @@ const DiscoverScreen = props => {
     try {
       const result = await axios.get(
         'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
-        '&language=en-US&sort_by=popularity.desc&include_video=false&page=1' + 
+        '&sort_by=' + (sortBy ? sortBy : 'popularity') + '.desc' + 
         (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
         (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
-        (rating ? '&sort_by=vote_count.desc&vote_average.gte=' + rating : '') +
+        (rating ? '&vote_average.gte=' + rating + '&sort_by=' + (sortBy ? sortBy : 'vote_count') + '.desc' : '') +
         (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
         (time ? '&with_runtime.lte=' + time : '') +
         (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')

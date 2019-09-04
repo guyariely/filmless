@@ -11,8 +11,7 @@ const Form = props => {
   const [toYear, setToYear] = useState(null);
   const [genres, setGenres] = useState([]);
   const [languages, setLanguages] = useState([]);
-  const [showWatchedMovies, setShowWatchedMovies] = useState(false);
-  const [netflixOnly, setNetflixOnly] = useState(false);
+  const [sortBy, setSortBy] = useState(null);
 
   return (
     <View style={styles.container}>
@@ -24,8 +23,7 @@ const Form = props => {
           toYear, setToYear,          
           genres, setGenres,
           languages, setLanguages,
-          showWatchedMovies, setShowWatchedMovies,
-          netflixOnly, setNetflixOnly
+          sortBy, setSortBy
         }}
       />
       <View style={styles.button}>
@@ -34,7 +32,7 @@ const Form = props => {
           color={colors.search}
           onPress={() => props.loadMovies(
             { rating, time, fromYear, toYear, genres, 
-              languages, showWatchedMovies, netflixOnly
+              languages, sortBy
             })}
         />
       </View>
