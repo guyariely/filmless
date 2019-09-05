@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, Keyboard } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import colors from '../../Constants/colors';
 import isSmallScreen from '../../utils/isSmallScreen';
@@ -32,6 +32,8 @@ const WatchlistScreen = props => {
     };
     loadWatchlist();
   }, [props.isFocused]);
+
+  useEffect(() => Keyboard.dismiss(), [props.isFocused])
 
   return (
     <View style={styles.container}>

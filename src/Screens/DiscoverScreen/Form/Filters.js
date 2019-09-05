@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import WheelInput from 'react-native-picker-select';
 import colors from '../../../Constants/colors';
 
 const timeDurations = [
-    { label: '30 MIN', value: 30 },
-    { label: '45 MIN', value: 45 },
-    { label: '1 HR', value: 60 },
-    { label: '1 HR 15 MIN', value: 75 },
-    { label: '1 HR 30 MIN', value: 90 },
-    { label: '1 HR 45 MIN', value: 105 },
-    { label: '2 HR', value: 120 },
-    { label: '2 HR 15 MIN', value: 135 },
-    { label: '2 HR 30 MIN', value: 150 },
-    { label: '2 HR 45 MIN', value: 165 },
-    { label: '3 HR', value: 180 }
+    { label: '30 MIN', value: 30, color: colors.text01 },
+    { label: '45 MIN', value: 45, color: colors.text01 },
+    { label: '1 HR', value: 60, color: colors.text01 },
+    { label: '1 HR 15 MIN', value: 75, color: colors.text01 },
+    { label: '1 HR 30 MIN', value: 90, color: colors.text01 },
+    { label: '1 HR 45 MIN', value: 105, color: colors.text01 },
+    { label: '2 HR', value: 120, color: colors.text01 },
+    { label: '2 HR 15 MIN', value: 135, color: colors.text01 },
+    { label: '2 HR 30 MIN', value: 150, color: colors.text01 },
+    { label: '2 HR 45 MIN', value: 165, color: colors.text01 },
+    { label: '3 HR', value: 180, color: colors.text01 }
 ];
 
 const validateYear = year => {
@@ -29,29 +29,33 @@ const Filters = props => {
   const { rating, setRating, time, setTime, fromYear, setFromYear, toYear, setToYear } = props.screenProps;
 
   return (
+
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>MIN RATING</Text>
-        <TextInput
-        style={
-            rating ?
-            [styles.input, styles.input__active] :
-            styles.input
-          }
-          placeholder="NO FILTER"
-          placeholderTextColor={colors.text02}
-          selectionColor={colors.primary}
-          onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
-          keyboardType="numeric"
-          maxLength={3}
-          value={rating}
-      />
+          <TextInput
+            style={
+                rating ?
+                [styles.input, styles.input__active] :
+                styles.input
+              }
+              keyboardAppearance="dark"
+              placeholder="NO FILTER"
+              placeholderTextColor={colors.text02}
+              selectionColor={colors.primary}
+              onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
+              keyboardType="numeric"
+              maxLength={3}
+              value={rating}
+          />
+        
       </View>
+
       <View style={styles.inputContainer}>
         <Text style={styles.label}>MAX TIME</Text>
         <WheelInput
           style={time ? wheelInputStyles__active : wheelInputStyles}
-          placeholder={{label: 'NO FILTER'}}
+          placeholder={{label: 'NO FILTER', color: colors.text01}}
           placeholderTextColor={colors.text02}
           items={timeDurations}
           value={time}
@@ -62,6 +66,7 @@ const Filters = props => {
         <Text style={styles.label}>FROM YEAR</Text>
         <TextInput
           style={fromYear ? [styles.input, styles.input__active] : styles.input}
+          keyboardAppearance="dark"
           placeholder="NO FILTER"
           placeholderTextColor={colors.text02}
           selectionColor={colors.primary}
@@ -75,6 +80,7 @@ const Filters = props => {
         <Text style={styles.label}>TO YEAR</Text>
         <TextInput
           style={toYear ? [styles.input, styles.input__active] : styles.input}
+          keyboardAppearance="dark"
           placeholder="NO FILTER"
           placeholderTextColor={colors.text02}
           selectionColor={colors.primary}
@@ -87,6 +93,8 @@ const Filters = props => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -123,6 +131,19 @@ const styles = StyleSheet.create({
 });
 
 const wheelInputStyles = StyleSheet.create({
+  modalViewMiddle: {
+    backgroundColor: colors.base02,
+    borderTopWidth: 0,
+  },
+  modalViewBottom: {
+    backgroundColor: colors.base02
+  },
+  chevronContainer: {
+    opacity: 0.1
+  },
+  done: {
+    color: colors.primary,
+  },
   inputIOS: {
     height: 45,
     borderColor: colors.base01,
@@ -130,7 +151,7 @@ const wheelInputStyles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     color: colors.text01,
-    fontSize: 16
+    fontSize: 16,
   },
   inputAndroid: {
     height: 45,
@@ -145,6 +166,19 @@ const wheelInputStyles = StyleSheet.create({
 });
 
 const wheelInputStyles__active = StyleSheet.create({
+  modalViewMiddle: {
+    backgroundColor: colors.base02,
+    borderTopWidth: 0,
+  },
+  modalViewBottom: {
+    backgroundColor: colors.base02
+  },
+  chevronContainer: {
+    opacity: 0.1
+  },
+  done: {
+    color: colors.primary,
+  },
   inputIOS: {
     height: 45,
     backgroundColor: colors.base01,

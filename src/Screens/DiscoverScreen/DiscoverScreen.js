@@ -1,6 +1,6 @@
 import API_KEY from '../../../env';
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import isSmallScreen from '../../utils/isSmallScreen';
 import axios from 'axios';
@@ -123,50 +123,54 @@ const DiscoverScreen = props => {
     updateWatchlist();
   }, [props.isFocused]);
 
+  useEffect(() => Keyboard.dismiss(), [props.isFocused])
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Find Your Film</Text>
-      <View style={styles.form}>
-        <Form loadMovies={loadMovies} />  
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Find Your Film</Text>
+        <View style={styles.form}>
+          <Form loadMovies={loadMovies} />  
+        </View>
+        { 
+          isLoading && 
+          <View style={styles.activityIndicator}>
+            <ActivityIndicator size='small' color={colors.text01} />
+          </View> 
+        }
+        { 
+          error && 
+          <Text style={styles.error}>
+            <Text style={styles.errorKeyword}>
+              Error: {''} 
+            </Text>
+            {error}
+          </Text> 
+        }
+        {
+          (!error && !isLoading) &&
+          <MoviesPreviews 
+            movies={movies} 
+            openSwiper={index => { 
+              setSwiperIndex(index)
+              setShowSwiper(true); 
+            }} 
+          />
+        }
+        {
+          showSwiper &&
+        <MoviesSwiper 
+            visible={showSwiper} 
+            firstItem={swiperIndex}
+            movies={movies} 
+            watchlist={watchlist}
+            isLoading={isLoadingSwiper}
+            closeSwiper={() => setShowSwiper(false)}
+            setMovies={movies => setMovies(movies)}
+        /> 
+        }
       </View>
-      { 
-        isLoading && 
-        <View style={styles.activityIndicator}>
-          <ActivityIndicator size='small' color={colors.text01} />
-        </View> 
-      }
-      { 
-        error && 
-        <Text style={styles.error}>
-          <Text style={styles.errorKeyword}>
-            Error: {''} 
-          </Text>
-          {error}
-        </Text> 
-      }
-      {
-        (!error && !isLoading) &&
-        <MoviesPreviews 
-          movies={movies} 
-          openSwiper={index => { 
-            setSwiperIndex(index)
-            setShowSwiper(true); 
-          }} 
-        />
-      }
-      {
-        showSwiper &&
-       <MoviesSwiper 
-          visible={showSwiper} 
-          firstItem={swiperIndex}
-          movies={movies} 
-          watchlist={watchlist}
-          isLoading={isLoadingSwiper}
-          closeSwiper={() => setShowSwiper(false)}
-          setMovies={movies => setMovies(movies)}
-      /> 
-      }
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

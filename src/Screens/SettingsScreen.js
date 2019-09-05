@@ -1,10 +1,13 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Image, Keyboard } from 'react-native';
+import { withNavigationFocus } from "react-navigation";
 import colors from '../Constants/colors';
 import TMDbLogo from '../../assets/TMDb-logo.png';
 import isSmallScreen from '../utils/isSmallScreen';
 
-const SettingsScreen = () => {
+const SettingsScreen = props => {
+
+  useEffect(() => Keyboard.dismiss(), [props.isFocused])
 
   return (
     <View style={styles.container}>
@@ -52,4 +55,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SettingsScreen;
+export default withNavigationFocus(SettingsScreen);

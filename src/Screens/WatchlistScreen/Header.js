@@ -5,11 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../Constants/colors';
 
 const sortMethods = [
-  {label: 'Release Date', value: 'Release Date'},
-  {label: 'Rating', value: 'Rating'},
-  {label: 'Alphabetical', value: 'Alphabetical'},
-  {label: 'Runtime', value: 'Runtime'},
-  {label: 'Popularity', value: 'Popularity'},
+  {label: 'Release Date', value: 'Release Date', color: colors.text01},
+  {label: 'Rating', value: 'Rating', color: colors.text01},
+  {label: 'Alphabetical', value: 'Alphabetical', color: colors.text01},
+  {label: 'Runtime', value: 'Runtime', color: colors.text01},
+  {label: 'Popularity', value: 'Popularity', color: colors.text01},
 ];
 
 const Header = props => {
@@ -40,7 +40,7 @@ const Header = props => {
           <Text style={styles.sortMethodPlaceHolder}>Sorted By </Text>
           <WheelInput
             style={wheelInputStyles}
-            placeholder={{label: 'Date Added'}}
+            placeholder={{label: 'Date Added', color: colors.text01}}
             placeholderTextColor={colors.primary}
             items={sortMethods}
             value={props.sortMethod}
@@ -80,6 +80,19 @@ const styles = StyleSheet.create({
 });
 
 const wheelInputStyles = StyleSheet.create({
+  modalViewMiddle: {
+    backgroundColor: colors.base02,
+    borderTopWidth: 0,
+  },
+  modalViewBottom: {
+    backgroundColor: colors.base02
+  },
+  chevronContainer: {
+    opacity: 0.1
+  },
+  done: {
+    color: colors.primary,
+  },
   inputIOS: {
     color: colors.primary,
     fontSize: 16,
