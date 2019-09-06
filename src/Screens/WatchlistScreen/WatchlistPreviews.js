@@ -15,8 +15,8 @@ const WatchlistPreviews = props => {
         onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1 && props.watchlist.length > 0)}
         scrollEventThrottle={16}
         data={props.watchlist}
-        renderItem={({item: movie, index}) => (
-          <TouchableOpacity style={styles.movie} onPress={() => props.openSwiper(index)}>
+        renderItem={({item: movie}) => (
+          <TouchableOpacity style={styles.movie} onPress={() => props.selectMovie(movie)}>
             <View style={styles.imageShadow}>
               <View style={styles.imageContainer}>
                 <Image

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from 'react-native';
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 
 const Overview = props => {
   return (

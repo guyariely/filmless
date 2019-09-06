@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
+import colors from '../../../Constants/colors';
+import isSmallScreen from '../../../utils/isSmallScreen';
 
 const Header = props => {
 
@@ -10,7 +10,7 @@ const Header = props => {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={props.closeSwiper} style={styles.closeButton}>
+      <TouchableOpacity onPress={props.closeModal} style={styles.closeButton}>
         <Icon 
           color={colors.text01} 
           name="keyboard-arrow-down" 

@@ -11,8 +11,8 @@ const MoviesPreviews = props => {
         horizontal={true}
         keyExtractor={movie => movie.id.toString()}
         data={props.movies}
-        renderItem={({item: movie, index}) => (
-          <TouchableOpacity style={styles.movie} onPress={() => props.openSwiper(index)}>
+        renderItem={({item: movie}) => (
+          <TouchableOpacity style={styles.movie} onPress={() => props.selectMovie(movie)}>
             <View style={styles.imageShadow}>
               <View style={styles.imageContainer}>
                 <Image

@@ -4,9 +4,9 @@ import { withNavigationFocus } from "react-navigation";
 import colors from '../../Constants/colors';
 import isSmallScreen from '../../utils/isSmallScreen';
 import sortMovies from '../../utils/sortMovies';
-import Header from './Header';
+import Lister from './Lister';
 import WatchlistPreviews from './WatchlistPreviews';
-import WatchlistSwiper from './WatchlistSwiper';
+import MovieModal from '../../Components/MovieModal/MovieModal';
 
 const WatchlistScreen = props => {
 
@@ -14,8 +14,8 @@ const WatchlistScreen = props => {
   const [sortMethod, setSortMethod] = useState(null);
   const [sortDirection, setSortDirection] = useState('des');
 
-  const [showSwiper, setShowSwiper] = useState(false);
-  const [swiperIndex, setSwiperIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     const loadWatchlist = async () => {
@@ -38,35 +38,33 @@ const WatchlistScreen = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Watchlist</Text>
-      <Header 
+      <Lister 
         sortDirection={sortDirection}
         sortMethod={sortMethod}
         setSortMethod={sortMethod => {
           setSortMethod(sortMethod);
           setWatchlist(sortMovies([...watchlist], sortMethod, sortDirection));
         }} 
-        setSortDirection={
-          () => {
-            setSortDirection(sortDirection == 'asc' ? 'des' : 'asc');
-            setWatchlist([...watchlist].reverse());
+        setSortDirection={() => {
+          setSortDirection(sortDirection == 'asc' ? 'des' : 'asc');
+          setWatchlist([...watchlist].reverse());
         }}
       />
       <WatchlistPreviews
         watchlist={watchlist} 
-        openSwiper={index => { 
-          setSwiperIndex(index)
-          setShowSwiper(true); 
-        }} 
+        selectMovie={movie => {
+          setSelectedMovie(movie);
+          setShowModal(true);
+        }}
       />
       {
-      showSwiper &&
-      <WatchlistSwiper 
-        visible={showSwiper} 
-        firstItem={swiperIndex}
-        watchlist={watchlist}
-        closeSwiper={() => setShowSwiper(false)}
-        setWatchlist={movies => setWatchlist(movies)}
-      /> 
+        showModal &&
+        <MovieModal 
+          visible={showModal} 
+          movie={selectedMovie}
+          loadDetails={false}
+          closeModal={() => setShowModal(false)}
+        /> 
       }
     </View>
   )

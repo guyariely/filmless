@@ -12,10 +12,10 @@ const sortMethods = [
   {label: 'Popularity', value: 'Popularity', color: colors.text01},
 ];
 
-const Header = props => {
+const Lister = props => {
 
   return (
-    <View style={styles.header}>
+    <View style={styles.lister}>
       <TouchableOpacity 
         onPress={props.setSortDirection}
         style={styles.sortDirectionButtonContainer}
@@ -53,7 +53,7 @@ const Header = props => {
 };
 
 const styles = StyleSheet.create({
-  header: {
+  lister: {
     flexDirection: 'row',
     marginVertical: 14,
     paddingHorizontal: 28,
@@ -106,4 +106,4 @@ const wheelInputStyles = StyleSheet.create({
   }
 });
 
-export default Header;
+export default Lister;

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 import Header from './Header';
 import Info from './Info';
 import Poster from './Poster';
@@ -12,12 +12,12 @@ import Actors from './Actors';
 
 const Slide = props => {
 
-  const { title, overview, images, videos, actors, reviews } = props.movie;
+  const { title, overview, images, videos, credits, reviews } = props.movie;
 
   return (
     <View style={styles.slide}>
       <Header 
-        closeSwiper={props.closeSwiper} 
+        closeModal={props.closeModal} 
         inWatchlist={props.movie.inWatchlist}
         removeFromWatchlist={props.removeFromWatchlist}
         saveToWatchlist={props.saveToWatchlist}
@@ -29,10 +29,10 @@ const Slide = props => {
           <Info movie={props.movie} />
         </View>
         <Overview overview={overview} />
-        {images.length > 0 &&<Photos images={images} />}
-        {videos.length > 0 &&<Videos videos={videos} />}
-        {actors.length > 0 &&<Actors actors={actors} />}
-        {reviews.length > 0 && <Reviews reviews={reviews} />}
+        {images.backdrops.length > 0 && <Photos images={images.backdrops} />}
+        {videos.results.length > 0 && <Videos videos={videos.results} />}
+        {credits.cast.length > 0 && <Actors actors={credits.cast} />}
+        {reviews.results.length > 0 && <Reviews reviews={reviews.results} />}
         <View style={styles.bottomBuffer}></View>
       </ScrollView>
     </View>

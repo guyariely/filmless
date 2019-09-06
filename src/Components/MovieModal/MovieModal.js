@@ -3,33 +3,32 @@ import API_KEY from '../../../env';
 import { StyleSheet, Modal, View, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import colors from '../../Constants/colors';
-import Slide from '../../Swiper/Slide/Slide';
+import Slide from './Slide/Slide';
 
 const MovieModal = props => {
 
   const [movie, setMovie] = useState(props.movie);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(props.loadDetails);
 
   useEffect(() => {
-    const getMovie = async () => {
+    const getMovieDetails = async () => {
       try {
         const movieDetails = await axios.get(
           `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`
         );
-        const updatedMovie = movie;
-        updatedMovie.runtime = movieDetails.data.runtime;
-        updatedMovie.images = movieDetails.data.images.backdrops;
-        updatedMovie.reviews = movieDetails.data.reviews.results;
-        updatedMovie.videos = movieDetails.data.videos.results;
-        updatedMovie.actors = movieDetails.data.credits.cast;
-        setMovie(updatedMovie);
+        // updatedMovie.runtime = movieDetails.data.runtime;
+        // updatedMovie.images = movieDetails.data.images.backdrops;
+        // updatedMovie.reviews = movieDetails.data.reviews.results;
+        // updatedMovie.videos = movieDetails.data.videos.results;
+        // updatedMovie.actors = movieDetails.data.credits.cast;
+        setMovie(movieDetails.data);
         setIsLoading(false);
       } 
       catch (error) {
         console.log(error);
       }
     }
-    getMovie();
+    if (props.loadDetails) getMovieDetails();
   }, []);
 
   return (
@@ -46,10 +45,7 @@ const MovieModal = props => {
           <ActivityIndicator size='small' color={colors.text01} />
         </View> 
         :
-        <Slide 
-          movie={movie} 
-          closeSwiper={props.closeModal}
-        />
+        <Slide movie={movie} closeModal={props.closeModal} />
       } 
       </Modal>
     </View>
