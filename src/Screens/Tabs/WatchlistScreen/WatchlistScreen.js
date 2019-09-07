@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, AsyncStorage, Keyboard } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
-import sortMovies from '../../utils/sortMovies';
+import colors from '../../../Constants/colors';
+import isSmallScreen from '../../../utils/isSmallScreen';
+import sortMovies from '../../../utils/sortMovies';
 import Lister from './Lister';
 import WatchlistPreviews from './WatchlistPreviews';
-import MovieModal from '../../Components/MovieModal/MovieModal';
 
 const WatchlistScreen = props => {
 
   const [watchlist, setWatchlist] = useState([]);
   const [sortMethod, setSortMethod] = useState(null);
   const [sortDirection, setSortDirection] = useState('des');
-
-  const [showModal, setShowModal] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     const loadWatchlist = async () => {
@@ -53,19 +49,11 @@ const WatchlistScreen = props => {
       <WatchlistPreviews
         watchlist={watchlist} 
         selectMovie={movie => {
-          setSelectedMovie(movie);
-          setShowModal(true);
+          props.navigation.navigate(
+            'MovieScreen', { movie, loadDetails: false }
+          );
         }}
       />
-      {
-        showModal &&
-        <MovieModal 
-          visible={showModal} 
-          movie={selectedMovie}
-          loadDetails={false}
-          closeModal={() => setShowModal(false)}
-        /> 
-      }
     </View>
   )
 };

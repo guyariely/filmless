@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text } from "react-native";
 import SelectInput from 'react-native-sectioned-multi-select';
-import colors from '../../../Constants/colors';
-import fonts from '../../../Constants/fonts';
+import colors from '../../../../Constants/colors';
+import fonts from '../../../../Constants/fonts';
 
 const parseIDsToString = (IDs, categories) => {
   return IDs.map(ID => categories[0].children.find(

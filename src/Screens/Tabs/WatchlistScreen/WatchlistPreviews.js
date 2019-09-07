@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import runtimeText from '../../utils/runtimeText';
-import colors from '../../Constants/colors';
+import runtimeText from '../../../utils/runtimeText';
+import colors from '../../../Constants/colors';
 
 const WatchlistPreviews = props => {
 

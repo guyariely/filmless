@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import WheelInput from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 
 const sortMethods = [
   {label: 'Release Date', value: 'Release Date', color: colors.text01},

@@ -10,10 +10,10 @@ const Header = props => {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={props.closeModal} style={styles.closeButton}>
+      <TouchableOpacity onPress={props.goBack} style={styles.closeButton}>
         <Icon 
           color={colors.text01} 
-          name="keyboard-arrow-down" 
+          name="keyboard-arrow-left" 
           size={34} 
         />
       </TouchableOpacity>

@@ -1,15 +1,15 @@
 import React from 'react';
-import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
+import { createMaterialTopTabNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
 import SearchScreen from './SearchScreen/SearchScreen';
 import SettingsScreen from './SettingsScreen/SettingsScreen';
-import colors from '../Constants/colors';
-import isSmallScreen from '../utils/isSmallScreen';
+import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 
-const AppNavigator = createMaterialTopTabNavigator(
+const TabsNavigator = createMaterialTopTabNavigator(
   {
     Discover: { 
       screen: DiscoverScreen,
@@ -49,7 +49,7 @@ const AppNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Discover',
+    initialRouteName: 'Search',
     animationEnabled: true,
     swipeEnabled: false,
     tabBarOptions: {
@@ -69,4 +69,4 @@ const AppNavigator = createMaterialTopTabNavigator(
   }
 );
 
-export default createAppContainer(AppNavigator);
+export default TabsNavigator;

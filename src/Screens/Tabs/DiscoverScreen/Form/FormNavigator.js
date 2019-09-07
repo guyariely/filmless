@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
-import colors from '../../../Constants/colors';
+import colors from '../../../../Constants/colors';
 import Filters from './Filters';
 import Categories from './Categories';
 import Sorting from './Sorting';

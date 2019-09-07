@@ -17,7 +17,7 @@ const Slide = props => {
   return (
     <View style={styles.slide}>
       <Header 
-        closeModal={props.closeModal} 
+        goBack={props.goBack} 
         inWatchlist={props.movie.inWatchlist}
         removeFromWatchlist={props.removeFromWatchlist}
         saveToWatchlist={props.saveToWatchlist}

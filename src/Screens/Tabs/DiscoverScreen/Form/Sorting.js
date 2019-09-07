@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import colors from '../../../Constants/colors';
+import colors from '../../../../Constants/colors';
 
 const Sorting = props => {
 

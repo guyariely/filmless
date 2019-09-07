@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
+import colors from '../../../Constants/colors';
+import isSmallScreen from '../../../utils/isSmallScreen';
 
 const MoviesPreviews = props => {
   return (

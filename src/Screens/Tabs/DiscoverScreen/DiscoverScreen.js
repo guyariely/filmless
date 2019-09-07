@@ -1,13 +1,12 @@
-import API_KEY from '../../../env';
+import API_KEY from '../../../../env';
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
-import isSmallScreen from '../../utils/isSmallScreen';
+import isSmallScreen from '../../../utils/isSmallScreen';
 import axios from 'axios';
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 import Form from './Form/Form';
 import MoviesPreviews from './MoviesPreviews';
-import MovieModal from '../../Components/MovieModal/MovieModal';
 
 const DiscoverScreen = props => {
 
@@ -15,9 +14,6 @@ const DiscoverScreen = props => {
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  
-  const [showModal, setShowModal] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const loadMovies = async inputs => {
 
@@ -108,19 +104,11 @@ const DiscoverScreen = props => {
           <MoviesPreviews 
             movies={movies} 
             selectMovie={movie => {
-              setSelectedMovie(movie);
-              setShowModal(true);
+              props.navigation.navigate(
+                'MovieScreen', { movie, loadDetails: true }
+              );
             }}
           />
-        }
-        {
-          showModal &&
-          <MovieModal 
-            visible={showModal} 
-            movie={selectedMovie}
-            loadDetails={true}
-            closeModal={() => setShowModal(false)}
-          /> 
         }
       </View>
     </TouchableWithoutFeedback>

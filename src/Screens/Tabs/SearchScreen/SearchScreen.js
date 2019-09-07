@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from '../../../env';
+import API_KEY from '../../../../env';
 import { StyleSheet, Text, View, TextInput, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import SearchResults from './SearchResults';
-import MovieModal from '../../Components/MovieModal/MovieModal';
 import axios from 'axios';
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
+import colors from '../../../Constants/colors';
+import isSmallScreen from '../../../utils/isSmallScreen';
 
 const SearchScreen = props => {
 
@@ -15,12 +14,10 @@ const SearchScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [showBorder, setShowBorder] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
   const getSearchResults = async () => {
     if (!input) return;
     setShowBorder(false);
+
     setIsLoading(true);
     const searchResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${escape(input)}&include_adult=false`);
     setSearchResults(searchResults.data.results);
@@ -61,18 +58,10 @@ const SearchScreen = props => {
             searchResults={results}
             setShowBorder={setShowBorder}
             selectMovie={movie => {
-              setSelectedMovie(movie);
-              setShowModal(true);
+              props.navigation.navigate(
+                'MovieScreen', { movie, loadDetails: true }
+              );
             }}
-          />
-        }
-        {
-          showModal &&
-          <MovieModal 
-            visible={showModal} 
-            movie={selectedMovie}
-            loadDetails={true}
-            closeModal={() => setShowModal(false)}
           /> 
         }
       </View>

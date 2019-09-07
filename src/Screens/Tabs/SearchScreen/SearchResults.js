@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 
 const SearchResults = props => {
 

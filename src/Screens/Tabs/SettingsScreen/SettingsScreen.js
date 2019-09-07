@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Image, Keyboard } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
-import colors from '../../Constants/colors';
+import colors from '../../../Constants/colors';
 // import TMDbLogo from '../../assets/TMDb-logo.png';
-import isSmallScreen from '../../utils/isSmallScreen';
+import isSmallScreen from '../../../utils/isSmallScreen';
 
 const SettingsScreen = props => {
 

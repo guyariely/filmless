@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import WheelInput from 'react-native-picker-select';
-import colors from '../../../Constants/colors';
+import colors from '../../../../Constants/colors';
 
 const timeDurations = [
     { label: '30 MIN', value: 30, color: colors.text01 },

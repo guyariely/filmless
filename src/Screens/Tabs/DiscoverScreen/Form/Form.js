@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Button } from "react-native";
 import FormContainer from './FormNavigator';
-import colors from '../../../Constants/colors';
+import colors from '../../../../Constants/colors';
 
 const Form = props => {
 
