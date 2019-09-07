@@ -19,88 +19,45 @@ const DiscoverScreen = props => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  // const loadMovies = async inputs => {
+  const loadMovies = async inputs => {
 
-  //   // remove keyboard and any error message 
-  //   setError(null);
-  //   Keyboard.dismiss();
+    // remove keyboard and any error message 
+    setError(null);
+    Keyboard.dismiss();
 
-  //   const { 
-  //     rating, time, fromYear, 
-  //     toYear, genres, languages, 
-  //     sortBy 
-  //   } = inputs;
+    const { rating, time, fromYear, toYear, genres, languages, sortBy } = inputs;
 
-  //   // inputs validation
-  //   if (!Number(rating) && rating) {
-  //     return setError("Rating number is invalid.");
-  //   }
-  //   if (Number(fromYear) > Number(toYear) && toYear && fromYear) {
-  //     return setError("You can't select a start year that is bigger then the end year.")
-  //   }
-  //   if (Number(toYear) < Number(fromYear) && toYear && fromYear) {
-  //     return setError("You can't select an end year that is smaller then the start year.")
-  //   }
+    // inputs validation
+    if (!Number(rating) && rating) {
+      return setError("Rating number is invalid.");
+    }
+    if (Number(fromYear) > Number(toYear) && toYear && fromYear) {
+      return setError("You can't select a start year that is bigger then the end year.");
+    }
+    if (Number(toYear) < Number(fromYear) && toYear && fromYear) {
+      return setError("You can't select an end year that is smaller then the start year.");
+    }
 
-  //   // fetching the movies
-  //   setIsLoading(true);
-  //   try {
-  //     const result = await axios.get(
-  //       'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
-  //       '&sort_by=' + (sortBy ? sortBy : 'popularity') + '.desc' + 
-  //       (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
-  //       (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
-  //       (rating ? '&vote_average.gte=' + rating + '&sort_by=' + (sortBy ? sortBy : 'vote_count') + '.desc' : '') +
-  //       (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
-  //       (time ? '&with_runtime.lte=' + time : '') +
-  //       (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
-  //     );
-  //     setMovies(result.data.results); 
-  //   } 
-  //   catch (error) {
-  //     console.log(error);
-  //   }
-  //   setIsLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   const getMovieDetails = async () => {
-  //     setIsLoadingSwiper(true);
-  //     const moviesExtended = movies;
-  //     try {
-  //       // fetchs additional info about the movies
-  //       for (let movie of moviesExtended) {
-  //         const movieDetails = await axios.get(
-  //           `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`
-  //         );
-  //         movie.runtime = movieDetails.data.runtime;
-  //         movie.images = movieDetails.data.images.backdrops;
-  //         movie.reviews = movieDetails.data.reviews.results;
-  //         movie.videos = movieDetails.data.videos.results;
-  //         movie.actors = movieDetails.data.credits.cast;
-  //         movie.inWatchlist = false;
-  //       }
-
-  //       // updates the fetched movies watchlist status
-  //       let watchlist = await AsyncStorage.getItem('watchlist');
-  //       if (watchlist) {
-  //         setWatchlist(JSON.parse(watchlist));
-  //         watchlist = JSON.parse(watchlist).map(movie => movie.id);
-  //         for (let i = 0; i < moviesExtended.length; i++) {
-  //           if (watchlist.indexOf(moviesExtended[i].id) != -1) {
-  //             moviesExtended[i].inWatchlist = true;
-  //           }
-  //         }         
-  //       }         
-  //       setIsLoadingSwiper(false);
-  //       setMovies(moviesExtended);
-  //     }
-  //     catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getMovieDetails();
-  // }, [movies]);
+    // fetching the movies
+    setIsLoading(true);
+    try {
+      const result = await axios.get(
+        'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
+        '&sort_by=' + (sortBy ? sortBy : 'popularity') + '.desc' + 
+        (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
+        (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
+        (rating ? '&vote_average.gte=' + rating + '&sort_by=' + (sortBy ? sortBy : 'vote_count') + '.desc' : '') +
+        (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
+        (time ? '&with_runtime.lte=' + time : '') +
+        (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
+      );
+      setMovies(result.data.results); 
+    } 
+    catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
 
   // useEffect(() => {
   //   // updates the fetched movies watchlist status
@@ -121,8 +78,6 @@ const DiscoverScreen = props => {
   //   };
   //   updateWatchlist();
   // }, [props.isFocused]);
-
-  let loadMovies;
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
 
@@ -151,7 +106,7 @@ const DiscoverScreen = props => {
         {
           (!error && !isLoading) &&
           <MoviesPreviews 
-            movies={results} 
+            movies={movies} 
             selectMovie={movie => {
               setSelectedMovie(movie);
               setShowModal(true);
