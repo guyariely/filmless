@@ -55,11 +55,11 @@ const Lister = props => {
 const styles = StyleSheet.create({
   lister: {
     flexDirection: 'row',
-    marginVertical: 14,
     paddingHorizontal: 28,
   },
   sortDirectionButtonContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingVertical: 14
   },
   sortDirectionButton: {
     fontWeight: '200',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   sortMethodButtonContainer: {
     justifyContent: 'center',
-    marginLeft: 'auto',
+    marginLeft: 'auto'
   },
   sortMethodButton: {
     flexDirection: 'row',
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     color: colors.text01,
     fontSize: 16,
     fontWeight: '600',
+    marginVertical: 14,
   }
 });
 
@@ -97,12 +98,14 @@ const wheelInputStyles = StyleSheet.create({
     color: colors.primary,
     fontSize: 16,
     fontWeight: '600',
+    marginVertical: 14,
   },
   inputAndroid: {
     color: colors.primary,
     marginLeft: 'auto',
     fontSize: 20,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginVertical: 14,
   }
 });
 
