@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../Constants/colors';
 import Header from './Header';
@@ -12,12 +12,20 @@ import Actors from './Actors';
 
 const Slide = props => {
 
+  const [showBorder, setShowBorder] = useState(false);
   const { title, overview, images, videos, credits, reviews } = props.movie;
 
   return (
     <View style={styles.slide}>
-      <Header goBack={props.goBack} movie={props.movie} />
-      <ScrollView >
+      <Header 
+        goBack={props.goBack} 
+        movie={props.movie} 
+        showBorder={showBorder}
+      />
+      <ScrollView 
+        scrollEventThrottle={16}
+        onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1)}
+      >
         <Text style={styles.title}>{title}</Text>
         <View style={styles.mainContent}>
           <Poster poster={props.movie.poster_path} />

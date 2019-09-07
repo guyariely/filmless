@@ -16,7 +16,11 @@ const Header = props => {
   }, [])
 
   return (
-    <View style={styles.header}>
+    <View style={
+      props.showBorder ? 
+      [styles.header, styles.headerWithBorder] : 
+      [styles.header]
+    }>
       <TouchableOpacity onPress={props.goBack} style={styles.closeButton}>
         <Icon 
           color={colors.text01} 
@@ -53,7 +57,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingTop: isSmallScreen() ? 25 : 40,
-    paddingBottom: 5,
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderColor: colors.base01,
+  },
+  headerWithBorder: {
+    borderColor: colors.base02,
   },
   watchedButton: {
     marginLeft: 'auto',
