@@ -15,7 +15,7 @@ const WatchlistScreen = props => {
 
   useEffect(() => {
     AsyncStorage.getItem('watchlist').then(watchlist => {
-        if (watchlist) setWatchlist(JSON.parse(watchlist));
+        if (watchlist) setWatchlist(JSON.parse(watchlist).reverse());
       } 
     ).catch(error => console.log(error));
   }, [props.isFocused]);

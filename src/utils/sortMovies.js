@@ -11,8 +11,8 @@ const sortMovies = (movies, sortMethod, sortDirection) => {
     case 'Release Date':
       return movies.sort(
         sortDirection == 'des' ?
-        (a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime() : 
-        (a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
+        (a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime() : 
+        (a, b) => new Date(a.release_date).getTime() - new Date(b.release_date).getTime()
       );
     case 'Rating':
       return movies.sort(
