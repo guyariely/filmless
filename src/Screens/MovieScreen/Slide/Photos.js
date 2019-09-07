@@ -9,7 +9,7 @@ const Photos = props => {
       <Text style={styles.heading}>PHOTOS</Text>
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.images.slice(0, 11).map(image => {
+          props.images.map(image => {
             return (
               <View style={styles.imageShadow} key={image.file_path}>
                 <View style={styles.imageContainer}>

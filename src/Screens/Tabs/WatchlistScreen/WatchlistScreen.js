@@ -14,19 +14,10 @@ const WatchlistScreen = props => {
   const [sortDirection, setSortDirection] = useState('des');
 
   useEffect(() => {
-    const loadWatchlist = async () => {
-      try {
-        let watchlist = await AsyncStorage.getItem('watchlist');
-        if (watchlist) {
-          watchlist = JSON.parse(watchlist);
-          watchlist.forEach(movie => movie.inWatchlist = true);
-          setWatchlist(watchlist.reverse());
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadWatchlist();
+    AsyncStorage.getItem('watchlist').then(watchlist => {
+        if (watchlist) setWatchlist(JSON.parse(watchlist));
+      } 
+    ).catch(error => console.log(error));
   }, [props.isFocused]);
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
@@ -46,14 +37,17 @@ const WatchlistScreen = props => {
           setWatchlist([...watchlist].reverse());
         }}
       />
-      <WatchlistPreviews
-        watchlist={watchlist} 
-        selectMovie={movie => {
-          props.navigation.navigate(
-            'MovieScreen', { movie, loadDetails: false }
-          );
-        }}
-      />
+      {
+        watchlist.length > 0 &&
+        <WatchlistPreviews
+          watchlist={watchlist} 
+          selectMovie={movie => {
+            props.navigation.navigate(
+              'MovieScreen', { movie, loadDetails: false }
+            );
+          }}
+        />
+      }
     </View>
   )
 };

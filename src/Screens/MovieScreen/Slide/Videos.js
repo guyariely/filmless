@@ -12,7 +12,7 @@ const Videos = props => {
         props.videos &&
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.videos.slice(0, 4).map(video => {
+          props.videos.map(video => {
             return (
               <View style={styles.videoShadow} key={video.id}>
                 <View style={styles.videoContainer}>

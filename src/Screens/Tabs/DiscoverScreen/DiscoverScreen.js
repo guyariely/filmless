@@ -11,7 +11,6 @@ import MoviesPreviews from './MoviesPreviews';
 const DiscoverScreen = props => {
 
   const [movies, setMovies] = useState([]);
-  const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -54,26 +53,6 @@ const DiscoverScreen = props => {
     }
     setIsLoading(false);
   };
-
-  // useEffect(() => {
-  //   // updates the fetched movies watchlist status
-  //   const updateWatchlist = async () => {
-  //     let watchlist = await AsyncStorage.getItem('watchlist');
-  //     if (watchlist) {
-  //       setWatchlist(JSON.parse(watchlist));
-
-  //       watchlist = JSON.parse(watchlist).map(movie => movie.id);
-  //       const updatedMovies = movies;
-  //       for (let i = 0; i < updatedMovies.length; i++) {
-  //         updatedMovies[i].inWatchlist = (
-  //           watchlist.indexOf(updatedMovies[i].id) != -1 ? true : false
-  //         );
-  //       }         
-  //       setMovies(updatedMovies);
-  //     }
-  //   };
-  //   updateWatchlist();
-  // }, [props.isFocused]);
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
 

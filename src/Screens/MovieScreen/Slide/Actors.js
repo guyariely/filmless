@@ -9,9 +9,9 @@ const Actors = props => {
       <Text style={styles.heading}>ACTORS</Text>
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.actors.slice(0, 11).map(actor => {
+          props.actors.map(actor => {
             return (
-              <View style={styles.actor} key={actor.id}>
+              <View style={styles.actor} key={actor.cast_id}>
                 <View style={styles.imageShadow}>
                   <View style={styles.imageContainer}>
                     <Image

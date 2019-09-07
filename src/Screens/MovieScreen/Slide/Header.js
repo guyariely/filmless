@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { getWatchlistStatus, saveToWatchlist, removeFromWatchlist } from '../../../utils/watchlistActions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../Constants/colors';
 import isSmallScreen from '../../../utils/isSmallScreen';
 
 const Header = props => {
 
-  const [inWatchlist, setInWatchlist] = useState(props.inWatchlist);
+  const [watchlistStatus, setWatchlistStatus] = useState(props.watchlistStatus);
+
+  useEffect(() => {
+    getWatchlistStatus(props.movie.id).then(
+      status => setWatchlistStatus(status)
+    ).catch(error => console.log(error));
+  }, [])
 
   return (
     <View style={styles.header}>
@@ -27,13 +34,13 @@ const Header = props => {
       <TouchableOpacity 
         style={styles.bookmarkButton}
         onPress={() => {
-          setInWatchlist(!inWatchlist);
-          inWatchlist ? props.removeFromWatchlist() : props.saveToWatchlist();
+          setWatchlistStatus(!watchlistStatus);
+          watchlistStatus ? removeFromWatchlist(props.movie) : saveToWatchlist(props.movie);
         }}
-      >
+      > 
         <Icon 
-          color={inWatchlist ? colors.primary : colors.text01} 
-          name={inWatchlist ? "bookmark" : "bookmark-border"}
+          color={watchlistStatus ? colors.primary : colors.text01} 
+          name={watchlistStatus ? "bookmark" : "bookmark-border"}
           size={28} 
         />
       </TouchableOpacity>
@@ -47,7 +54,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: isSmallScreen() ? 25 : 40,
     paddingBottom: 5,
-    backgroundColor: colors.base01,
   },
   watchedButton: {
     marginLeft: 'auto',

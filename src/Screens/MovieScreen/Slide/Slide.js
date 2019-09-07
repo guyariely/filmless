@@ -16,12 +16,7 @@ const Slide = props => {
 
   return (
     <View style={styles.slide}>
-      <Header 
-        goBack={props.goBack} 
-        inWatchlist={props.movie.inWatchlist}
-        removeFromWatchlist={props.removeFromWatchlist}
-        saveToWatchlist={props.saveToWatchlist}
-      />
+      <Header goBack={props.goBack} movie={props.movie} />
       <ScrollView >
         <Text style={styles.title}>{title}</Text>
         <View style={styles.mainContent}>
