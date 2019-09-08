@@ -28,11 +28,11 @@ const Slide = props => {
       >
         <Text style={styles.title}>{title}</Text>
         <View style={styles.mainContent}>
-          <Poster poster={props.movie.poster_path} />
+          <Poster poster={props.movie.poster_path} openLightbox={props.openLightbox} />
           <Info movie={props.movie} />
         </View>
         <Overview overview={overview} />
-        {images.backdrops.length > 0 && <Photos images={images.backdrops} />}
+        {images.backdrops.length > 0 && <Photos images={images.backdrops} openLightbox={props.openLightbox} />}
         {videos.results.length > 0 && <Videos videos={videos.results} />}
         {credits.cast.length > 0 && <Actors actors={credits.cast} />}
         {reviews.results.length > 0 && <Reviews reviews={reviews.results} />}

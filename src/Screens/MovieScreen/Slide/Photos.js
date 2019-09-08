@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../../Constants/colors';
 
 const Photos = props => {
@@ -9,16 +9,20 @@ const Photos = props => {
       <Text style={styles.heading}>PHOTOS</Text>
         <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
         {
-          props.images.map(image => {
+          props.images.map((image, index) => {
             return (
-              <View style={styles.imageShadow} key={image.file_path}>
+              <TouchableOpacity 
+                style={styles.imageShadow} 
+                key={image.file_path}
+                onPress={() => props.openLightbox(props.images, index)}
+              >
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
-                    source={{uri: 'https://image.tmdb.org/t/p/w500' + image.file_path}} 
+                    source={{uri: 'https://image.tmdb.org/t/p/w780' + image.file_path}} 
                   />
                 </View>
-            </View>
+            </TouchableOpacity>
             );
           })
         }

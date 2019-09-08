@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import colors from '../../../Constants/colors';
 
 const Poster = props => {
   return (
-    <View style={styles.posterContainer} >
+    <TouchableOpacity 
+      style={styles.posterContainer}
+      onPress={() => props.openLightbox([{file_path: props.poster}])}
+    >
       <View style={styles.poster}>
         <Image
           style={styles.posterImage}
@@ -16,7 +19,7 @@ const Poster = props => {
           source={{uri: 'https://image.tmdb.org/t/p/w500' + props.poster}} 
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

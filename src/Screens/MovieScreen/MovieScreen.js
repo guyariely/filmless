@@ -36,7 +36,13 @@ const MovieScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Slide movie={movie} goBack={() => props.navigation.goBack()} />
+      <Slide 
+        movie={movie} 
+        goBack={() => props.navigation.goBack()} 
+        openLightbox={(images, index) => props.navigation.navigate(
+          'Lightbox', { images, index }
+        )}
+      />
     </View>
   )
 };
