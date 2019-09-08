@@ -13,9 +13,11 @@ const MovieScreen = props => {
   const [isLoading, setIsLoading] = useState(loadDetails);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
+
     const getMovieDetails = async () => {
       try {
-        const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`);
+        const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`, { cancelToken: source.token });
         setMovie(movieDetails.data);
         setIsLoading(false);
       } 
@@ -24,6 +26,8 @@ const MovieScreen = props => {
       }
     }
     if (loadDetails) getMovieDetails();
+
+    return () => source.cancel();
   }, []);
 
   if (isLoading) {
