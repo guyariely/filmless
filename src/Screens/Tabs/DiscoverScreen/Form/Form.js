@@ -30,7 +30,7 @@ const Form = props => {
         <Button 
           title="Search"
           color={colors.search}
-          onPress={() => props.loadMovies(
+          onPress={() => props.updateQueries(
             { rating, time, fromYear, toYear, genres, 
               languages, sortBy
             })}

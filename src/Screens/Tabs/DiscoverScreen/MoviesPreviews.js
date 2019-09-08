@@ -9,6 +9,8 @@ const MoviesPreviews = props => {
       <FlatList
         contentContainerStyle={styles.flatList}
         horizontal={true}
+        onEndReachedThreshold={0.5}
+        onEndReached={props.loadMovies}
         keyExtractor={movie => movie.id.toString()}
         data={props.movies}
         renderItem={({item: movie}) => (

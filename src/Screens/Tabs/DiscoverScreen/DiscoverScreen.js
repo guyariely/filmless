@@ -1,6 +1,6 @@
 import API_KEY from '../../../../env';
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, Keyboard, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import isSmallScreen from '../../../utils/isSmallScreen';
 import axios from 'axios';
@@ -10,19 +10,23 @@ import MoviesPreviews from './MoviesPreviews';
 
 const DiscoverScreen = props => {
 
+  const [queries, setQueries] = useState(null);
+  const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const loadMovies = async inputs => {
+  const updateQueries = queries => {
+
+    setQueries(queries);
 
     // remove keyboard and any error message 
     setError(null);
     Keyboard.dismiss();
 
-    const { rating, time, fromYear, toYear, genres, languages, sortBy } = inputs;
-
     // inputs validation
+    const { rating, fromYear, toYear } = queries;
+
     if (!Number(rating) && rating) {
       return setError("Rating number is invalid.");
     }
@@ -34,10 +38,21 @@ const DiscoverScreen = props => {
     }
 
     // fetching the movies
-    setIsLoading(true);
+    setPage(1);
+    loadMovies(queries, 1);
+  };
+
+  const loadMovies = async (queries, page) => {
+
+    if (page == 501) return; 
+    if (page == 1) setIsLoading(true);
+
+    const { rating, time, fromYear, toYear, genres, languages, sortBy } = queries;
+
     try {
       const result = await axios.get(
         'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
+        '&page=' + page +
         '&sort_by=' + (sortBy ? sortBy : 'popularity') + '.desc' + 
         (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
         (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
@@ -46,12 +61,19 @@ const DiscoverScreen = props => {
         (time ? '&with_runtime.lte=' + time : '') +
         (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
       );
-      setMovies(result.data.results); 
+      if (page == 1) {
+        setMovies(result.data.results);
+      } 
+      else if (result.data.results.length > 0) {
+        setMovies(movies.concat(result.data.results));
+      }
     } 
     catch (error) {
       console.log(error);
     }
-    setIsLoading(false);
+
+    if (page == 1) setIsLoading(false);
+    setPage(page + 1);
   };
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
@@ -61,7 +83,7 @@ const DiscoverScreen = props => {
       <View style={styles.container}>
         <Text style={styles.title}>Find Your Film</Text>
         <View style={styles.form}>
-          <Form loadMovies={loadMovies} />  
+          <Form updateQueries={updateQueries} />  
         </View>
         { 
           isLoading && 
@@ -82,6 +104,7 @@ const DiscoverScreen = props => {
           (!error && !isLoading) &&
           <MoviesPreviews 
             movies={movies} 
+            loadMovies={() => loadMovies(queries, page)}
             selectMovie={movie => {
               props.navigation.navigate(
                 'MovieScreen', { movie, loadDetails: true }
