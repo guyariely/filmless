@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../../Constants/colors';
 import Carousel from 'react-native-snap-carousel';
 import { Dimensions } from "react-native";
@@ -8,10 +8,14 @@ const Reviews = props => {
 
   const review = ({item: review}) => {
     return (
-      <ScrollView style={styles.review}>
-        <Text style={styles.author}>{review.author}</Text>
-        <Text style={styles.content}>{review.content}</Text>
-      </ScrollView>
+      <View style={styles.review}>
+        <TouchableOpacity 
+          onPress={() => props.openReviewScreen(review)}
+        >
+          <Text style={styles.author}>{review.author}</Text>
+          <Text numberOfLines={10} style={styles.content}>{review.content}</Text>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.base02,
     borderColor: colors.base01,
     borderBottomWidth: 1,
-    height: 300,
+    height: 320,
     borderRadius: 15,
     paddingHorizontal: 20,
     marginHorizontal: 20,
@@ -72,7 +76,6 @@ const styles = StyleSheet.create({
     color: colors.text01,
     lineHeight: 25,
     fontSize: 16,
-    marginBottom: 30
   }
 });
 

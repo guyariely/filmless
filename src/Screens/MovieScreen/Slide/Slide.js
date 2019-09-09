@@ -35,7 +35,7 @@ const Slide = props => {
         {images.backdrops.length > 0 && <Photos images={images.backdrops} openLightbox={props.openLightbox} />}
         {videos.results.length > 0 && <Videos videos={videos.results} />}
         {credits.cast.length > 0 && <Actors actors={credits.cast} />}
-        {reviews.results.length > 0 && <Reviews reviews={reviews.results} />}
+        {reviews.results.length > 0 && <Reviews reviews={reviews.results} openReviewScreen={props.openReviewScreen} />}
         <View style={styles.bottomBuffer}></View>
       </ScrollView>
     </View>

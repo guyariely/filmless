@@ -46,6 +46,9 @@ const MovieScreen = props => {
         openLightbox={(images, index) => props.navigation.navigate(
           'Lightbox', { images, index }
         )}
+        openReviewScreen={review => props.navigation.navigate(
+          'ReviewScreen', { review, movieTitle: movie.title }
+        )}
       />
     </View>
   )
