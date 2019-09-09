@@ -12,7 +12,7 @@ const ReviewScreen = props => {
 
   return (
     <View style={styles.slide}>
-      <Header goBack={props.goBack} />
+      <Header goBack={() => props.navigation.goBack()} />
       <Text style={styles.title}>{movieTitle}</Text>
       <Text style={styles.subtitle}>
         A review by <Text style={styles.authorName}>{review.author}</Text>
