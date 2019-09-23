@@ -1,13 +1,14 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import colors from '../../Constants/colors';
+import isSmallScreen from '../../utils/isSmallScreen';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
+import ListsScreen from './ListsScreen/ListsScreen';
 import WatchlistScreen from './WatchlistScreen/WatchlistScreen';  
 import SearchScreen from './SearchScreen/SearchScreen';
 import SettingsScreen from './SettingsScreen/SettingsScreen';
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
 
 const TabsNavigator = createMaterialTopTabNavigator(
   {
@@ -17,6 +18,15 @@ const TabsNavigator = createMaterialTopTabNavigator(
         tabBarLabel: "",
         tabBarIcon: ({tintColor}) => (
           <Icon name="local-movies" color={tintColor} size={28} />
+        )
+      } 
+    },
+    Lists: { 
+      screen: ListsScreen,
+      navigationOptions: {
+        tabBarLabel: "",
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="format-list-bulleted" color={tintColor} size={28} />
         )
       } 
     },
@@ -49,7 +59,7 @@ const TabsNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Watchlist',
+    initialRouteName: 'Lists',
     animationEnabled: true,
     swipeEnabled: false,
     tabBarOptions: {

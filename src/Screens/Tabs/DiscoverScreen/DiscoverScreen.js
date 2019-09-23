@@ -81,7 +81,7 @@ const DiscoverScreen = props => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Text style={styles.title}>Find Your Film</Text>
+        <Text style={styles.title}>Discover</Text>
         <View style={styles.form}>
           <Form updateQueries={updateQueries} />  
         </View>
@@ -103,7 +103,7 @@ const DiscoverScreen = props => {
         {
           (!error && !isLoading) &&
           <MovieCards 
-            movies={movies} 
+            movies={results} 
             loadMovies={() => loadMovies(queries, page)}
             selectMovie={movie => {
               props.navigation.push(

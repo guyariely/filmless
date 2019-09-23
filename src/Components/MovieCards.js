@@ -52,7 +52,7 @@ const MovieCards = props => {
 
 const styles = StyleSheet.create({
   movieCards: {
-    flex: 6
+    flex: 1
   },
   flatList: {
     paddingHorizontal: 28
