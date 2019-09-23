@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import colors from '../../../Constants/colors';
 import Header from './Header';
@@ -37,7 +37,7 @@ const Person = props => {
           <Info person={props.person} />
         </View>
         {
-          biography && 
+          biography.length > 0 && 
           <Biography 
             biography={biography} 
             openBiographyScreen={props.openBiographyScreen}

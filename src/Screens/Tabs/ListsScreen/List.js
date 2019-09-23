@@ -60,7 +60,7 @@ const List = props => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 360
+    height: 340
   },
   heading: {
     color: colors.heading,
