@@ -42,7 +42,7 @@ const WatchlistScreen = props => {
         <WatchlistPreviews
           watchlist={watchlist} 
           selectMovie={movie => {
-            props.navigation.navigate(
+            props.navigation.push(
               'MovieScreen', { movie, loadDetails: false }
             );
           }}

@@ -55,10 +55,10 @@ const SearchScreen = props => {
           </View> 
           :
           <SearchResults 
-            searchResults={results}
+            searchResults={searchResults}
             setShowBorder={setShowBorder}
             selectMovie={movie => {
-              props.navigation.navigate(
+              props.navigation.push(
                 'MovieScreen', { movie, loadDetails: true }
               );
             }}

@@ -3,7 +3,7 @@ import API_KEY from '../../../env';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import colors from '../../Constants/colors';
-import Slide from './Slide/Slide';
+import Movie from './Movie/Movie';
 
 const MovieScreen = props => {
 
@@ -40,14 +40,17 @@ const MovieScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Slide 
+      <Movie 
         movie={movie} 
         goBack={() => props.navigation.goBack()} 
-        openLightbox={(images, index) => props.navigation.navigate(
+        openLightbox={(images, index) => props.navigation.push(
           'Lightbox', { images, index }
         )}
-        openReviewScreen={review => props.navigation.navigate(
+        openReviewScreen={review => props.navigation.push(
           'ReviewScreen', { review, movieTitle: movie.title }
+        )}
+        openPersonScreen={person => props.navigation.push(
+          'PersonScreen', { person }
         )}
       />
     </View>

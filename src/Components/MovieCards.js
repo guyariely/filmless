@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import colors from '../../../Constants/colors';
-import isSmallScreen from '../../../utils/isSmallScreen';
+import colors from '../Constants/colors';
+import isSmallScreen from '../utils/isSmallScreen';
 
-const MoviesPreviews = props => {
+const MovieCards = props => {
   return (
-    <View style={styles.moviesPreviews}>
+    <View style={styles.movieCards}>
       <FlatList
         contentContainerStyle={styles.flatList}
         horizontal={true}
@@ -36,7 +36,7 @@ const MoviesPreviews = props => {
                 <Text 
                   style={styles.rating} 
                   numberOfLines={1}
-                  >
+                >
                     {movie.vote_average}
                     <Text>  •  </Text>
                     {movie.release_date.slice(0, 4)}
@@ -51,7 +51,7 @@ const MoviesPreviews = props => {
 };
 
 const styles = StyleSheet.create({
-  moviesPreviews: {
+  movieCards: {
     flex: 6
   },
   flatList: {
@@ -102,5 +102,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoviesPreviews;
+export default MovieCards;
 

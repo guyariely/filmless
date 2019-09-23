@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../../Constants/colors';
 
 const Actors = props => {
@@ -11,7 +11,11 @@ const Actors = props => {
         {
           props.actors.map(actor => {
             return (
-              <View style={styles.actor} key={actor.cast_id}>
+              <TouchableOpacity 
+                style={styles.actor} 
+                key={actor.cast_id}
+                onPress={() => props.openPersonScreen(actor)}
+              >
                 <View style={styles.imageShadow}>
                   <View style={styles.imageContainer}>
                     <Image
@@ -36,7 +40,7 @@ const Actors = props => {
                       {actor.character}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             );
           })
         }
@@ -91,8 +95,9 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.text01,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
+    paddingVertical: 5
   },
   character: {
     color: colors.text03,

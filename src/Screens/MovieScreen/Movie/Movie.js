@@ -10,13 +10,13 @@ import Reviews from "./Reviews";
 import Videos from "./Videos";
 import Actors from './Actors';
 
-const Slide = props => {
+const Movie = props => {
 
   const [showBorder, setShowBorder] = useState(false);
   const { title, overview, images, videos, credits, reviews } = props.movie;
 
   return (
-    <View style={styles.slide}>
+    <View style={styles.movie}>
       <Header 
         goBack={props.goBack} 
         movie={props.movie} 
@@ -28,14 +28,38 @@ const Slide = props => {
       >
         <Text style={styles.title}>{title}</Text>
         <View style={styles.mainContent}>
-          <Poster poster={props.movie.poster_path} openLightbox={props.openLightbox} />
+          <Poster 
+            poster={props.movie.poster_path} 
+            openLightbox={props.openLightbox} 
+          />
           <Info movie={props.movie} />
         </View>
         <Overview overview={overview} />
-        {images.backdrops.length > 0 && <Photos images={images.backdrops} openLightbox={props.openLightbox} />}
-        {videos.results.length > 0 && <Videos videos={videos.results} />}
-        {credits.cast.length > 0 && <Actors actors={credits.cast} />}
-        {reviews.results.length > 0 && <Reviews reviews={reviews.results} openReviewScreen={props.openReviewScreen} />}
+        {
+          images.backdrops.length > 0 && 
+          <Photos 
+            images={images.backdrops} 
+            openLightbox={props.openLightbox} 
+          />
+        }
+        {
+          videos.results.length > 0 && 
+          <Videos videos={videos.results} />
+        }
+        {
+          credits.cast.length > 0 && 
+          <Actors 
+            actors={credits.cast} 
+            openPersonScreen={props.openPersonScreen} 
+          />
+        }
+        {
+          reviews.results.length > 0 && 
+          <Reviews 
+            reviews={reviews.results} 
+            openReviewScreen={props.openReviewScreen} 
+          />
+        }
         <View style={styles.bottomBuffer}></View>
       </ScrollView>
     </View>
@@ -43,7 +67,7 @@ const Slide = props => {
 };
 
 const styles = StyleSheet.create({
-  slide: {
+  movie: {
     flex: 1,
     backgroundColor: colors.base01,
     paddingTop: 10,
@@ -67,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Slide;
+export default Movie;

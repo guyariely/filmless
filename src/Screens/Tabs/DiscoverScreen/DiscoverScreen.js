@@ -6,7 +6,7 @@ import isSmallScreen from '../../../utils/isSmallScreen';
 import axios from 'axios';
 import colors from '../../../Constants/colors';
 import Form from './Form/Form';
-import MoviesPreviews from './MoviesPreviews';
+import MovieCards from '../../../Components/MovieCards';
 
 const DiscoverScreen = props => {
 
@@ -102,11 +102,11 @@ const DiscoverScreen = props => {
         }
         {
           (!error && !isLoading) &&
-          <MoviesPreviews 
+          <MovieCards 
             movies={movies} 
             loadMovies={() => loadMovies(queries, page)}
             selectMovie={movie => {
-              props.navigation.navigate(
+              props.navigation.push(
                 'MovieScreen', { movie, loadDetails: true }
               );
             }}
