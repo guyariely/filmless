@@ -64,7 +64,7 @@ const TabsNavigator = createMaterialTopTabNavigator(
     swipeEnabled: false,
     tabBarOptions: {
       activeTintColor: colors.text01,
-      inactiveTintColor: colors.text02,
+      inactiveTintColor: colors.text04,
       style: { 
         backgroundColor: colors.base01,
         paddingTop: isSmallScreen() ? 25 : 40,

@@ -41,7 +41,7 @@ const Filters = props => {
               }
               keyboardAppearance="dark"
               placeholder="NO FILTER"
-              placeholderTextColor={colors.text02}
+              placeholderTextColor={colors.text04}
               selectionColor={colors.primary}
               onChangeText={rating => rating > 9.9 ? setRating('9.9') : setRating(rating)}
               keyboardType="numeric"
@@ -56,7 +56,7 @@ const Filters = props => {
         <WheelInput
           style={time ? wheelInputStyles__active : wheelInputStyles}
           placeholder={{label: 'NO FILTER', color: colors.text01}}
-          placeholderTextColor={colors.text02}
+          placeholderTextColor={colors.text04}
           items={timeDurations}
           value={time}
           onValueChange={time => setTime(time)}
@@ -68,7 +68,7 @@ const Filters = props => {
           style={fromYear ? [styles.input, styles.input__active] : styles.input}
           keyboardAppearance="dark"
           placeholder="NO FILTER"
-          placeholderTextColor={colors.text02}
+          placeholderTextColor={colors.text04}
           selectionColor={colors.primary}
           onChangeText={year => setFromYear(validateYear(year))}
           keyboardType="numeric"
@@ -82,7 +82,7 @@ const Filters = props => {
           style={toYear ? [styles.input, styles.input__active] : styles.input}
           keyboardAppearance="dark"
           placeholder="NO FILTER"
-          placeholderTextColor={colors.text02}
+          placeholderTextColor={colors.text04}
           selectionColor={colors.primary}
           onChangeText={year => setToYear(validateYear(year))}
           keyboardType="numeric"

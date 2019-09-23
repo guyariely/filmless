@@ -5,8 +5,8 @@ const themes = {
     base02: '#1C2033',
     primary: '#5F77EF',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -16,8 +16,9 @@ const themes = {
     base02: '#26263d',
     primary: '#596fde',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
+    text02: 'rgba(245, 245, 247, 0.8)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -27,8 +28,8 @@ const themes = {
     base02: '#3a4466',
     primary: '#28a3d1',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -38,8 +39,8 @@ const themes = {
     base02: '#3d4287',
     primary: '#5F77EF',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -49,8 +50,8 @@ const themes = {
     base02: '#1c1e30',
     primary: '#5F77EF',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -60,8 +61,8 @@ const themes = {
     base02: '#19233b',
     primary: '#7592f1',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: '#F5F5F7',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#F5F5F7'
@@ -71,8 +72,8 @@ const themes = {
     base02: '#f2f2f2',
     primary: 'black',
     text01: 'rgba(0, 0, 0, 0.8)',
-    text02: 'rgba(0, 0, 0, 0.2)',
     text03: 'rgba(0, 0, 0, 0.6)',
+    text04: 'rgba(0, 0, 0, 0.2)',
     heading: 'rgba(0, 0, 0, 0.8)',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#f2f2f2'
@@ -82,8 +83,8 @@ const themes = {
     base02: '#fafcff',
     primary: '#7c73e2',
     text01: '#0c0c0c',
-    text02: '#adb5c4',
     text03: '#afb3c5',
+    text04: '#adb5c4',
     heading: '#0c0c0c',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#ffffff'
@@ -93,8 +94,8 @@ const themes = {
     base02: '#ffffff',
     primary: '#e80000',
     text01: '#0c0c0c',
-    text02: '#adb5c4',
     text03: '#afb3c5',
+    text04: '#adb5c4',
     heading: '#e80000',
     shadow: 'rgba(0, 0, 0, 0.4)',
     search: '#f5f5f5'
@@ -104,8 +105,8 @@ const themes = {
     base02: '#111111',
     primary: 'rgb(95, 119, 239)',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: 'rgb(95, 119, 239)',
     shadow: '#000',
     search: '#F5F5F7'
@@ -115,8 +116,8 @@ const themes = {
     base02: '#111111',
     primary: 'rgb(235, 195, 37)',
     text01: '#F5F5F7',
-    text02: 'rgba(245, 245, 247, 0.2)',
     text03: 'rgba(245, 245, 247, 0.6)',
+    text04: 'rgba(245, 245, 247, 0.2)',
     heading: 'rgb(235, 195, 37)',
     shadow: '#000',
     search: '#F5F5F7'

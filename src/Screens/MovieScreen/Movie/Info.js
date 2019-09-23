@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   voteCount: {
-    color: colors.text02,
+    color: colors.text04,
     fontSize: 16
   }
 });

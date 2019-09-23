@@ -152,7 +152,7 @@ const selectInputStyles = {
     fontSize: 16
   },
   selectToggleText: {
-    color: colors.text02,
+    color: colors.text04,
   }
 };
 
