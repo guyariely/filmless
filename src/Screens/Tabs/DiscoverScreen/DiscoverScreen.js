@@ -103,7 +103,7 @@ const DiscoverScreen = props => {
         {
           (!error && !isLoading) &&
           <MovieCards 
-            movies={results} 
+            movies={movies} 
             loadMovies={() => loadMovies(queries, page)}
             selectMovie={movie => {
               props.navigation.push(

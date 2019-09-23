@@ -19,7 +19,7 @@ const List = props => {
 
     try {
       const result = await axios.get(`https://api.themoviedb.org/3/movie/${props.listType}?api_key=${API_KEY}&page=${page}`);
-
+      
       if (page == 1) {
         setList(result.data.results);
       } 
@@ -37,7 +37,7 @@ const List = props => {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>
-          {props.listType.toUpperCase()}
+          {props.listType.toUpperCase().replace('_', ' ')}
         </Text>
         <ActivityIndicator style={styles.activityIndicator} />
       </View>
@@ -50,7 +50,11 @@ const List = props => {
         {props.listType.toUpperCase().replace('_', ' ')}
       </Text>
       <MovieCards 
-        movies={list} 
+        movies={
+          props.listType == 'upcoming' ?
+          list.filter(movie => new Date(movie.release_date).getTime() > new Date().getTime()) :
+          list
+        } 
         loadMovies={() => loadList(page)}
         selectMovie={props.selectMovie}
       />
