@@ -1,5 +1,5 @@
 import API_KEY from '../../../../env';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
 import isSmallScreen from '../../../utils/isSmallScreen';
@@ -7,26 +7,24 @@ import axios from 'axios';
 import colors from '../../../Constants/colors';
 import Form from './Form/Form';
 import MovieCards from '../../../Components/MovieCards';
+import { DiscoverContext } from '../../../Context/DiscoverContext';
 
 const DiscoverScreen = props => {
 
-  const [queries, setQueries] = useState(null);
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const updateQueries = queries => {
+  const { rating, time, fromYear, toYear, genres, languages, sortBy } = useContext(DiscoverContext);
 
-    setQueries(queries);
+  const validateQueries = () => {
 
     // remove keyboard and any error message 
     setError(null);
     Keyboard.dismiss();
 
     // inputs validation
-    const { rating, fromYear, toYear } = queries;
-
     if (!Number(rating) && rating) {
       return setError("Rating number is invalid.");
     }
@@ -39,15 +37,13 @@ const DiscoverScreen = props => {
 
     // fetching the movies
     setPage(1);
-    loadMovies(queries, 1);
+    loadMovies(1);
   };
 
-  const loadMovies = async (queries, page) => {
+  const loadMovies = async page => {
 
     if (page == 501) return; 
     if (page == 1) setIsLoading(true);
-
-    const { rating, time, fromYear, toYear, genres, languages, sortBy } = queries;
 
     try {
       const result = await axios.get(
@@ -83,7 +79,7 @@ const DiscoverScreen = props => {
       <View style={styles.container}>
         <Text style={styles.title}>Discover</Text>
         <View style={styles.form}>
-          <Form updateQueries={updateQueries} />  
+          <Form validateQueries={validateQueries} />  
         </View>
         { 
           isLoading && 
@@ -104,7 +100,7 @@ const DiscoverScreen = props => {
           (!error && !isLoading) &&
           <MovieCards 
             movies={movies} 
-            loadMovies={() => loadMovies(queries, page)}
+            loadMovies={() => loadMovies(page)}
             selectMovie={movie => {
               props.navigation.push(
                 'MovieScreen', { movie, loadDetails: true }

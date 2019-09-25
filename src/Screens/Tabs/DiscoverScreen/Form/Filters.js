@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import WheelInput from 'react-native-picker-select';
 import colors from '../../../../Constants/colors';
+import { DiscoverContext } from '../../../../Context/DiscoverContext';
 
 const timeDurations = [
     { label: '30 MIN', value: 30, color: colors.text01 },
@@ -26,7 +27,12 @@ const validateYear = year => {
 
 const Filters = props => {
 
-  const { rating, setRating, time, setTime, fromYear, setFromYear, toYear, setToYear } = props.screenProps;
+  const { 
+    rating, setRating, 
+    time, setTime, 
+    fromYear, setFromYear, 
+    toYear, setToYear 
+  } = useContext(DiscoverContext);
 
   return (
 

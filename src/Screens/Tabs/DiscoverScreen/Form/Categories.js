@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text } from "react-native";
 import SelectInput from 'react-native-sectioned-multi-select';
 import colors from '../../../../Constants/colors';
 import fonts from '../../../../Constants/fonts';
+import { DiscoverContext } from '../../../../Context/DiscoverContext';
 
 const parseIDsToString = (IDs, categories) => {
   return IDs.map(ID => categories[0].children.find(
@@ -12,7 +13,7 @@ const parseIDsToString = (IDs, categories) => {
 
 const Categories = props => {
 
-  const { genres, setGenres, languages, setLanguages } = props.screenProps;
+  const { genres, setGenres, languages, setLanguages } = useContext(DiscoverContext);
 
   return (
     <View style={styles.container}>
@@ -77,7 +78,8 @@ const Categories = props => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 26,
-    paddingVertical: 20
+    paddingTop: 20,
+    paddingBottom: 10
   },
   inputContainer: {
     paddingBottom: 20

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import colors from '../../../../Constants/colors';
+import { DiscoverContext } from '../../../../Context/DiscoverContext';
 
 const Sorting = props => {
 
-  const { sortBy, setSortBy } = props.screenProps; 
+  const { sortBy, setSortBy } = useContext(DiscoverContext); 
 
   const sortOptions = [
     {name: 'POPULARITY', parameter: 'popularity'},
