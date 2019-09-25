@@ -43,6 +43,7 @@ const MovieScreen = props => {
       <Movie 
         movie={movie} 
         goBack={() => props.navigation.goBack()} 
+        goRoot={() => props.navigation.popToTop()}
         openLightbox={(images, index) => props.navigation.push(
           'Lightbox', { images, index }
         )}

@@ -41,6 +41,7 @@ const PersonScreen = props => {
       <Person 
         person={person} 
         goBack={() => props.navigation.goBack()} 
+        goRoot={() => props.navigation.popToTop()}
         openLightbox={(images, index) => props.navigation.push(
           'Lightbox', { images, index }
         )}

@@ -19,6 +19,7 @@ const Movie = props => {
     <View style={styles.movie}>
       <Header 
         goBack={props.goBack} 
+        goRoot={props.goRoot}
         movie={props.movie} 
         showBorder={showBorder}
       />

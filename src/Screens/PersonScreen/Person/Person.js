@@ -22,6 +22,7 @@ const Person = props => {
     <View style={styles.person}>
       <Header 
         goBack={props.goBack} 
+        goRoot={props.goRoot}
         showBorder={showBorder} 
       />
       <ScrollView 

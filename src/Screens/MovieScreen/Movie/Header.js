@@ -21,7 +21,11 @@ const Header = props => {
       [styles.header, styles.headerWithBorder] : 
       [styles.header]
     }>
-      <TouchableOpacity onPress={props.goBack} style={styles.closeButton}>
+      <TouchableOpacity 
+        onPress={props.goBack} 
+        onLongPress={props.goRoot}
+        style={styles.closeButton}
+      >
         <Icon 
           color={colors.text01} 
           name="keyboard-arrow-left" 

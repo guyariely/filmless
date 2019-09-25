@@ -11,7 +11,10 @@ const ReviewScreen = props => {
 
   return (
     <View style={styles.slide}>
-      <Header goBack={() => props.navigation.goBack()} />
+      <Header 
+        goBack={() => props.navigation.goBack()} 
+        goRoot={() => props.navigation.popToTop()}
+      />
       <Text style={styles.name}>{name}</Text>
       <View 
         style={showBorder ? [styles.border, styles.borderVisible] : styles.border}>

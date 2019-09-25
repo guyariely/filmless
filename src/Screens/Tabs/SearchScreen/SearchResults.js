@@ -1,8 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
 import colors from '../../../Constants/colors';
+import MovieResult from './MovieResult';
+import PersonResult from './PersonResult';
 
 const SearchResults = props => {
+
+  if (props.isLoading) {
+    return (
+      <View style={styles.activityIndicator}>
+        <ActivityIndicator size='small' color={colors.text01} />
+      </View>  
+    );
+  }
 
   return (
     <ScrollView 
@@ -16,32 +26,38 @@ const SearchResults = props => {
     >
     {
       props.searchResults &&
-      props.searchResults.map(movie => 
-        <TouchableOpacity 
-          style={styles.imageShadow} 
-          key={movie.id}
-          onPress={() => props.selectMovie(movie)}
-        >
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path}} 
-            />
-            <Text 
-              style={styles.movieTitle} 
-              numberOfLines={3}
-              >
-              {movie.title.toUpperCase()}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      )
+      props.searchResults.map(result => {
+        switch (result.media_type) {
+          case 'movie':
+            return (
+              <MovieResult 
+                key={result.id}
+                movie={result}
+                selectMovie={props.selectMovie} 
+              />
+            );
+          case 'person': 
+            return (
+              <PersonResult 
+                key={result.id}
+                person={result}
+                openPersonScreen={props.openPersonScreen} 
+              />
+            );
+          default:
+            return;
+        }
+      })
     }
     </ScrollView>
   )
 };
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   imageShadow: {
     paddingHorizontal: 32,
     shadowColor: colors.shadow,
