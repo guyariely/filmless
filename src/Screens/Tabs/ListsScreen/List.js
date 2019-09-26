@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import API from '../../../API/Movies';
 import colors from '../../../Constants/colors';
-import API_KEY from '../../../../env';
-import axios from "axios";
 import MovieCards from '../../../Components/MovieCards';
 
 const List = props => {
@@ -15,22 +14,15 @@ const List = props => {
 
   const loadList = async page => {
 
-    if (page == 501) return; 
-
-    try {
-      const result = await axios.get(`https://api.themoviedb.org/3/movie/${props.listType}?api_key=${API_KEY}&page=${page}`);
-      
+    API.GetList(props.listType, page).then(listResult => {
       if (page == 1) {
-        setList(result.data.results);
+        setList(listResult);
       } 
-      else if (result.data.results.length > 0) {
-        setList(list.concat(result.data.results));
-      }
-    } 
-    catch (error) {
-      console.log(error);
-    }
-    setPage(page + 1);
+      else if (listResult.length > 0) {
+        setList(list.concat(listResult));
+      }  
+      setPage(page + 1);
+    });
   };
 
   if (isLoading) {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from '../../../../env';
-import { StyleSheet, Text, View, TextInput, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
+import API from '../../../API/Search';
 import SearchResults from './SearchResults';
-import axios from 'axios';
 import colors from '../../../Constants/colors';
 import isSmallScreen from '../../../utils/isSmallScreen';
 
@@ -14,14 +13,15 @@ const SearchScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [showBorder, setShowBorder] = useState(false);
 
-  const getSearchResults = async () => {
+  const getSearchResults = () => {
     if (!input) return;
     setShowBorder(false);
-
     setIsLoading(true);
-    const searchResults = await axios.get(`https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${escape(input)}&include_adult=false`);
-    setSearchResults(searchResults.data.results);
-    setIsLoading(false);
+
+    API.MultiSearch(input).then(searchResults => {
+      setSearchResults(searchResults.data.results);
+      setIsLoading(false);
+    });
   }
   
   useEffect(() => Keyboard.dismiss(), [props.isFocused])

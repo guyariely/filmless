@@ -1,9 +1,8 @@
-import API_KEY from '../../../../env';
 import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import API from '../../../API/Discover';
 import { withNavigationFocus } from "react-navigation";
 import isSmallScreen from '../../../utils/isSmallScreen';
-import axios from 'axios';
 import colors from '../../../Constants/colors';
 import Form from './Form/Form';
 import MovieCards from '../../../Components/MovieCards';
@@ -16,7 +15,7 @@ const DiscoverScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { rating, time, fromYear, toYear, genres, languages, sortBy } = useContext(DiscoverContext);
+  const queries = useContext(DiscoverContext);
 
   const validateQueries = () => {
 
@@ -25,6 +24,8 @@ const DiscoverScreen = props => {
     Keyboard.dismiss();
 
     // inputs validation
+    const { rating, fromYear, toYear } = queries;
+
     if (!Number(rating) && rating) {
       return setError("Rating number is invalid.");
     }
@@ -40,36 +41,22 @@ const DiscoverScreen = props => {
     loadMovies(1);
   };
 
-  const loadMovies = async page => {
+  const loadMovies = page => {
 
     if (page == 501) return; 
     if (page == 1) setIsLoading(true);
 
-    try {
-      const result = await axios.get(
-        'https://api.themoviedb.org/3/discover/movie?api_key=' + API_KEY +
-        '&page=' + page +
-        '&sort_by=' + (sortBy ? sortBy : 'popularity') + '.desc' + 
-        (fromYear ? '&primary_release_date.gte=' + fromYear + '-01-01' : '') +
-        (toYear ? '&primary_release_date.lte=' + toYear + '-12-31' : '') +
-        (rating ? '&vote_average.gte=' + rating + '&sort_by=' + (sortBy ? sortBy : 'vote_count') + '.desc' : '') +
-        (genres.length > 0 ? '&with_genres=' + genres.join('%2C') : '') +
-        (time ? '&with_runtime.lte=' + time : '') +
-        (languages.length > 0 ? '&with_original_language=' + languages.join('%2C') : '')
-      );
+    API.Discover(queries, page).then(movieResults => {
       if (page == 1) {
-        setMovies(result.data.results);
+        setMovies(movieResults);
       } 
-      else if (result.data.results.length > 0) {
-        setMovies(movies.concat(result.data.results));
+      else if (movieResults.length > 0) {
+        setMovies(movies.concat(movieResults));
       }
-    } 
-    catch (error) {
-      console.log(error);
-    }
-
-    if (page == 1) setIsLoading(false);
-    setPage(page + 1);
+  
+      if (page == 1) setIsLoading(false);
+      setPage(page + 1);
+    })
   };
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])

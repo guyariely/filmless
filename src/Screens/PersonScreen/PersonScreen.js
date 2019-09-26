@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from '../../../env';
+import useIsMounted from '../../Hooks/isMounted';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import axios from 'axios';
+import API from '../../API/People';
 import colors from '../../Constants/colors';
 import Person from './Person/Person';
 
@@ -9,23 +9,15 @@ const PersonScreen = props => {
 
   const [person, setPerson] = useState(props.navigation.getParam('person', {}));
   const [isLoading, setIsLoading] = useState(true);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
-
-    const getPersonDetails = async () => {
-      try {
-        const personDetails = await axios.get(`https://api.themoviedb.org/3/person/${person.id}?api_key=${API_KEY}&append_to_response=movie_credits,tagged_images`, { cancelToken: source.token });
+    API.GetDetails(person).then(personDetails => {
+      if (isMounted.current) {
         setPerson(personDetails.data);
         setIsLoading(false);
-      } 
-      catch (error) {
-        console.log(error);
       }
-    }
-    getPersonDetails();
-
-    return () => source.cancel();
+    });
   }, []);
 
   if (isLoading) {

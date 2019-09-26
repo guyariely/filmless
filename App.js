@@ -4,9 +4,6 @@ import colors from './src/Constants/colors';
 import AppContainer from './src/Screens/StackNavigator';
 import DiscoverContextProvider from './src/Context/DiscoverContext';
 
-import { YellowBox } from 'react-native'
-YellowBox.ignoreWarnings(['You should only render one navigator']);
-
 const App = () => {
   return (
     <View style={styles.container}>

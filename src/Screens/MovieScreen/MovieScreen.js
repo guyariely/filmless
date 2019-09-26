@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import API_KEY from '../../../env';
+import useIsMounted from '../../Hooks/isMounted';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import axios from 'axios';
+import API from '../../API/Movies';
 import colors from '../../Constants/colors';
 import Movie from './Movie/Movie';
 
@@ -11,23 +11,17 @@ const MovieScreen = props => {
 
   const [movie, setMovie] = useState(props.navigation.getParam('movie', {}));
   const [isLoading, setIsLoading] = useState(loadDetails);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
-
-    const getMovieDetails = async () => {
-      try {
-        const movieDetails = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=images,reviews,videos,credits`, { cancelToken: source.token });
-        setMovie(movieDetails.data);
-        setIsLoading(false);
-      } 
-      catch (error) {
-        console.log(error);
-      }
-    }
-    if (loadDetails) getMovieDetails();
-
-    return () => source.cancel();
+    if (loadDetails) {
+      API.GetDetails(movie).then(movieDetails => {
+        if (isMounted.current) {
+          setMovie(movieDetails.data);
+          setIsLoading(false);
+        }
+      });
+    } 
   }, []);
 
   if (isLoading) {
