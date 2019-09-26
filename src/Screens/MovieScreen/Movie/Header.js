@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { getWatchlistStatus, saveToWatchlist, removeFromWatchlist } from '../../../utils/watchlistActions';
+import { getHidelistStatus, saveToHidelist, removeFromHidelist } from '../../../utils/hidelistActions';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../Constants/colors';
 import isSmallScreen from '../../../utils/isSmallScreen';
@@ -8,10 +10,15 @@ import isSmallScreen from '../../../utils/isSmallScreen';
 const Header = props => {
 
   const [watchlistStatus, setWatchlistStatus] = useState(props.watchlistStatus);
+  const [hidelistStatus, setHidelistStatus] = useState(props.hidelistStatus);
 
   useEffect(() => {
     getWatchlistStatus(props.movie.id).then(
       status => setWatchlistStatus(status)
+    ).catch(error => console.log(error));
+
+    getHidelistStatus(props.movie.id).then(
+      status => setHidelistStatus(status)
     ).catch(error => console.log(error));
   }, [])
 
@@ -32,15 +39,21 @@ const Header = props => {
           size={34} 
         />
       </TouchableOpacity>
-      {/*<TouchableOpacity style={styles.watchedButton}>
+      <TouchableOpacity 
+        style={styles.hidelistButton}
+        onPress={() => {
+          setHidelistStatus(!hidelistStatus);
+          hidelistStatus ? removeFromHidelist(props.movie) : saveToHidelist(props.movie);
+        }}
+      >
         <Icon 
-          color={colors.text01} 
-          name="visibility" 
+          color={hidelistStatus ? colors.primary : colors.text01} 
+          name={hidelistStatus ? "visibility-off" : "visibility"}
           size={28} 
         />
-      </TouchableOpacity>*/}
+      </TouchableOpacity>
       <TouchableOpacity 
-        style={styles.bookmarkButton}
+        style={styles.watchlistButton}
         onPress={() => {
           setWatchlistStatus(!watchlistStatus);
           watchlistStatus ? removeFromWatchlist(props.movie) : saveToWatchlist(props.movie);
@@ -68,12 +81,11 @@ const styles = StyleSheet.create({
   headerWithBorder: {
     borderColor: colors.base02,
   },
-  watchedButton: {
+  hidelistButton: {
     marginLeft: 'auto',
     marginRight: 14
   },
-  bookmarkButton: {
-    marginLeft: 'auto',
+  watchlistButton: {
   },
 });
 

@@ -59,7 +59,7 @@ const TabsNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Lists',
+    initialRouteName: 'Discover',
     animationEnabled: true,
     swipeEnabled: false,
     tabBarOptions: {

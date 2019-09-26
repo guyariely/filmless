@@ -8,7 +8,7 @@ const Sorting = props => {
   const { sortBy, setSortBy } = useContext(DiscoverContext); 
 
   const sortOptions = [
-    {name: 'POPULARITY', parameter: 'popularity'},
+    {name: 'POPULARITY', parameter: ''},
     {name: 'RATING', parameter: 'vote_average'},
     {name: 'RELEASE DATE', parameter: 'release_date'},
     {name: 'VOTE COUNT', parameter: 'vote_count'}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import API from '../../../API/Discover';
 import { withNavigationFocus } from "react-navigation";
+import { getHidelist } from '../../../utils/hidelistActions';
 import isSmallScreen from '../../../utils/isSmallScreen';
 import colors from '../../../Constants/colors';
 import Form from './Form/Form';
@@ -14,6 +15,12 @@ const DiscoverScreen = props => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [hidelist, setHidelist] = useState([]);
+
+  useEffect(() => {
+    getHidelist().then(hidelist => { setHidelist(hidelist) });
+  }, [props.isFocused, movies])
 
   const queries = useContext(DiscoverContext);
 
@@ -47,6 +54,7 @@ const DiscoverScreen = props => {
     if (page == 1) setIsLoading(true);
 
     API.Discover(queries, page).then(movieResults => {
+
       if (page == 1) {
         setMovies(movieResults);
       } 
@@ -86,7 +94,7 @@ const DiscoverScreen = props => {
         {
           (!error && !isLoading) &&
           <MovieCards 
-            movies={movies} 
+            movies={movies.filter(movie => !hidelist.includes(movie.id))} 
             loadMovies={() => loadMovies(page)}
             selectMovie={movie => {
               props.navigation.push(
