@@ -3,7 +3,25 @@ import { AsyncStorage } from 'react-native';
 const getHidelist = async () => {
   const hidelist = await AsyncStorage.getItem('hidelist');
   if (hidelist) {
+    return JSON.parse(hidelist);
+  }
+  return [];
+};
+
+const getHidelistIDs = async () => {
+  const hidelist = await AsyncStorage.getItem('hidelist');
+  if (hidelist) {
     return JSON.parse(hidelist).map(movie => movie.id);
+  }
+  return [];
+};
+
+const getHidelistRecentImages = async () => {
+  const hidelist = await AsyncStorage.getItem('hidelist');
+  if (hidelist) {
+    return JSON.parse(hidelist).reverse().slice(0, 3).map(
+      movie => movie.poster_path
+    );
   }
   return [];
 };
@@ -44,5 +62,12 @@ const removeFromHidelist = async movie => {
 };
 
 
-export { getHidelist, getHidelistStatus, saveToHidelist, removeFromHidelist };
+export { 
+  getHidelist, 
+  getHidelistIDs, 
+  getHidelistRecentImages, 
+  getHidelistStatus, 
+  saveToHidelist, 
+  removeFromHidelist 
+};
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import API from '../../../API/Discover';
 import { withNavigationFocus } from "react-navigation";
-import { getHidelist } from '../../../utils/hidelistActions';
+import { getHidelistIDs } from '../../../utils/hidelistActions';
 import isSmallScreen from '../../../utils/isSmallScreen';
 import colors from '../../../Constants/colors';
 import Form from './Form/Form';
@@ -19,7 +19,7 @@ const DiscoverScreen = props => {
   const [hidelist, setHidelist] = useState([]);
 
   useEffect(() => {
-    getHidelist().then(hidelist => { setHidelist(hidelist) });
+    getHidelistIDs().then(hidelist => { setHidelist(hidelist) });
   }, [props.isFocused, movies])
 
   const queries = useContext(DiscoverContext);
