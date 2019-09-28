@@ -1,25 +1,27 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import colors from '../../../Constants/colors';
+import React, { useContext } from "react";
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 
 const MovieResult = ({movie, selectMovie}) => {
 
+  const { theme } = useContext(ThemesContext);
+
   return (
     <TouchableOpacity 
-      style={styles.imageShadow} 
+      style={styles(theme).imageShadow} 
       onPress={() => selectMovie(movie)}
     >
-      <View style={styles.imageContainer}>
+      <View style={styles(theme).imageContainer}>
         <Image
-          style={styles.image}
+          style={styles(theme).image}
           source={{uri: 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path}} 
         />
         <Text 
-          style={styles.movieTitle} 
+          style={styles(theme).movieTitle} 
           numberOfLines={3}
         >
           {movie.title.toUpperCase()} 
-          <Text style={styles.movieDate}> 
+          <Text style={styles(theme).movieDate}> 
             {` (${movie.release_date.slice(0, 4)})`}
           </Text>
         </Text>
@@ -28,38 +30,40 @@ const MovieResult = ({movie, selectMovie}) => {
   )
 };
 
-const styles = StyleSheet.create({
-  imageShadow: {
-    paddingHorizontal: 32,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    paddingBottom: 30
-  },
-  imageContainer: {
-    flex: 1,
-    borderRadius: 15,
-    overflow: 'hidden',
-    backgroundColor: colors.base02,
-    height: 180,
-  },
-  image: {
-    flex: 1,
-    opacity: 0.8,
-    resizeMode: 'cover',
-  },
-  movieTitle: {
-    position: 'absolute',
-    bottom: 10,
-    left: 15,
-    width: 200,
-    color: colors.text01,
-    fontWeight: '800',
-    fontSize: 20
-  },
-  movieDate: {
-    fontWeight: '400'
+const styles = theme => {
+  return {
+    imageShadow: {
+      paddingHorizontal: 32,
+      shadowColor: theme.shadow,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.8,
+      paddingBottom: 30
+    },
+    imageContainer: {
+      flex: 1,
+      borderRadius: 15,
+      overflow: 'hidden',
+      backgroundColor: theme.base02,
+      height: 180,
+    },
+    image: {
+      flex: 1,
+      opacity: 0.8,
+      resizeMode: 'cover',
+    },
+    movieTitle: {
+      position: 'absolute',
+      bottom: 10,
+      left: 15,
+      width: 200,
+      color: theme.text01,
+      fontWeight: '800',
+      fontSize: 20
+    },
+    movieDate: {
+      fontWeight: '400'
+    }  
   }
-});
+};
 
 export default MovieResult;

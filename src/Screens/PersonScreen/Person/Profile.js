@@ -1,18 +1,21 @@
-import React from "react";
-import { StyleSheet, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
-import colors from '../../../Constants/colors';
+import React, { useContext } from "react";
+import { View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 
 const Profile = props => {
+
+  const { theme } = useContext(ThemesContext);
+
   return (
     <TouchableOpacity 
-      style={styles.profileContainer}
+      style={styles(theme).profileContainer}
       onPress={() => props.openLightbox([{file_path: props.profile}])}
     >
-      <View style={styles.profile}>
+      <View style={styles(theme).profile}>
         <Image
-          style={styles.profileImage}
+          style={styles(theme).profileImage}
           loadingIndicatorSource={() => 
-            <View style={styles.loadingScreen}>
+            <View style={styles(theme).loadingScreen}>
               <ActivityIndicator />
             </View>
           }
@@ -23,32 +26,34 @@ const Profile = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  profileContainer: {
-    width: 135,
-    flex: 4,
-    height: 220,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.8,
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-  },
-  profile: {
-    flex: 1,
-    borderRadius: 15,
-    overflow: 'hidden',
-    backgroundColor: colors.base02
-  },
-  profileImage: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  loadingScreen: {
-    backgroundColor: colors.base02,
-    justifyContent: 'center',
-    flex: 1
+const styles = theme => {
+  return {
+    profileContainer: {
+      width: 135,
+      flex: 4,
+      height: 220,
+      shadowColor: theme.shadow,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.8,
+      borderTopLeftRadius: 14,
+      borderTopRightRadius: 14,
+    },
+    profile: {
+      flex: 1,
+      borderRadius: 15,
+      overflow: 'hidden',
+      backgroundColor: theme.base02
+    },
+    profileImage: {
+      flex: 1,
+      resizeMode: 'cover',
+    },
+    loadingScreen: {
+      backgroundColor: theme.base02,
+      justifyContent: 'center',
+      flex: 1
+    }  
   }
-});
+};
 
 export default Profile;

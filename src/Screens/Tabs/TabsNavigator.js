@@ -1,8 +1,6 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '../../Constants/colors';
-import isSmallScreen from '../../utils/isSmallScreen';
 
 import DiscoverScreen from './DiscoverScreen/DiscoverScreen';
 import ListsScreen from './ListsScreen/ListsScreen';
@@ -14,61 +12,106 @@ const TabsNavigator = createMaterialTopTabNavigator(
   {
     Discover: { 
       screen: DiscoverScreen,
-      navigationOptions: {
-        tabBarLabel: "",
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="local-movies" color={tintColor} size={28} />
-        )
+      navigationOptions({screenProps}) {
+        const { theme } = screenProps;
+        return {
+          tabBarLabel: "",
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon 
+                name="local-movies" 
+                color={focused ? theme.text01 : theme.text04} 
+                size={28} 
+              />
+            ) 
+          }
+        }
       } 
     },
     Lists: { 
       screen: ListsScreen,
-      navigationOptions: {
-        tabBarLabel: "",
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="format-list-bulleted" color={tintColor} size={28} />
-        )
+      navigationOptions({screenProps}) {
+        const { theme } = screenProps;
+        return {
+          tabBarLabel: "",
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon 
+                name="format-list-bulleted" 
+                color={focused ? theme.text01 : theme.text04} 
+                size={28} 
+              />
+            ) 
+          }
+        }
       } 
     },
     Watchlist: { 
       screen: WatchlistScreen,
-      navigationOptions: {
-        tabBarLabel: "",
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="bookmark" color={tintColor} size={28} />
-        )
+      navigationOptions({screenProps}) {
+        const { theme } = screenProps;
+        return {
+          tabBarLabel: "",
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon 
+                name="bookmark" 
+                color={focused ? theme.text01 : theme.text04} 
+                size={28} 
+              />
+            ) 
+          }
+        }
       } 
     },
     Search: { 
       screen: SearchScreen,
-      navigationOptions: {
-        tabBarLabel: "",
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="search" color={tintColor} size={28} />
-        )
+      navigationOptions({screenProps}) {
+        const { theme } = screenProps;
+        return {
+          tabBarLabel: "",
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon 
+                name="search" 
+                color={focused ? theme.text01 : theme.text04} 
+                size={28} 
+              />
+            ) 
+          }
+        }
       } 
     },
     Settings: { 
       screen: SettingsScreen,
-      navigationOptions: {
-        tabBarLabel: "",
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="settings" color={tintColor} size={28} />
-        )
+      navigationOptions({screenProps}) {
+        const { theme } = screenProps;
+        return {
+          tabBarLabel: "",
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon 
+                name="settings" 
+                color={focused ? theme.text01 : theme.text04} 
+                size={28} 
+              />
+            ) 
+          }
+        }
       } 
     }
   }, 
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Discover',
     animationEnabled: true,
     swipeEnabled: false,
     tabBarOptions: {
-      activeTintColor: colors.text01,
-      inactiveTintColor: colors.text04,
       style: { 
-        backgroundColor: colors.base01,
-        paddingTop: isSmallScreen() ? 25 : 40,
-        paddingBottom: isSmallScreen() ? 5 : 5,
+        backgroundColor: 'transparent',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
       },
       indicatorStyle: {
         height: 0

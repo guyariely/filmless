@@ -1,11 +1,12 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity, Dimensions, ActivityIndicator, Text, StatusBar } from 'react-native';
-import colors from '../Constants/colors';
+import React, { useState } from "react";
+import { View, TouchableOpacity, Dimensions, ActivityIndicator, Text, StatusBar, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import ImageViewer from 'react-native-image-zoom-viewer';
 
 const Lightbox = props => {
+
+  const [showModal, setShowModal] = useState(true);
 
   const images = props.navigation.getParam('images', '').map(image => {
     return { url: 'https://image.tmdb.org/t/p/w780' + image.file_path };
@@ -15,11 +16,14 @@ const Lightbox = props => {
     return (
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => props.navigation.goBack()} 
+          onPress={() => {
+            props.navigation.goBack();
+            setTimeout(() => setShowModal(false), 200);
+          }} 
           style={styles.closeButton}
         >
           <Icon 
-            color={colors.text01} 
+            color={'#fff'} 
             name="keyboard-arrow-left" 
             size={34} 
           />
@@ -39,20 +43,24 @@ const Lightbox = props => {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
-      <ImageViewer 
-        imageUrls={images}
-        loadingRender={() => <ActivityIndicator />}
-        index={props.navigation.getParam('index', 0)}
-        renderHeader={currentIndex => <Header currentIndex={currentIndex} />}
-        renderIndicator={() => null}
-      />
+      <Modal visible={showModal} transparent={true }>
+        <ImageViewer
+          backgroundColor={'#000'}
+          imageUrls={images}
+          loadingRender={() => <ActivityIndicator />}
+          index={props.navigation.getParam('index', 0)}
+          renderHeader={currentIndex => <Header currentIndex={currentIndex} />}
+          renderIndicator={() => null}
+        />
+      </Modal>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#000'
   },
   header: {
     flexDirection: 'row',
@@ -69,10 +77,10 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   indexIndicator: {
-    color: colors.text01,
+    color: '#fff',
     fontWeight: '500',
     fontSize: 20,
-  }
-});
+  }  
+};
 
 export default Lightbox;

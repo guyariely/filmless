@@ -1,39 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Keyboard } from 'react-native';
+import React, { useEffect, useContext } from "react";
+import { Text, View, Keyboard } from 'react-native';
 import { withNavigationFocus } from "react-navigation";
+import { ThemesContext } from '../../../Context/ThemesContext';
 import isSmallScreen from '../../../utils/isSmallScreen';
-import colors from '../../../Constants/colors';
 import HidelistReferral from './HidelistReferral';
 import Attribution from './Attribution';
+import ThemePicker from './ThemePicker';
 
 const SettingsScreen = props => {
 
+  useEffect(() => Keyboard.dismiss(), [props.isFocused]);
 
-  
-
-  useEffect(() => Keyboard.dismiss(), [props.isFocused])
+  const { theme } = useContext(ThemesContext);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
-      <HidelistReferral isFocused={props.isFocused} />
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Settings</Text>
+      <ThemePicker />
+      <HidelistReferral />
       <Attribution />
     </View>
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.base01,
-    paddingHorizontal: 28,
-  },
-  title: {
-    justifyContent: 'flex-end',
-    color: colors.text01,
-    fontSize: 38,
-    paddingTop: isSmallScreen() ? 10 : 20
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      backgroundColor: theme.base01,
+      paddingHorizontal: 28,
+    },
+    title: {
+      justifyContent: 'flex-end',
+      color: theme.text01,
+      fontSize: 38,
+      paddingTop: isSmallScreen() ? 10 : 20
+    }
   }
-});
+};
 
 export default withNavigationFocus(SettingsScreen);

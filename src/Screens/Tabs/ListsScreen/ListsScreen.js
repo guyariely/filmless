@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Keyboard, ScrollView } from 'react-native';
+import React, { useState, useEffect, useContext } from "react";
+import { Text, View, Keyboard, ScrollView } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
-import colors from '../../../Constants/colors';
+
 import isSmallScreen from '../../../utils/isSmallScreen';
 import List from './List';
 
@@ -13,10 +14,12 @@ const ListsScreen = props => {
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused]);
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Lists</Text>
-      <View style={showBorder ? [styles.border, styles.borderVisible] : styles.border}></View>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Lists</Text>
+      <View style={showBorder ? [styles(theme).border, styles(theme).borderVisible] : styles(theme).border}></View>
       <ScrollView
         scrollEventThrottle={16}
         onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1)}
@@ -41,26 +44,29 @@ const ListsScreen = props => {
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.base01,
-  },
-  title: {
-    justifyContent: 'flex-end',
-    color: colors.text01,
-    fontSize: 38,
-    paddingHorizontal: 28,
-    paddingTop: isSmallScreen() ? 10 : 20,
-    paddingBottom: 15
-  },
-  border: {
-    borderTopWidth: 1,
-    borderColor: colors.base01,
-  },
-  borderVisible: {
-    borderColor: colors.base02,
-  },
-});
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      backgroundColor: theme.base01,
+    },
+    title: {
+      justifyContent: 'flex-end',
+      color: theme.text01,
+      fontSize: 38,
+      paddingHorizontal: 28,
+      paddingTop: isSmallScreen() ? 10 : 20,
+      paddingBottom: 15
+    },
+    border: {
+      borderTopWidth: 1,
+      borderColor: theme.base01,
+    },
+    borderVisible: {
+      borderColor: theme.base02,
+    },  
+  }
+};
 
 export default withNavigationFocus(ListsScreen);

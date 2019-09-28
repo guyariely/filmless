@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, AsyncStorage, Keyboard } from 'react-native';
+import React, { useState, useEffect, useContext } from "react";
+import { Text, View, AsyncStorage, Keyboard } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
-import colors from '../../../Constants/colors';
+
 import isSmallScreen from '../../../utils/isSmallScreen';
 import sortMovies from '../../../utils/sortMovies';
 import Lister from './Lister';
@@ -22,9 +23,11 @@ const WatchlistScreen = props => {
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Watchlist</Text>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Watchlist</Text>
       <Lister 
         sortDirection={sortDirection}
         sortMethod={sortMethod}
@@ -52,18 +55,21 @@ const WatchlistScreen = props => {
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.base01,
-  },
-  title: {
-    justifyContent: 'flex-end',
-    color: colors.text01,
-    fontSize: 38,
-    paddingTop: isSmallScreen() ? 10 : 20,
-    paddingHorizontal: 28,
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      backgroundColor: theme.base01,
+    },
+    title: {
+      justifyContent: 'flex-end',
+      color: theme.text01,
+      fontSize: 38,
+      paddingTop: isSmallScreen() ? 10 : 20,
+      paddingHorizontal: 28,
+    }  
   }
-});
+};
 
 export default withNavigationFocus(WatchlistScreen);

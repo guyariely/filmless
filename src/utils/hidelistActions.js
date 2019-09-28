@@ -1,36 +1,58 @@
 import { AsyncStorage } from 'react-native';
 
 const getHidelist = async () => {
-  const hidelist = await AsyncStorage.getItem('hidelist');
-  if (hidelist) {
-    return JSON.parse(hidelist);
+  try {
+    const hidelist = await AsyncStorage.getItem('hidelist');
+    if (hidelist) {
+      return JSON.parse(hidelist);
+    }
+    return [];  
+  } 
+  catch (error) {
+    console.log(error);
   }
-  return [];
 };
 
 const getHidelistIDs = async () => {
-  const hidelist = await AsyncStorage.getItem('hidelist');
-  if (hidelist) {
-    return JSON.parse(hidelist).map(movie => movie.id);
+  try {
+    const hidelist = await AsyncStorage.getItem('hidelist');
+    if (hidelist) {
+      return JSON.parse(hidelist).map(movie => movie.id);
+    }
+    return [];  
+  } 
+  catch (error) {
+    console.log(error);
   }
-  return [];
+  
 };
 
 const getHidelistRecentImages = async () => {
-  const hidelist = await AsyncStorage.getItem('hidelist');
-  if (hidelist) {
-    return JSON.parse(hidelist).reverse().slice(0, 3).map(
-      movie => movie.poster_path
-    );
+  try {
+    const hidelist = await AsyncStorage.getItem('hidelist');
+    if (hidelist) {
+      return JSON.parse(hidelist).reverse().slice(0, 3).map(
+        movie => movie.poster_path
+      );
+    }
+    return [];  
+  } 
+  catch (error) {
+    console.log(error);
   }
-  return [];
 };
 
 const getHidelistStatus = async movieId => {
-  const hidelist = await AsyncStorage.getItem('hidelist');
-  if (!hidelist) return false;
-  const hidelistIds = JSON.parse(hidelist).map(movie => movie.id);
-  return hidelistIds.includes(movieId);
+  try {
+    const hidelist = await AsyncStorage.getItem('hidelist');
+    if (!hidelist) return false;
+    const hidelistIds = JSON.parse(hidelist).map(movie => movie.id);
+    return hidelistIds.includes(movieId);
+  } 
+  catch (error) {
+    console.log(error);
+  }
+  
 };
 
 const saveToHidelist = async movie => {

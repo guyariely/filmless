@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useContext } from "react";
+import { View, Text, ActivityIndicator } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import API from '../../../API/Movies';
-import colors from '../../../Constants/colors';
+
 import MovieCards from '../../../Components/MovieCards';
 
 const List = props => {
@@ -25,20 +26,22 @@ const List = props => {
     });
   };
 
+  const { theme } = useContext(ThemesContext);
+
   if (isLoading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.heading}>
+      <View style={styles(theme).container}>
+        <Text style={styles(theme).heading}>
           {props.listType.toUpperCase().replace('_', ' ')}
         </Text>
-        <ActivityIndicator style={styles.activityIndicator} />
+        <ActivityIndicator style={styles(theme).activityIndicator} />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).heading}>
         {props.listType.toUpperCase().replace('_', ' ')}
       </Text>
       <MovieCards 
@@ -54,22 +57,24 @@ const List = props => {
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    height: 340
-  },
-  heading: {
-    color: colors.heading,
-    fontWeight: 'bold',
-    fontSize: 20,
-    paddingHorizontal: 28,
-    paddingBottom: 15
-  },
-  activityIndicator: {
-    height: 360,
-    paddingHorizontal: 28,
-    justifyContent: 'center',
-  },
-});
+const styles = theme => {
+  return {
+    container: {
+      height: 340
+    },
+    heading: {
+      color: theme.heading,
+      fontWeight: 'bold',
+      fontSize: 20,
+      paddingHorizontal: 28,
+      paddingBottom: 15
+    },
+    activityIndicator: {
+      height: 360,
+      paddingHorizontal: 28,
+      justifyContent: 'center',
+    },  
+  }
+};
 
 export default List;

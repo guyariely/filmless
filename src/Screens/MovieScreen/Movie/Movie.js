@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import colors from '../../../Constants/colors';
+import React, { useState, useContext } from "react";
+import { Text, View, ScrollView } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import Header from './Header';
 import Info from './Info';
 import Poster from './Poster';
@@ -15,8 +15,10 @@ const Movie = props => {
   const [showBorder, setShowBorder] = useState(false);
   const { title, overview, images, videos, credits, reviews } = props.movie;
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.movie}>
+    <View style={styles(theme).movie}>
       <Header 
         goBack={props.goBack} 
         goRoot={props.goRoot}
@@ -27,8 +29,8 @@ const Movie = props => {
         scrollEventThrottle={16}
         onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1)}
       >
-        <Text style={styles.title}>{title}</Text>
-        <View style={styles.mainContent}>
+        <Text style={styles(theme).title}>{title}</Text>
+        <View style={styles(theme).mainContent}>
           <Poster 
             poster={props.movie.poster_path} 
             openLightbox={props.openLightbox} 
@@ -61,35 +63,36 @@ const Movie = props => {
             openReviewScreen={props.openReviewScreen} 
           />
         }
-        <View style={styles.bottomBuffer}></View>
+        <View style={styles(theme).bottomBuffer}></View>
       </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  movie: {
-    flex: 1,
-    backgroundColor: colors.base01,
-    paddingTop: 10,
-    marginTop: 'auto',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    color: colors.text01,
-    textAlign: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 20
-  },
-  mainContent: {
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingBottom: 15
-  },
-  bottomBuffer: {
-    marginBottom: 50
+const styles = theme => {
+  return {
+    movie: {
+      flex: 1,
+      backgroundColor: theme.base01,
+      paddingTop: 10,
+    },
+    title: {
+      fontWeight: 'bold',
+      fontSize: 28,
+      color: theme.text01,
+      textAlign: 'center',
+      paddingHorizontal: 20,
+      marginBottom: 20
+    },
+    mainContent: {
+      flexDirection: 'row',
+      paddingHorizontal: 20,
+      paddingBottom: 15
+    },
+    bottomBuffer: {
+      marginBottom: 50
+    }  
   }
-});
+};
 
 export default Movie;

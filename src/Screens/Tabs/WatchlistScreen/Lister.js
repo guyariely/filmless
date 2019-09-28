@@ -1,47 +1,49 @@
-import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { useContext } from "react";
+import { View, Text, TouchableOpacity } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import WheelInput from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../../../Constants/colors';
-
-const sortMethods = [
-  {label: 'Release Date', value: 'Release Date', color: colors.text01},
-  {label: 'Rating', value: 'Rating', color: colors.text01},
-  {label: 'Alphabetical', value: 'Alphabetical', color: colors.text01},
-  {label: 'Runtime', value: 'Runtime', color: colors.text01},
-  {label: 'Popularity', value: 'Popularity', color: colors.text01},
-];
 
 const Lister = props => {
 
+  const { theme } = useContext(ThemesContext);
+
+  const sortMethods = [
+    {label: 'Release Date', value: 'Release Date', color: theme.text01},
+    {label: 'Rating', value: 'Rating', color: theme.text01},
+    {label: 'Alphabetical', value: 'Alphabetical', color: theme.text01},
+    {label: 'Runtime', value: 'Runtime', color: theme.text01},
+    {label: 'Popularity', value: 'Popularity', color: theme.text01},
+  ];
+
   return (
-    <View style={styles.lister}>
+    <View style={styles(theme).lister}>
       <TouchableOpacity 
         onPress={props.setSortDirection}
-        style={styles.sortDirectionButtonContainer}
+        style={styles(theme).sortDirectionButtonContainer}
       >
-      <View style={styles.sortDirectionButton}>
+      <View style={styles(theme).sortDirectionButton}>
         <Icon 
-          color={props.sortDirection == 'des' ? colors.primary : colors.text01} 
+          color={props.sortDirection == 'des' ? theme.primary : theme.text01} 
           name="long-arrow-down" 
           size={22} 
         />
       </View>
-      <View style={styles.sortDirectionButton}>
+      <View style={styles(theme).sortDirectionButton}>
         <Icon 
-          color={props.sortDirection == 'asc' ? colors.primary : colors.text01} 
+          color={props.sortDirection == 'asc' ? theme.primary : theme.text01} 
           name="long-arrow-up" 
           size={22} 
         />
       </View>
       </TouchableOpacity>
-      <View style={styles.sortMethodButtonContainer}>
-        <View style={styles.sortMethodButton}>
-          <Text style={styles.sortMethodPlaceHolder}>Sorted By </Text>
+      <View style={styles(theme).sortMethodButtonContainer}>
+        <View style={styles(theme).sortMethodButton}>
+          <Text style={styles(theme).sortMethodPlaceHolder}>Sorted By </Text>
           <WheelInput
-            style={wheelInputStyles}
-            placeholder={{label: 'Date Added', color: colors.text01}}
-            placeholderTextColor={colors.primary}
+            style={wheelInputStyles(theme)}
+            placeholder={{label: 'Date Added', color: theme.text01}}
+            placeholderTextColor={theme.primary}
             items={sortMethods}
             value={props.sortMethod}
             onValueChange={sortMethod => props.setSortMethod(sortMethod)}
@@ -52,61 +54,65 @@ const Lister = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  lister: {
-    flexDirection: 'row',
-    paddingHorizontal: 28,
-  },
-  sortDirectionButtonContainer: {
-    flexDirection: 'row',
-    paddingVertical: 14
-  },
-  sortDirectionButton: {
-    fontWeight: '200',
-    paddingHorizontal: 2
-  },
-  sortMethodButtonContainer: {
-    justifyContent: 'center',
-    marginLeft: 'auto'
-  },
-  sortMethodButton: {
-    flexDirection: 'row',
-  },
-  sortMethodPlaceHolder: {
-    color: colors.text01,
-    fontSize: 16,
-    fontWeight: '600',
-    marginVertical: 14,
+const styles = theme => {
+  return {
+    lister: {
+      flexDirection: 'row',
+      paddingHorizontal: 28,
+    },
+    sortDirectionButtonContainer: {
+      flexDirection: 'row',
+      paddingVertical: 14
+    },
+    sortDirectionButton: {
+      fontWeight: '200',
+      paddingHorizontal: 2
+    },
+    sortMethodButtonContainer: {
+      justifyContent: 'center',
+      marginLeft: 'auto'
+    },
+    sortMethodButton: {
+      flexDirection: 'row',
+    },
+    sortMethodPlaceHolder: {
+      color: theme.text01,
+      fontSize: 16,
+      fontWeight: '600',
+      marginVertical: 14,
+    }  
   }
-});
+};
 
-const wheelInputStyles = StyleSheet.create({
-  modalViewMiddle: {
-    backgroundColor: colors.base02,
-    borderTopWidth: 0,
-  },
-  modalViewBottom: {
-    backgroundColor: colors.base02
-  },
-  chevronContainer: {
-    opacity: 0.1
-  },
-  done: {
-    color: colors.primary,
-  },
-  inputIOS: {
-    color: colors.primary,
-    fontSize: 16,
-    fontWeight: '600',
-    marginVertical: 14,
-  },
-  inputAndroid: {
-    color: colors.primary,
-    marginLeft: 'auto',
-    fontSize: 20,
-    fontWeight: '600',
-    marginVertical: 14,
+const wheelInputStyles = theme => {
+  return {
+    modalViewMiddle: {
+      backgroundColor: theme.base02,
+      borderTopWidth: 0,
+    },
+    modalViewBottom: {
+      backgroundColor: theme.base02
+    },
+    chevronContainer: {
+      opacity: 0.1
+    },
+    done: {
+      color: theme.primary,
+    },
+    inputIOS: {
+      color: theme.primary,
+      fontSize: 16,
+      fontWeight: '600',
+      marginVertical: 14,
+    },
+    inputAndroid: {
+      color: theme.primary,
+      marginLeft: 'auto',
+      fontSize: 20,
+      fontWeight: '600',
+      marginVertical: 14,
+    }  
   }
-});
+};
 
 export default Lister;

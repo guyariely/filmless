@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import React, { useState, useEffect, useContext } from "react";
+import { Text, View, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
+import isSmallScreen from '../../../utils/isSmallScreen';
 import API from '../../../API/Search';
 import SearchResults from './SearchResults';
-import colors from '../../../Constants/colors';
-import isSmallScreen from '../../../utils/isSmallScreen';
 
 const SearchScreen = props => {
 
@@ -24,23 +24,25 @@ const SearchScreen = props => {
     });
   }
   
-  useEffect(() => Keyboard.dismiss(), [props.isFocused])
+  useEffect(() => Keyboard.dismiss(), [props.isFocused]);
+
+  const { theme } = useContext(ThemesContext);
   
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Search</Text>
+      <View style={styles(theme).container}>
+        <Text style={styles(theme).title}>Search</Text>
         <View style={
           showBorder ? 
-          [styles.searchButtonContainer, styles.searchButtonContainerBorder] : 
-          styles.searchButtonContainer}
+          [styles(theme).searchButtonContainer, styles(theme).searchButtonContainerBorder] : 
+          styles(theme).searchButtonContainer}
         >
           <TextInput
-            style={input ? [styles.searchButton, styles.searchButton__active] : styles.searchButton}
+            style={input ? [styles(theme).searchButton, styles(theme).searchButton__active] : styles(theme).searchButton}
             keyboardAppearance="dark"
             placeholder="Search movies"
-            placeholderTextColor={colors.text03}
-            selectionColor={colors.primary}
+            placeholderTextColor={theme.text03}
+            selectionColor={theme.primary}
             onChangeText={input => setInput(input)}
             value={input}
             returnKeyType="go"
@@ -69,45 +71,48 @@ const SearchScreen = props => {
 };
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.base01,
-  },
-  title: {
-    paddingHorizontal: 28,
-    justifyContent: 'flex-end',
-    color: colors.text01,
-    fontSize: 38,
-    paddingTop: isSmallScreen() ? 10 : 20
-  },
-  searchButtonContainer: {
-    paddingTop: 15,
-    paddingHorizontal: 28,
-    paddingBottom: 30,
-    borderBottomWidth: 1,
-    borderColor: colors.base01,
-  },
-  searchButtonContainerBorder: {
-    borderColor: colors.base02,
-  },
-  searchButton: {
-    backgroundColor: colors.base02,
-    color: colors.text01,
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 20,
-    fontSize: 24,
-  },
-  searchButton__active: {
-    borderColor: colors.primary,
-    borderWidth: 1,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.8,
-    shadowRadius: 20,
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      backgroundColor: theme.base01,
+    },
+    title: {
+      paddingHorizontal: 28,
+      justifyContent: 'flex-end',
+      color: theme.text01,
+      fontSize: 38,
+      paddingTop: isSmallScreen() ? 10 : 20
+    },
+    searchButtonContainer: {
+      paddingTop: 15,
+      paddingHorizontal: 28,
+      paddingBottom: 30,
+      borderBottomWidth: 1,
+      borderColor: theme.base01,
+    },
+    searchButtonContainerBorder: {
+      borderColor: theme.base02,
+    },
+    searchButton: {
+      backgroundColor: theme.base02,
+      color: theme.text01,
+      borderRadius: 5,
+      paddingHorizontal: 15,
+      paddingVertical: 20,
+      fontSize: 24,
+    },
+    searchButton__active: {
+      borderColor: theme.primary,
+      borderWidth: 1,
+      shadowColor: theme.shadow,
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.8,
+      shadowRadius: 20,
+    }  
   }
-});
+};
 
 const multi = JSON.parse(JSON.stringify({
   "page": 1,

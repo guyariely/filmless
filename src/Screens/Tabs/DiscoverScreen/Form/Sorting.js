@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import colors from '../../../../Constants/colors';
+import { View, Text, TouchableOpacity } from "react-native";
+import { ThemesContext } from '../../../../Context/ThemesContext';
 import { DiscoverContext } from '../../../../Context/DiscoverContext';
 
 const Sorting = props => {
@@ -14,10 +14,12 @@ const Sorting = props => {
     {name: 'VOTE COUNT', parameter: 'vote_count'}
   ];
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>CHOOSE A SORTING METHOD</Text>
-      <View style={styles.buttonsContainer}>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).label}>CHOOSE A SORTING METHOD</Text>
+      <View style={styles(theme).buttonsContainer}>
       {
         sortOptions.map(sortMethod => {
           return (
@@ -25,8 +27,8 @@ const Sorting = props => {
               key={sortMethod.parameter} 
               style={
                 sortBy == sortMethod.parameter ?
-                [styles.button, styles.buttonActive] :
-                styles.button
+                [styles(theme).button, styles(theme).buttonActive] :
+                styles(theme).button
               }
               onPress={() => {
                 sortBy == sortMethod.parameter ?
@@ -36,8 +38,8 @@ const Sorting = props => {
             >
               <Text style={
                 sortBy == sortMethod.parameter ?
-                [styles.text, styles.textActive] :
-                styles.text
+                [styles(theme).text, styles(theme).textActive] :
+                styles(theme).text
               }>
                 {sortMethod.name}
               </Text>
@@ -50,40 +52,42 @@ const Sorting = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 26,
-    paddingVertical: 20
-  },
-  label: {
-    color: colors.text03, 
-    fontSize: 18,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
-  },
-  button: {
-    paddingVertical: 15,
-    marginTop: 20,
-    width: 120,
-    borderColor: colors.base01,
-    borderWidth: 1,
-    borderRadius: 5
-  },
-  buttonActive: {
-    backgroundColor: colors.base01,
-    borderColor: colors.primary,
-  },
-  text: {
-    textAlign: 'center',
-    color: colors.text04,
-    fontSize: 15
-  },
-  textActive: {
-    color: colors.text01,
+const styles = theme => {
+  return {
+    container: {
+      paddingHorizontal: 26,
+      paddingVertical: 20
+    },
+    label: {
+      color: theme.text03, 
+      fontSize: 18,
+    },
+    buttonsContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around'
+    },
+    button: {
+      paddingVertical: 15,
+      marginTop: 20,
+      width: 120,
+      borderColor: theme.base01,
+      borderWidth: 1,
+      borderRadius: 5
+    },
+    buttonActive: {
+      backgroundColor: theme.base01,
+      borderColor: theme.primary,
+    },
+    text: {
+      textAlign: 'center',
+      color: theme.text04,
+      fontSize: 15
+    },
+    textActive: {
+      color: theme.text01,
+    }  
   }
-});
+};
 
 export default Sorting;

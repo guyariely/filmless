@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View, Text } from "react-native";
-import SelectInput from 'react-native-sectioned-multi-select';
-import colors from '../../../../Constants/colors';
-import fonts from '../../../../Constants/fonts';
+import { View, Text } from "react-native";
+import { ThemesContext } from '../../../../Context/ThemesContext';
 import { DiscoverContext } from '../../../../Context/DiscoverContext';
+import SelectInput from 'react-native-sectioned-multi-select';
+import fonts from '../../../../Constants/fonts';
 
 const parseIDsToString = (IDs, categories) => {
   return IDs.map(ID => categories[0].children.find(
@@ -15,10 +15,12 @@ const Categories = props => {
 
   const { genres, setGenres, languages, setLanguages } = useContext(DiscoverContext);
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>GENRES</Text>
+    <View style={styles(theme).container}>
+      <View style={styles(theme).inputContainer}>
+        <Text style={styles(theme).label}>GENRES</Text>
         <SelectInput
         items={genresList}
         uniqueKey="id"
@@ -36,16 +38,16 @@ const Categories = props => {
         modalWithSafeAreaView={true}
         onSelectedItemsChange={genres => setGenres(genres)}
         selectedItems={genres}
-        colors={selectInputColors}
+        colors={selectInputColors(theme)}
         styles={
           genres.length == 0 ?
-          selectInputStyles :
-          [selectInputStyles, SelectInputStyles__active]
+          selectInputStyles(theme) :
+          [selectInputStyles(theme), SelectInputStyles__active(theme)]
         }
       />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>LANGUAGES</Text>
+      <View style={styles(theme).inputContainer}>
+        <Text style={styles(theme).label}>LANGUAGES</Text>
         <SelectInput
         items={languagesList}
         uniqueKey="id"
@@ -63,11 +65,11 @@ const Categories = props => {
         modalWithSafeAreaView={true}
         onSelectedItemsChange={languages => setLanguages(languages)}
         selectedItems={languages}
-        colors={selectInputColors}
+        colors={selectInputColors(theme)}
         styles={
           languages.length == 0 ?
-          selectInputStyles :
-          [selectInputStyles, SelectInputStyles__active]
+          selectInputStyles(theme) :
+          [selectInputStyles(theme), SelectInputStyles__active(theme)]
         }
       />
       </View>
@@ -75,101 +77,109 @@ const Categories = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 26,
-    paddingTop: 20,
-    paddingBottom: 10
-  },
-  inputContainer: {
-    paddingBottom: 20
-  },
-  label: {
-    color: colors.text03, 
-    fontSize: 18,
-    marginBottom: 10
-  }
-});
-
-const selectInputColors = {
-  base01: colors.text01,
-  subItemBackground: colors.base01,
-  searchSelectionColor: colors.text01
-}
-
-const selectInputStyles = {
-  container: {
-    backgroundColor: colors.base01,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: colors.primary
-  },
-  searchBar: {
-    backgroundColor: colors.base02,
-    paddingVertical: 10,
-  },
-  searchTextInput: {
-    color: colors.text01
-  },
-  scrollView: {
-    padding: 15,
-  },
-  item: {
-    backgroundColor: colors.base01,
-    paddingHorizontal: 15,
-    paddingBottom: 15
-  },
-  itemText: {
-    color: colors.text01,
-    fontWeight: '600',
-    fontFamily: fonts.base01,
-    fontSize: 34
-  },
-  subItem: {
-    backgroundColor: colors.base01,
-    paddingHorizontal: 15,
-    paddingBottom: 25,
-    paddingTop: 0
-  },
-  subItemText: {
-    color: colors.text01,
-    fontSize: 20
-  },
-  activeOpacity: {
-    backgroundColor: colors.base01,
-  },
-  button: {
-    backgroundColor: colors.primary,
-    paddingVertical: 15
-  },  
-  confirmText: {
-    fontFamily: 'Helvetica Neue',
-  },
-  selectToggle: {
-    height: 45,
-    borderColor: colors.base01,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    fontSize: 16
-  },
-  selectToggleText: {
-    color: colors.text04,
+const styles = theme => {
+  return {
+    container: {
+      paddingHorizontal: 26,
+      paddingTop: 20,
+      paddingBottom: 10
+    },
+    inputContainer: {
+      paddingBottom: 20
+    },
+    label: {
+      color: theme.text03, 
+      fontSize: 18,
+      marginBottom: 10
+    }  
   }
 };
 
-const SelectInputStyles__active = {
-  selectToggle: {
-    backgroundColor: colors.base01,
-    borderColor: colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 45,
-    paddingHorizontal: 15,
-    fontSize: 16
-  },
-  selectToggleText: {
-    color: colors.text01,
+const selectInputColors = theme => {
+  return {
+    base01: theme.text01,
+    subItemBackground: theme.base01,
+    searchSelectionColor: theme.text01  
+  }
+}
+
+const selectInputStyles = theme => {
+  return {
+    container: {
+      backgroundColor: theme.base01,
+      borderRadius: 15,
+      borderWidth: 1,
+      borderColor: theme.primary
+    },
+    searchBar: {
+      backgroundColor: theme.base02,
+      paddingVertical: 10,
+    },
+    searchTextInput: {
+      color: theme.text01
+    },
+    scrollView: {
+      padding: 15,
+    },
+    item: {
+      backgroundColor: theme.base01,
+      paddingHorizontal: 15,
+      paddingBottom: 15
+    },
+    itemText: {
+      color: theme.text01,
+      fontWeight: '600',
+      fontFamily: fonts.base01,
+      fontSize: 34
+    },
+    subItem: {
+      backgroundColor: theme.base01,
+      paddingHorizontal: 15,
+      paddingBottom: 25,
+      paddingTop: 0
+    },
+    subItemText: {
+      color: theme.text01,
+      fontSize: 20
+    },
+    activeOpacity: {
+      backgroundColor: theme.base01,
+    },
+    button: {
+      backgroundColor: theme.primary,
+      paddingVertical: 15
+    },  
+    confirmText: {
+      fontFamily: 'Helvetica Neue',
+    },
+    selectToggle: {
+      height: 45,
+      borderColor: theme.base01,
+      borderWidth: 1,
+      borderRadius: 5,
+      paddingHorizontal: 15,
+      fontSize: 16
+    },
+    selectToggleText: {
+      color: theme.text04,
+    }  
+  }
+};
+
+const SelectInputStyles__active = theme => {
+  return {
+    selectToggle: {
+      backgroundColor: theme.base01,
+      borderColor: theme.primary,
+      borderWidth: 1,
+      borderRadius: 5,
+      height: 45,
+      paddingHorizontal: 15,
+      fontSize: 16
+    },
+    selectToggleText: {
+      color: theme.text01,
+    }  
   }
 };
 

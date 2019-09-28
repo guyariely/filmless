@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 import API from '../../../API/Discover';
 import { withNavigationFocus } from "react-navigation";
 import { getHidelistIDs } from '../../../utils/hidelistActions';
 import isSmallScreen from '../../../utils/isSmallScreen';
-import colors from '../../../Constants/colors';
+
 import Form from './Form/Form';
 import MovieCards from '../../../Components/MovieCards';
 import { DiscoverContext } from '../../../Context/DiscoverContext';
@@ -69,23 +70,25 @@ const DiscoverScreen = props => {
 
   useEffect(() => Keyboard.dismiss(), [props.isFocused])
 
+  const { theme } = useContext(ThemesContext);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Discover</Text>
-        <View style={styles.form}>
+      <View style={styles(theme).container}>
+        <Text style={styles(theme).title}>Discover</Text>
+        <View style={styles(theme).form}>
           <Form validateQueries={validateQueries} />  
         </View>
         { 
           isLoading && 
-          <View style={styles.activityIndicator}>
-            <ActivityIndicator size='small' color={colors.text01} />
+          <View style={styles(theme).activityIndicator}>
+            <ActivityIndicator size='small' color={theme.text01} />
           </View> 
         }
         { 
           error && 
-          <Text style={styles.error}>
-            <Text style={styles.errorKeyword}>
+          <Text style={styles(theme).error}>
+            <Text style={styles(theme).errorKeyword}>
               Error: {''} 
             </Text>
             {error}
@@ -108,40 +111,43 @@ const DiscoverScreen = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.base01
-  },
-  title: {
-    justifyContent: 'flex-end',
-    color: colors.text01,
-    fontSize: 38,
-    paddingHorizontal: 28,
-    paddingTop: isSmallScreen() ? 10 : 20
-  },
-  form: {
-    height: isSmallScreen() ? 330 : 350,
-    paddingHorizontal: 28,
-    paddingVertical: isSmallScreen() ? 10 : 20, 
-  },
-  activityIndicator: {
-    justifyContent: 'center',
-    flex: 6
-  },
-  errorKeyword: {
-    color: colors.primary
-  }, 
-  error: {
-    flex: 6,
-    paddingHorizontal: 30,
-    alignSelf: 'center',
-    paddingVertical: 15,
-    fontSize: 20, 
-    color: colors.text01,
-    fontStyle: 'italic'
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      backgroundColor: theme.base01
+    },
+    title: {
+      justifyContent: 'flex-end',
+      color: theme.text01,
+      fontSize: 38,
+      paddingHorizontal: 28,
+      paddingTop: isSmallScreen() ? 10 : 20
+    },
+    form: {
+      height: isSmallScreen() ? 330 : 350,
+      paddingHorizontal: 28,
+      paddingVertical: isSmallScreen() ? 10 : 20, 
+    },
+    activityIndicator: {
+      justifyContent: 'center',
+      flex: 6
+    },
+    errorKeyword: {
+      color: theme.primary
+    }, 
+    error: {
+      flex: 6,
+      paddingHorizontal: 30,
+      alignSelf: 'center',
+      paddingVertical: 15,
+      fontSize: 20, 
+      color: theme.text01,
+      fontStyle: 'italic'
+    }  
   }
-});
+};
 
 const results = JSON.parse(JSON.stringify({
   "page": 1,

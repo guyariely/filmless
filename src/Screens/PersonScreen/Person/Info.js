@@ -1,30 +1,32 @@
-import React from "react";
-import { StyleSheet, Text, View } from 'react-native';
-import colors from '../../../Constants/colors';
+import React, { useContext } from "react";
+import { Text, View } from 'react-native';
+import { ThemesContext } from '../../../Context/ThemesContext';
 
 const Info = props => {
 
   const { known_for_department, birthday, deathday, place_of_birth } = props.person;
 
+  const { theme } = useContext(ThemesContext);
+
   return (
-    <View style={styles.infoContainer}>
-      <Text style={styles.info}>
-        <Text style={styles.infoTitle}>Known for: </Text>
+    <View style={styles(theme).infoContainer}>
+      <Text style={styles(theme).info}>
+        <Text style={styles(theme).infoTitle}>Known for: </Text>
         {known_for_department}
       </Text>
-      <Text style={styles.info}>
-        <Text style={styles.infoTitle}>Born: </Text>
+      <Text style={styles(theme).info}>
+        <Text style={styles(theme).infoTitle}>Born: </Text>
         {formatDate(birthday)}
        </Text>
        {
         deathday &&
-        <Text style={styles.info}>
-          <Text style={styles.infoTitle}>Died: </Text>
+        <Text style={styles(theme).info}>
+          <Text style={styles(theme).infoTitle}>Died: </Text>
           {formatDate(deathday)}
         </Text>
        }
-       <Text style={styles.info}>
-        <Text style={styles.infoTitle}>Place of birth: </Text>
+       <Text style={styles(theme).info}>
+        <Text style={styles(theme).infoTitle}>Place of birth: </Text>
         {place_of_birth}
       </Text>
     </View>
@@ -36,20 +38,22 @@ const formatDate = date => {
   return stringDate.slice(4, stringDate.length);
 };
 
-const styles = StyleSheet.create({
-  infoContainer:{
-    flex: 4,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    justifyContent: 'space-evenly'
-  },
-  info: {
-    color: colors.text03,
-    fontSize: 20,
-  },
-  infoTitle: {
-    color: colors.text01
+const styles = theme => {
+  return {
+    infoContainer:{
+      flex: 4,
+      paddingHorizontal: 15,
+      paddingVertical: 5,
+      justifyContent: 'space-evenly'
+    },
+    info: {
+      color: theme.text03,
+      fontSize: 20,
+    },
+    infoTitle: {
+      color: theme.text01
+    }  
   }
-});
+};
 
 export default Info;
