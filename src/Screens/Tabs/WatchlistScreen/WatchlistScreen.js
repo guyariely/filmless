@@ -45,14 +45,7 @@ const WatchlistScreen = props => {
       />
       {
         watchlist.length > 0 &&
-        <MovieCardsColumn
-          movies={watchlist} 
-          selectMovie={movie => {
-            props.navigation.push(
-              'MovieScreen', { movie, loadDetails: false }
-            );
-          }}
-        />
+        <MovieCardsColumn movies={watchlist} />
       }
     </View>
   )

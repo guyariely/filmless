@@ -26,14 +26,7 @@ const HidelistScreen = props => {
       <Text style={styles(theme).title}>Filtered Films</Text>
       {
         hidelist.length > 0 &&
-        <MovieCardsColumn
-          movies={hidelist} 
-          selectMovie={movie => {
-            props.navigation.push(
-              'MovieScreen', { movie, loadDetails: false }
-            );
-          }}
-        />
+        <MovieCardsColumn movies={hidelist} />
       }
     </View>
   );

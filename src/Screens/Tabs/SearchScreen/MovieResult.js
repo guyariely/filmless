@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const MovieResult = ({movie, selectMovie}) => {
 
@@ -21,10 +22,19 @@ const MovieResult = ({movie, selectMovie}) => {
           numberOfLines={3}
         >
           {movie.title.toUpperCase()} 
-          <Text style={styles(theme).movieDate}> 
-            {` (${movie.release_date.slice(0, 4)})`}
-          </Text>
+          {
+            movie.release_date &&
+            <Text style={styles(theme).movieDate}> 
+              {` (${movie.release_date.slice(0, 4)})`}
+            </Text>  
+          }
         </Text>
+        {
+          !movie.backdrop_path &&
+          <View style={styles(theme).iconContainer}>
+            <Icon color={theme.text04} name='local-movies' size={80} />
+          </View>
+        }
       </View>
     </TouchableOpacity>
   )
@@ -37,7 +47,7 @@ const styles = theme => {
       shadowColor: theme.shadow,
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.8,
-      paddingBottom: 30
+      paddingBottom: 30,
     },
     imageContainer: {
       flex: 1,
@@ -48,7 +58,7 @@ const styles = theme => {
     },
     image: {
       flex: 1,
-      opacity: 0.8,
+      opacity: 0.7,
       resizeMode: 'cover',
     },
     movieTitle: {
@@ -62,7 +72,13 @@ const styles = theme => {
     },
     movieDate: {
       fontWeight: '400'
-    }  
+    },
+    iconContainer: {
+      position: 'absolute',
+      zIndex: -1,
+      top: 48,
+      left: 115
+    }
   }
 };
 

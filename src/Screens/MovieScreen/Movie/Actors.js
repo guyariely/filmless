@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import Picture from '../../../Components/Picture';
 
@@ -22,6 +22,7 @@ const Actors = props => {
                 <Picture 
                   file_path={actor.profile_path} 
                   dimensions={{width: 150, height: 240}}
+                  icon={{name: 'person', size: 90, position: {top: 70, left: 30}}}
                 />
                 <View style={styles(theme).text}>
                   <Text 

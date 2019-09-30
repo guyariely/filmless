@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { View, Image } from 'react-native';
 import { ThemesContext } from '../Context/ThemesContext';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Picture = props => {
+
+  const { name, size, position } = props.icon;
 
   const { theme } = useContext(ThemesContext);
 
@@ -13,6 +16,9 @@ const Picture = props => {
           style={styles(theme).image}
           source={{uri: 'https://image.tmdb.org/t/p/w500' + props.file_path}} 
         />
+        <View style={[styles(theme).iconContainer, position]}>
+          <Icon color={theme.text04} name={name} size={size} />
+        </View>
       </View>
     </View>
   );
@@ -37,6 +43,10 @@ const styles = theme => {
     image: {
       flex: 1,
       resizeMode: 'cover'
+    },
+    iconContainer: {
+      position: 'absolute',
+      zIndex: -1
     }
   }
 };

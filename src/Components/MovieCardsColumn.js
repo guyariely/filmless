@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, TextInput } from "react-native";
 import { ThemesContext } from '../Context/ThemesContext';
+import { withNavigationFocus } from "react-navigation";
 import Picture from '../Components/Picture';
 import runtimeText from '../utils/runtimeText';
 
@@ -10,6 +11,12 @@ const MovieCardsColumn = props => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   
   const [showBorder, setShowBorder] = useState(false);
+
+  const openMovieScreen = movie => {
+    props.navigation.push(
+      'MovieScreen', { movie, loadDetails: false }
+    );
+  };
 
   const { theme } = useContext(ThemesContext);
 
@@ -39,10 +46,14 @@ const MovieCardsColumn = props => {
           scrollEventThrottle={16}
           data={searchInput ? filteredMovies : props.movies}
           renderItem={({item: movie}) => (
-            <TouchableOpacity style={styles(theme).movie} onPress={() => props.selectMovie(movie)}>
+            <TouchableOpacity 
+              style={styles(theme).movie} 
+              onPress={() => openMovieScreen(movie)}
+            >
               <Picture 
                 file_path={movie.poster_path} 
                 dimensions={{width: 100, height: 140}}
+                icon={{name: 'local-movies', size: 60, position: {top: 40, left: 20}}}
               />
               <View style={styles(theme).details}>
                 <Text style={styles(theme).title}>
@@ -110,5 +121,5 @@ const styles = theme => {
   }
 };
 
-export default MovieCardsColumn;
+export default withNavigationFocus(MovieCardsColumn);
 

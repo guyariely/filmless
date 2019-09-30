@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import Picture from '../../../Components/Picture';
 
@@ -22,6 +22,7 @@ const Photos = props => {
               <Picture 
                 file_path={image.file_path} 
                 dimensions={{width: 280, height: 160}}
+                icon={{name: 'insert-photo', size: 80, position: {top: 40, left: 100}}}
               />
             </TouchableOpacity>
             );

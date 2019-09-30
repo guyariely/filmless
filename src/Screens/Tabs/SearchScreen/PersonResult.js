@@ -15,6 +15,7 @@ const PersonResult = ({person, openPersonScreen}) => {
       <Picture 
         file_path={person.profile_path} 
         dimensions={{width: 120, height: 180}}
+        icon={{name: 'person', size: 70, position: {top: 56, left: 25}}}
       />
       <View style={styles(theme).details}>
         <Text style={styles(theme).title}>
@@ -40,7 +41,7 @@ const styles = theme => {
     details: {
       flex: 2,
       justifyContent: 'center',
-      marginLeft: 45
+      marginLeft: 50
     },
     title: {
       marginBottom: 8,

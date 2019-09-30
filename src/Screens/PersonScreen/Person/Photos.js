@@ -22,6 +22,7 @@ const Photos = props => {
                 <Picture 
                   file_path={photo.file_path} 
                   dimensions={{width: 280, height: 160}}
+                  icon={{name: 'insert-photo', size: 80, position: {top: 40, left: 100}}}
                 />
                 <Text style={styles(theme).title} numberOfLines={1}>
                   {photo.media.title + '  '}

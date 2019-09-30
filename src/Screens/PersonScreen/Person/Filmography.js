@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import Picture from '../../../Components/Picture';
 
@@ -26,6 +26,7 @@ const Filmography = props => {
               <Picture 
                 file_path={film.poster_path} 
                 dimensions={{width: 135, height: 210}}
+                icon={{name: 'local-movies', size: 70, position: {top: 64, left: 32}}}
               />
               <View style={styles(theme).text}>
                 <Text 
