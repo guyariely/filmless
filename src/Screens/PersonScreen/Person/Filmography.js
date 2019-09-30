@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
+import Picture from '../../../Components/Picture';
 
 const Filmography = props => {
 
@@ -22,14 +23,10 @@ const Filmography = props => {
               key={film.id}
               onPress={() => props.openMovieScreen({id: film.id})}
             >
-              <View style={styles(theme).imageShadow}>
-                <View style={styles(theme).imageContainer}>
-                  <Image
-                    style={styles(theme).image}
-                    source={{uri: 'https://image.tmdb.org/t/p/w500' + film.poster_path}} 
-                  />
-                </View>
-              </View>
+              <Picture 
+                file_path={film.poster_path} 
+                dimensions={{width: 135, height: 210}}
+              />
               <View style={styles(theme).text}>
                 <Text 
                   style={styles(theme).title}
@@ -60,7 +57,8 @@ const styles = theme => {
       fontWeight: 'bold',
       fontSize: 20,
       paddingHorizontal: 20,
-      paddingVertical: 15
+      paddingTop: 15,
+      paddingBottom: 25,
     },
     flatList: {
       paddingLeft: 20,
@@ -71,26 +69,6 @@ const styles = theme => {
       marginBottom: 10,
       width: 135,
     },
-    imageShadow: {
-      shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.8,
-      borderTopLeftRadius: 14,
-      borderTopRightRadius: 14,
-      marginVertical: 10,
-      height: 210,
-      width: 135,
-    },
-    imageContainer: {
-      flex: 1,
-      borderRadius: 15,
-      overflow: 'hidden',
-      backgroundColor: theme.base02
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover',
-    },
     text: {
       flex: 1,
       paddingHorizontal: 10,
@@ -99,6 +77,7 @@ const styles = theme => {
       textAlign: 'center'
     },
     title: {
+      paddingTop: 10,
       color: theme.text01,
       fontSize: 18,
       fontWeight: '600',

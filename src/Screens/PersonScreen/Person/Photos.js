@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
+import Picture from '../../../Components/Picture';
 
 const Photos = props => {
 
@@ -18,14 +19,10 @@ const Photos = props => {
                 style={styles(theme).photo}
                 onPress={() => props.openLightbox(props.photos, index)}
               >
-                <View style={styles(theme).imageShadow}>
-                  <View style={styles(theme).imageContainer}>
-                    <Image
-                      style={styles(theme).image}
-                      source={{uri: 'https://image.tmdb.org/t/p/w780' + photo.file_path}} 
-                    />
-                  </View>
-                </View>
+                <Picture 
+                  file_path={photo.file_path} 
+                  dimensions={{width: 280, height: 160}}
+                />
                 <Text style={styles(theme).title} numberOfLines={1}>
                   {photo.media.title + '  '}
                     <Text style={styles(theme).subtitle}>
@@ -57,25 +54,6 @@ const styles = theme => {
     photo: {
       marginVertical: 10,
       marginLeft: 15,
-    },
-    imageShadow: {
-      shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.8,
-      borderTopLeftRadius: 14,
-      borderTopRightRadius: 14,
-      height: 160,
-      width: 280,
-    },
-    imageContainer: {
-      flex: 1,
-      borderRadius: 15,
-      overflow: 'hidden',
-      backgroundColor: theme.base02
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover',
     },
     title: {
       width: 280,

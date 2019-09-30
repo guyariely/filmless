@@ -1,7 +1,5 @@
 import { AsyncStorage } from 'react-native';
 
-AsyncStorage.removeItem('hidelist').then();
-
 const getHidelist = async () => {
   try {
     const hidelist = await AsyncStorage.getItem('hidelist');

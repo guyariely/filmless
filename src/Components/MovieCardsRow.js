@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import Picture from '../Components/Picture';
 import { ThemesContext } from '../Context/ThemesContext';
 import isSmallScreen from '../utils/isSmallScreen';
 
@@ -18,14 +19,9 @@ const MovieCards = props => {
         data={props.movies}
         renderItem={({item: movie}) => (
           <TouchableOpacity style={styles(theme).movie} onPress={() => props.selectMovie(movie)}>
-            <View style={styles(theme).imageShadow}>
-              <View style={styles(theme).imageContainer}>
-                <Image
-                  style={styles(theme).image}
-                  source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
-                />
-              </View>
-            </View>
+            <Picture 
+              file_path={movie.poster_path} 
+            />
             <View style={styles(theme).text}>
               <Text 
                 style={styles(theme).title} 
@@ -67,25 +63,6 @@ const styles = theme => {
       marginTop: isSmallScreen() ? 5 : 8, 
       marginBottom: isSmallScreen() ? 5 : 26, 
       marginRight: isSmallScreen() ? 0 : 15,
-    },
-    imageShadow: {
-      flex: 5,
-      shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.8,
-      borderTopLeftRadius: 14,
-      borderTopRightRadius: 14,
-      paddingHorizontal: isSmallScreen() ? 15 : 0
-    },
-    imageContainer: {
-      flex: 1,
-      borderRadius: 15,
-      overflow: 'hidden',
-      backgroundColor: theme.base02,
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover',
     },
     text: {
       paddingHorizontal: 10,

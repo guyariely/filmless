@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, TextInput } from "react-native";
 import { ThemesContext } from '../Context/ThemesContext';
+import Picture from '../Components/Picture';
 import runtimeText from '../utils/runtimeText';
 
 const MovieCardsColumn = props => {
@@ -39,14 +40,10 @@ const MovieCardsColumn = props => {
           data={searchInput ? filteredMovies : props.movies}
           renderItem={({item: movie}) => (
             <TouchableOpacity style={styles(theme).movie} onPress={() => props.selectMovie(movie)}>
-              <View style={styles(theme).imageShadow}>
-                <View style={styles(theme).imageContainer}>
-                  <Image
-                    style={styles(theme).image}
-                    source={{uri: 'https://image.tmdb.org/t/p/w500' + movie.poster_path}} 
-                  />
-                </View>
-              </View>
+              <Picture 
+                file_path={movie.poster_path} 
+                dimensions={{width: 100, height: 140}}
+              />
               <View style={styles(theme).details}>
                 <Text style={styles(theme).title}>
                   {movie.title}
@@ -93,24 +90,6 @@ const styles = theme => {
       flexDirection: 'row',
       marginBottom: 20, 
       flex: 1
-    },
-    imageShadow: {
-      shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.8,
-      borderTopLeftRadius: 14,
-      borderTopRightRadius: 14,
-    },
-    imageContainer: {
-      borderRadius: 15,
-      height: 140,
-      width: 100,
-      overflow: 'hidden',
-      backgroundColor: theme.base02
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover'
     },
     details: {
       flex: 2,

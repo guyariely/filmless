@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
+import Picture from '../../../Components/Picture';
 
 const Actors = props => {
 
@@ -18,14 +19,10 @@ const Actors = props => {
                 key={actor.cast_id}
                 onPress={() => props.openPersonScreen(actor)}
               >
-                <View style={styles(theme).imageShadow}>
-                  <View style={styles(theme).imageContainer}>
-                    <Image
-                      style={styles(theme).image}
-                      source={{uri: 'https://image.tmdb.org/t/p/w500' + actor.profile_path}} 
-                    />
-                  </View>
-                </View>
+                <Picture 
+                  file_path={actor.profile_path} 
+                  dimensions={{width: 150, height: 240}}
+                />
                 <View style={styles(theme).text}>
                   <Text 
                     style={styles(theme).name}
@@ -65,29 +62,9 @@ const styles = theme => {
       paddingRight: 20
     },
     actor: {
-      marginLeft: 15,
-      marginBottom: 10,
-      width: 150,
-    },
-    imageShadow: {
-      shadowColor: theme.shadow,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.8,
-      borderTopLeftRadius: 14,
-      borderTopRightRadius: 14,
       marginVertical: 10,
-      height: 240,
+      marginLeft: 15,
       width: 150,
-    },
-    imageContainer: {
-      flex: 1,
-      borderRadius: 15,
-      overflow: 'hidden',
-      backgroundColor: theme.base02
-    },
-    image: {
-      flex: 1,
-      resizeMode: 'cover',
     },
     text: {
       flex: 1,
@@ -100,7 +77,8 @@ const styles = theme => {
       color: theme.text01,
       fontSize: 18,
       fontWeight: '600',
-      paddingVertical: 5
+      paddingTop: 15,
+      paddingBottom: 5
     },
     character: {
       color: theme.text03,

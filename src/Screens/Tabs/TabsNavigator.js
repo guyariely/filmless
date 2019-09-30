@@ -102,7 +102,7 @@ const TabsNavigator = createMaterialTopTabNavigator(
     }
   }, 
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Watchlist',
     animationEnabled: true,
     swipeEnabled: false,
     tabBarOptions: {
