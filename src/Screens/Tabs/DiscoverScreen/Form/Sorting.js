@@ -21,26 +21,25 @@ const Sorting = props => {
       <Text style={styles(theme).label}>CHOOSE A SORTING METHOD</Text>
       <View style={styles(theme).buttonsContainer}>
       {
-        sortOptions.map(sortMethod => {
+        sortOptions.map((sortMethod, index) => {
           return (
             <TouchableOpacity 
               key={sortMethod.parameter} 
-              style={
-                sortBy == sortMethod.parameter ?
-                [styles(theme).button, styles(theme).buttonActive] :
-                styles(theme).button
-              }
+              style={[
+                styles(theme).button, 
+                sortBy == sortMethod.parameter && styles(theme).buttonActive,
+                index > 1 && styles(theme).secondLineButton
+              ]}
               onPress={() => {
                 sortBy == sortMethod.parameter ?
                 setSortBy(null) :
                 setSortBy(sortMethod.parameter)
               }} 
             >
-              <Text style={
-                sortBy == sortMethod.parameter ?
-                [styles(theme).text, styles(theme).textActive] :
-                styles(theme).text
-              }>
+              <Text style={[
+                styles(theme).text,
+                sortBy == sortMethod.parameter && styles(theme).textActive
+              ]}>
                 {sortMethod.name}
               </Text>
             </TouchableOpacity>
@@ -65,7 +64,7 @@ const styles = theme => {
     buttonsContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-around'
+      justifyContent: 'space-between'
     },
     button: {
       paddingVertical: 15,
@@ -74,6 +73,9 @@ const styles = theme => {
       borderColor: theme.base01,
       borderWidth: 1,
       borderRadius: 5
+    },
+    secondLineButton: {
+      marginTop: 30
     },
     buttonActive: {
       backgroundColor: theme.base01,
