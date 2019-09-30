@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, TouchableOpacity, Dimensions, ActivityIndicator, Text, StatusBar, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const { width } = Dimensions.get('window');
 import ImageViewer from 'react-native-image-zoom-viewer';
+import { ThemesContext } from '../Context/ThemesContext';
 
 const Lightbox = props => {
 
@@ -12,15 +13,17 @@ const Lightbox = props => {
     return { url: 'https://image.tmdb.org/t/p/w780' + image.file_path };
   });
 
+  const { theme } = useContext(ThemesContext);
+
   const Header = ({currentIndex}) => {
     return (
-      <View style={styles.header}>
+      <View style={styles(theme).header}>
         <TouchableOpacity
           onPress={() => {
             props.navigation.goBack();
-            setTimeout(() => setShowModal(false), 200);
+            setShowModal(false);
           }} 
-          style={styles.closeButton}
+          style={styles(theme).closeButton}
         >
           <Icon 
             color={'#fff'} 
@@ -30,8 +33,8 @@ const Lightbox = props => {
         </TouchableOpacity>
         {
           images.length > 1 &&
-          <View style={styles.indexIndicatorContainer}>
-            <Text style={styles.indexIndicator}>
+          <View style={styles(theme).indexIndicatorContainer}>
+            <Text style={styles(theme).indexIndicator}>
               {currentIndex + 1} / {images.length}
             </Text>
           </View>
@@ -41,9 +44,9 @@ const Lightbox = props => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles(theme).container}>
       <StatusBar hidden={true} />
-      <Modal visible={showModal} transparent={true }>
+      <Modal visible={showModal} transparent={true}>
         <ImageViewer
           backgroundColor={'#000'}
           imageUrls={images}
@@ -57,31 +60,33 @@ const Lightbox = props => {
   );
 };
 
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: '#000'
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    top: 50,
-    width: width,
-    paddingLeft: 14,
-    paddingRight: 20,
-    zIndex: 1
-  },
-  indexIndicatorContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginRight: 10
-  },
-  indexIndicator: {
-    color: '#fff',
-    fontWeight: '500',
-    fontSize: 20,
-  }  
+const styles = theme => {
+  return {
+    container: {
+      flex: 1,
+      backgroundColor: theme.base01
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      position: 'absolute',
+      top: 50,
+      width: width,
+      paddingLeft: 14,
+      paddingRight: 20,
+      zIndex: 1
+    },
+    indexIndicatorContainer: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      marginRight: 10
+    },
+    indexIndicator: {
+      color: '#fff',
+      fontWeight: '500',
+      fontSize: 20,
+    }    
+  }
 };
 
 export default Lightbox;
