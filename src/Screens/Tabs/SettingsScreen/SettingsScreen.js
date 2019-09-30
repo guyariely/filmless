@@ -29,12 +29,12 @@ const styles = theme => {
       flex: 1,
       paddingTop: 40,
       backgroundColor: theme.base01,
-      paddingHorizontal: 28,
     },
     title: {
       justifyContent: 'flex-end',
       color: theme.text01,
       fontSize: 38,
+      paddingHorizontal: 28,
       paddingTop: isSmallScreen() ? 10 : 20
     }
   }

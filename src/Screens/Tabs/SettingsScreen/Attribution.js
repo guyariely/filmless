@@ -22,6 +22,9 @@ const Attribution = () => {
 
 const styles = theme => {
   return {
+    container: {
+      paddingHorizontal: 28,
+    },
     heading: {
       color: theme.heading,
       fontWeight: 'bold',

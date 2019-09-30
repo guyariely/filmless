@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext,  } from 'react';
+import React, { useState, createContext,  } from 'react';
 import { saveTheme } from '../utils/themePersist';
 import themes from '../Constants/themes';
 
@@ -6,10 +6,10 @@ export const ThemesContext = createContext();
 
 const ThemesContextProvider = props => {
 
-  const [theme, setTheme] = useState(themes.default);
+  const [theme, setTheme] = useState(themes.default.colors);
 
   const toggleTheme = theme => {
-    setTheme(theme);
+    setTheme(theme.colors);
     saveTheme(theme).then().catch(error => console.log(error));
   };
 

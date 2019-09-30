@@ -99,8 +99,6 @@ const Filters = props => {
   );
 };
 
-
-
 const styles = theme => {
   return {
     container: {

@@ -16,7 +16,7 @@ const HidelistReferral = props => {
   const { theme } = useContext(ThemesContext);
 
   return (
-    <View>
+    <View style={styles(theme).container}>
       <Text style={styles(theme).heading}>FILTERED FILMS</Text>
       <TouchableOpacity style={styles(theme).content}>
         <View style={styles(theme).images}>
@@ -51,6 +51,9 @@ const HidelistReferral = props => {
 
 const styles = theme => {
   return {
+    container: {
+      paddingHorizontal: 28,
+    },
     heading: {
       color: theme.heading,
       fontWeight: 'bold',

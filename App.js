@@ -16,7 +16,7 @@ const AppContainer = () => {
   useEffect(() => {
     getTheme().then(theme => {
       if (theme) {
-        setTheme(theme);
+        setTheme(theme.colors);
       }
       setAppLoading(false);
     }).catch(error => console.log(error));
