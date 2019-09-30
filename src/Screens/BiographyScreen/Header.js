@@ -28,7 +28,8 @@ const styles = theme => {
   return {
     header: {
       flexDirection: 'row',
-      paddingHorizontal: 20,
+      paddingLeft: 14,
+      paddingRight: 20,
       paddingBottom: 8
     }  
   }

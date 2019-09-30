@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import { getWatchlistStatus, saveToWatchlist, removeFromWatchlist } from '../../../utils/watchlistActions';
 import { getHidelistStatus, saveToHidelist, removeFromHidelist } from '../../../utils/hidelistActions';
-
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Header = props => {
 
@@ -74,7 +73,8 @@ const styles = theme => {
   return {
     header: {
       flexDirection: 'row',
-      paddingHorizontal: 20,
+      paddingLeft: 15,
+      paddingRight: 20,
       paddingBottom: 8,
       borderBottomWidth: 1,
       borderColor: theme.base01,

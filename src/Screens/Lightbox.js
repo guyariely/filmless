@@ -68,7 +68,8 @@ const styles = {
     position: 'absolute',
     top: 50,
     width: width,
-    paddingHorizontal: 20,
+    paddingLeft: 14,
+    paddingRight: 20,
     zIndex: 1
   },
   indexIndicatorContainer: {
