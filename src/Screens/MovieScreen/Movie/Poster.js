@@ -9,7 +9,7 @@ const Poster = props => {
   return (
     <TouchableOpacity 
       style={styles(theme).posterContainer}
-      onPress={() => props.openLightbox([{file_path: props.poster}])}
+      onPress={() => props.openLightbox(props.posters)}
     >
       <View style={styles(theme).poster}>
         <Image

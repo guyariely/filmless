@@ -9,7 +9,7 @@ const Profile = props => {
   return (
     <TouchableOpacity 
       style={styles(theme).profileContainer}
-      onPress={() => props.openLightbox([{file_path: props.profile}])}
+      onPress={() => props.openLightbox([{file_path: props.profile}, ...props.profiles])}
     >
       <View style={styles(theme).profile}>
         <Image

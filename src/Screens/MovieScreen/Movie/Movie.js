@@ -32,7 +32,8 @@ const Movie = props => {
         <Text style={styles(theme).title}>{title}</Text>
         <View style={styles(theme).mainContent}>
           <Poster 
-            poster={props.movie.poster_path} 
+            poster={props.movie.poster_path}
+            posters={images.posters} 
             openLightbox={props.openLightbox} 
           />
           <Info movie={props.movie} />

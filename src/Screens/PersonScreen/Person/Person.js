@@ -13,7 +13,7 @@ const Person = props => {
 
   const [showBorder, setShowBorder] = useState(false);
 
-  const { name, profile_path, biography, movie_credits, tagged_images } = props.person;
+  const { name, profile_path, biography, movie_credits, tagged_images, images } = props.person;
 
   const photos = tagged_images.results.filter(photo => {
     return photo.height === 1080 && photo.media_type == 'movie';
@@ -36,6 +36,7 @@ const Person = props => {
         <View style={styles(theme).mainContent}>
           <Profile 
             profile={profile_path} 
+            profiles={images.profiles}
             openLightbox={props.openLightbox} 
           />
           <Info person={props.person} />
