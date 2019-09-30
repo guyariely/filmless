@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text, View, AsyncStorage, Keyboard } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
+import { getWatchlist } from '../../../utils/watchlistActions';
 
 import isSmallScreen from '../../../utils/isSmallScreen';
 import sortMovies from '../../../utils/sortMovies';
 import Lister from './Lister';
-import WatchlistPreviews from './WatchlistPreviews';
+import MovieCardsColumn from '../../../Components/MovieCardsColumn';
 
 const WatchlistScreen = props => {
 
@@ -15,13 +16,21 @@ const WatchlistScreen = props => {
   const [sortDirection, setSortDirection] = useState('des');
 
   useEffect(() => {
-    AsyncStorage.getItem('watchlist').then(watchlist => {
-        if (watchlist) setWatchlist(JSON.parse(watchlist).reverse());
-      } 
-    ).catch(error => console.log(error));
+    Keyboard.dismiss();
+
+    getWatchlist().then(watchlist => setWatchlist(watchlist))
+    .catch(error => console.log(error));
   }, [props.isFocused]);
 
-  useEffect(() => Keyboard.dismiss(), [props.isFocused])
+  const toggleSortMethod = sortMethod => {
+    setSortMethod(sortMethod);
+    setWatchlist(sortMovies([...watchlist], sortMethod, sortDirection));
+  };
+
+  const toggleSortDirection = () => {
+    setSortDirection(sortDirection == 'asc' ? 'des' : 'asc');
+    setWatchlist([...watchlist].reverse());
+  };
 
   const { theme } = useContext(ThemesContext);
 
@@ -31,19 +40,13 @@ const WatchlistScreen = props => {
       <Lister 
         sortDirection={sortDirection}
         sortMethod={sortMethod}
-        setSortMethod={sortMethod => {
-          setSortMethod(sortMethod);
-          setWatchlist(sortMovies([...watchlist], sortMethod, sortDirection));
-        }} 
-        setSortDirection={() => {
-          setSortDirection(sortDirection == 'asc' ? 'des' : 'asc');
-          setWatchlist([...watchlist].reverse());
-        }}
+        setSortMethod={toggleSortMethod} 
+        setSortDirection={toggleSortDirection}
       />
       {
         watchlist.length > 0 &&
-        <WatchlistPreviews
-          watchlist={watchlist} 
+        <MovieCardsColumn
+          movies={watchlist} 
           selectMovie={movie => {
             props.navigation.push(
               'MovieScreen', { movie, loadDetails: false }

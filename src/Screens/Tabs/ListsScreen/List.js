@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import API from '../../../API/Movies';
 
-import MovieCards from '../../../Components/MovieCards';
+import MovieCardsRow from '../../../Components/MovieCardsRow';
 
 const List = props => {
 
@@ -44,7 +44,7 @@ const List = props => {
       <Text style={styles(theme).heading}>
         {props.listType.toUpperCase().replace('_', ' ')}
       </Text>
-      <MovieCards 
+      <MovieCardsRow 
         movies={
           props.listType == 'upcoming' ?
           list.filter(movie => new Date(movie.release_date).getTime() > new Date().getTime()) :

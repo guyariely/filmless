@@ -4,6 +4,7 @@ import Lightbox from './Lightbox';
 import ReviewScreen from './ReviewScreen/ReviewScreen';
 import PersonScreen from './PersonScreen/PersonScreen';
 import BiographyScreen from './BiographyScreen/BiographyScreen';
+import HidelistScreen from './HidelistScreen/HidelistScreen';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from "react-navigation";
 
@@ -14,6 +15,7 @@ const StackNavigator = createStackNavigator({
   ReviewScreen: ReviewScreen,
   PersonScreen: PersonScreen,
   BiographyScreen: BiographyScreen,
+  HidelistScreen: HidelistScreen
 }, {
   headerMode: 'none'
 });

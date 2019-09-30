@@ -7,7 +7,7 @@ import { getHidelistIDs } from '../../../utils/hidelistActions';
 import isSmallScreen from '../../../utils/isSmallScreen';
 
 import Form from './Form/Form';
-import MovieCards from '../../../Components/MovieCards';
+import MovieCardsRow from '../../../Components/MovieCardsRow';
 import { DiscoverContext } from '../../../Context/DiscoverContext';
 
 const DiscoverScreen = props => {
@@ -96,7 +96,7 @@ const DiscoverScreen = props => {
         }
         {
           (!error && !isLoading) &&
-          <MovieCards 
+          <MovieCardsRow 
             movies={movies.filter(movie => !hidelist.includes(movie.id))} 
             loadMovies={() => loadMovies(page)}
             selectMovie={movie => {

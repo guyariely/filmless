@@ -3,7 +3,7 @@ import { Text, View, ScrollView } from 'react-native';
 import { ThemesContext } from '../../Context/ThemesContext';
 import Header from './Header';
 
-const ReviewScreen = props => {
+const BiographyScreen = props => {
 
   const { name, biography } = props.navigation.getParam('person', '');
 
@@ -66,4 +66,4 @@ const styles = theme => {
   }
 };
 
-export default ReviewScreen;
+export default BiographyScreen;

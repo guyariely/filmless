@@ -40,8 +40,8 @@ const SearchScreen = props => {
           <TextInput
             style={input ? [styles(theme).searchButton, styles(theme).searchButton__active] : styles(theme).searchButton}
             keyboardAppearance="dark"
-            placeholder="Search movies"
-            placeholderTextColor={theme.text03}
+            placeholder="Search"
+            placeholderTextColor={theme.text04}
             selectionColor={theme.primary}
             onChangeText={input => setInput(input)}
             value={input}

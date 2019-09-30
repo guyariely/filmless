@@ -62,7 +62,7 @@ const styles = theme => {
     },
     sortDirectionButtonContainer: {
       flexDirection: 'row',
-      paddingVertical: 14
+      paddingVertical: 16
     },
     sortDirectionButton: {
       fontWeight: '200',

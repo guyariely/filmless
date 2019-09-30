@@ -15,10 +15,24 @@ const HidelistReferral = props => {
 
   const { theme } = useContext(ThemesContext);
 
+  if (images.length == 0) {
+    return (
+      <View style={styles(theme).container}>
+      <Text style={styles(theme).heading}>FILTERED FILMS</Text>
+      <Text style={styles(theme).placeholder}>
+        Movies you marked as filtered will show up here.
+      </Text>
+    </View>
+    );
+  }
+
   return (
     <View style={styles(theme).container}>
       <Text style={styles(theme).heading}>FILTERED FILMS</Text>
-      <TouchableOpacity style={styles(theme).content}>
+      <TouchableOpacity 
+        style={styles(theme).content}
+        onPress={() =>  props.navigation.push('HidelistScreen')}
+      >
         <View style={styles(theme).images}>
         {
           images.length > 0 &&
@@ -110,7 +124,15 @@ const styles = theme => {
       fontSize: 18,
       fontWeight: '600',
       color: theme.text02,
-    }  
+    },
+    placeholder: {
+      // textAlign: 'center',
+      fontSize: 18,
+      fontWeight: '600',
+      color: theme.text03,
+      paddingVertical: 20,
+      // paddingHorizontal: 30
+    }
   }
 };
 

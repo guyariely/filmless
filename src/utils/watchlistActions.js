@@ -1,10 +1,28 @@
 import { AsyncStorage } from 'react-native';
 
+const getWatchlist = async () => {
+  try {
+    const watchlist = await AsyncStorage.getItem('watchlist');
+    if (!watchlist) {
+      return [];
+    }
+    return JSON.parse(watchlist).reverse();  
+  } 
+  catch (error) {
+    console.log(error);
+  }
+};
+
 const getWatchlistStatus = async movieId => {
-  const watchlist = await AsyncStorage.getItem('watchlist');
-  if (!watchlist) return false;
-  const watchlistIds = JSON.parse(watchlist).map(movie => movie.id);
-  return watchlistIds.includes(movieId);
+  try {
+    const watchlist = await AsyncStorage.getItem('watchlist');
+    if (!watchlist) return false;
+    const watchlistIds = JSON.parse(watchlist).map(movie => movie.id);
+    return watchlistIds.includes(movieId);  
+  } 
+  catch (error) {
+    console.log(error);
+  }
 };
 
 const saveToWatchlist = async movie => {
@@ -36,5 +54,10 @@ const removeFromWatchlist = async movie => {
 };
 
 
-export { getWatchlistStatus, saveToWatchlist, removeFromWatchlist };
+export { 
+  getWatchlist, 
+  getWatchlistStatus, 
+  saveToWatchlist, 
+  removeFromWatchlist 
+};
 
