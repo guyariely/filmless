@@ -9,7 +9,8 @@ const Profile = props => {
       onPress={() => props.openLightbox([{file_path: props.profile}, ...props.profiles])}
     >
       <Picture 
-        file_path={'props.profile'} 
+        type='profile'
+        file_path={props.profile} 
         dimensions={{width: 150, height: 220}}
         icon={{name: 'person', size: 80, position: {top: 66, left: 34}}}
       />

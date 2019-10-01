@@ -13,6 +13,7 @@ const PersonResult = ({person, openPersonScreen}) => {
       onPress={() => openPersonScreen({id: person.id})}
     >
       <Picture 
+        type='profile'        
         file_path={person.profile_path} 
         dimensions={{width: 120, height: 180}}
         icon={{name: 'person', size: 70, position: {top: 56, left: 25}}}

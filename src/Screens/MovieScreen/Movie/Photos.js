@@ -20,6 +20,7 @@ const Photos = props => {
                 onPress={() => props.openLightbox(props.images, index)}
               >
               <Picture 
+                type='backdrop'
                 file_path={image.file_path} 
                 dimensions={{width: 280, height: 160}}
                 icon={{name: 'insert-photo', size: 80, position: {top: 40, left: 100}}}

@@ -20,6 +20,7 @@ const MovieCards = props => {
         renderItem={({item: movie}) => (
           <TouchableOpacity style={styles(theme).movie} onPress={() => props.selectMovie(movie)}>
             <Picture 
+              type='poster'
               file_path={movie.poster_path} 
               icon={{name: 'local-movies', size: 80, position: {top: 70, left: 28}}}
             />

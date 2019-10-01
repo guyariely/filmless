@@ -20,6 +20,7 @@ const Actors = props => {
                 onPress={() => props.openPersonScreen(actor)}
               >
                 <Picture 
+                  type='profile'
                   file_path={actor.profile_path} 
                   dimensions={{width: 150, height: 240}}
                   icon={{name: 'person', size: 90, position: {top: 70, left: 30}}}

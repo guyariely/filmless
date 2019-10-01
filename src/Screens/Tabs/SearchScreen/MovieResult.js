@@ -15,7 +15,7 @@ const MovieResult = ({movie, selectMovie}) => {
       <View style={styles(theme).imageContainer}>
         <Image
           style={styles(theme).image}
-          source={{uri: 'https://image.tmdb.org/t/p/w1280' + movie.backdrop_path}} 
+          source={{uri: 'https://image.tmdb.org/t/p/w780' + movie.backdrop_path}} 
         />
         <Text 
           style={styles(theme).movieTitle} 

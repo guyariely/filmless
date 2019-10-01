@@ -51,6 +51,7 @@ const MovieCardsColumn = props => {
               onPress={() => openMovieScreen(movie)}
             >
               <Picture 
+                type='poster'
                 file_path={movie.poster_path} 
                 dimensions={{width: 100, height: 140}}
                 icon={{name: 'local-movies', size: 60, position: {top: 40, left: 20}}}

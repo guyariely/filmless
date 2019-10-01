@@ -24,6 +24,7 @@ const Filmography = props => {
               onPress={() => props.openMovieScreen({id: film.id})}
             >
               <Picture 
+                type='poster'
                 file_path={film.poster_path} 
                 dimensions={{width: 135, height: 210}}
                 icon={{name: 'local-movies', size: 70, position: {top: 64, left: 32}}}

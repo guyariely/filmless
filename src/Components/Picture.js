@@ -7,6 +7,16 @@ const Picture = props => {
 
   const { name, size, position } = props.icon;
 
+  let quality;
+  switch (props.type) {
+    case 'poster':
+      quality = 'w500';
+    case 'profile':
+      quality = 'w185';
+    default:
+      quality = 'w780';
+  }
+
   const { theme } = useContext(ThemesContext);
 
   return (
@@ -14,7 +24,7 @@ const Picture = props => {
       <View style={[styles(theme).imageContainer, props.dimensions && props.dimensions]}>
         <Image
           style={styles(theme).image}
-          source={{uri: 'https://image.tmdb.org/t/p/w500' + props.file_path}} 
+          source={{uri: 'https://image.tmdb.org/t/p/' + quality + props.file_path}} 
         />
         <View style={[styles(theme).iconContainer, position]}>
           <Icon color={theme.text04} name={name} size={size} />
