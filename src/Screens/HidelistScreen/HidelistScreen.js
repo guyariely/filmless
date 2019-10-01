@@ -4,7 +4,7 @@ import { ThemesContext } from '../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
 import { getHidelist } from '../../utils/hidelistActions';
 import Header from './Header';
-import MovieCardsColumn from '../../Components/MovieCardsColumn';
+import MovieCardsColumn from '../../Components/MoviesCardsColumn/MovieCardsColumn';
 
 const HidelistScreen = props => {
 
@@ -26,7 +26,7 @@ const HidelistScreen = props => {
       <Text style={styles(theme).title}>Filtered Films</Text>
       {
         hidelist.length > 0 &&
-        <MovieCardsColumn movies={hidelist} />
+        <MovieCardsColumn movies={hidelist} type='hidelist' />
       }
     </View>
   );

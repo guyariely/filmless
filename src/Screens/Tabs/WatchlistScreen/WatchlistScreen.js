@@ -7,7 +7,7 @@ import { getWatchlist } from '../../../utils/watchlistActions';
 import isSmallScreen from '../../../utils/isSmallScreen';
 import sortMovies from '../../../utils/sortMovies';
 import Lister from './Lister';
-import MovieCardsColumn from '../../../Components/MovieCardsColumn';
+import MovieCardsColumn from '../../../Components/MoviesCardsColumn/MovieCardsColumn';
 
 const WatchlistScreen = props => {
 
@@ -45,7 +45,7 @@ const WatchlistScreen = props => {
       />
       {
         watchlist.length > 0 &&
-        <MovieCardsColumn movies={watchlist} />
+        <MovieCardsColumn movies={watchlist} type='watchlist' />
       }
     </View>
   )

@@ -12,7 +12,7 @@ const Poster = props => {
         type='poster'
         file_path={props.poster} 
         dimensions={{width: 150, height: 220}}
-        icon={{name: 'local-movies', size: 80, position: {top: 66, left: 34}}}
+        icon={{name: 'local-movies', size: 80, position: {top: 66, left: 36}}}
       />
     </TouchableOpacity>
   );

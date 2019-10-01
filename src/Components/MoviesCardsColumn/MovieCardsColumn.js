@@ -1,21 +1,34 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, FlatList, TouchableOpacity, TextInput } from "react-native";
-import { ThemesContext } from '../Context/ThemesContext';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, FlatList, TextInput } from "react-native";
+import { ThemesContext } from '../../Context/ThemesContext';
 import { withNavigationFocus } from "react-navigation";
-import Picture from '../Components/Picture';
-import runtimeText from '../utils/runtimeText';
+import { removeFromWatchlist } from '../../utils/watchlistActions';
+import { removeFromHidelist } from '../../utils/hidelistActions';
+import MovieCard from './MovieCard';
 
 const MovieCardsColumn = props => {
 
+  const [movies, setMovies] = useState(props.movies);
   const [searchInput, setSearchInput] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
-  
   const [showBorder, setShowBorder] = useState(false);
+
+  useEffect(() => setMovies(props.movies), [props.movies])
 
   const openMovieScreen = movie => {
     props.navigation.push(
       'MovieScreen', { movie, loadDetails: false }
     );
+  };
+
+  const removeFromList = removedMovie => {
+    setMovies(movies.filter(movie =>
+      movie.id != removedMovie.id
+    ));
+    if (props.type == 'watchlist') {
+      return removeFromWatchlist(removedMovie);
+    }
+    return removeFromHidelist(removedMovie);
   };
 
   const { theme } = useContext(ThemesContext);
@@ -30,7 +43,7 @@ const MovieCardsColumn = props => {
           placeholderTextColor={theme.text04}
           selectionColor={theme.primary}
           onChangeText={input => {
-            setFilteredMovies(props.movies.filter(movie => 
+            setFilteredMovies(movies.filter(movie => 
               movie.title.toLowerCase().includes(input.toLowerCase())
             ));
             setSearchInput(input);
@@ -42,29 +55,15 @@ const MovieCardsColumn = props => {
         <FlatList
           contentContainerStyle={styles(theme).flatList}
           keyExtractor={movie => movie.id.toString()}
-          onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1 && props.movies.length > 0)}
+          onScroll={e => setShowBorder(e.nativeEvent.contentOffset.y >= 1 && movies.length > 0)}
           scrollEventThrottle={16}
-          data={searchInput ? filteredMovies : props.movies}
-          renderItem={({item: movie}) => (
-            <TouchableOpacity 
-              style={styles(theme).movie} 
-              onPress={() => openMovieScreen(movie)}
-            >
-              <Picture 
-                type='poster'
-                file_path={movie.poster_path} 
-                dimensions={{width: 100, height: 140}}
-                icon={{name: 'local-movies', size: 60, position: {top: 40, left: 20}}}
-              />
-              <View style={styles(theme).details}>
-                <Text style={styles(theme).title}>
-                  {movie.title}
-                </Text>
-                <Text style={styles(theme).info}>
-                  {movie.vote_average} | {runtimeText(movie.runtime)} | {movie.release_date.slice(0, 4)}
-                </Text>
-              </View>
-            </TouchableOpacity>
+          data={searchInput ? filteredMovies : movies}
+          renderItem={({item}) => (
+            <MovieCard
+              movie={item}
+              openMovieScreen={openMovieScreen}
+              removeFromList={removeFromList}
+            />
           )}
         />
       </View>
@@ -96,29 +95,7 @@ const styles = theme => {
     },
     flatList: {
       paddingBottom: 250,
-      paddingHorizontal: 28,
-    },  
-    movie: {
-      flexDirection: 'row',
-      marginBottom: 20, 
-      flex: 1
-    },
-    details: {
-      flex: 2,
-      justifyContent: 'center',
-      marginLeft: 15
-    },
-    title: {
-      marginBottom: 8,
-      color: theme.text01,
-      fontSize: 22,
-      fontWeight: '700',
-    },
-    info: {
-      color: theme.text03,
-      fontSize: 18,
-      fontWeight: '600',
-    }  
+    }
   }
 };
 
