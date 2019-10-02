@@ -15,8 +15,10 @@ const MovieCard = ({movie, openMovieScreen, removeFromList}) => {
       <TouchableOpacity 
         style={styles(theme).removeButton}
         onPress={() => removeFromList(movie)}
-      >
-        <Icon color={theme.text01} name='remove-circle-outline' size={35} />
+      > 
+      <View style={styles(theme).removeButtonContainer}>
+        <Icon color={theme.primary} name='remove-circle-outline' size={35} />
+      </View>
       </TouchableOpacity>
     );
   };
@@ -78,6 +80,10 @@ const styles = theme => {
       color: theme.text03,
       fontSize: 18,
       fontWeight: '600',
+    },
+    removeButtonContainer: {
+      flexDirection: 'row', 
+      justifyContent: 'center'
     },
     removeButton: {
       flex: 1,

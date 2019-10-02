@@ -22,7 +22,7 @@ const MovieCards = props => {
             <Picture 
               type='poster'
               file_path={movie.poster_path} 
-              icon={{name: 'local-movies', size: 80, position: {top: 70, left: 28}}}
+              icon={{name: 'local-movies', size: 80, position: isSmallScreen() ? {top: 48, left: 20} : {top: 70, left: 28}}}
             />
             <View style={styles(theme).text}>
               <Text 
@@ -32,7 +32,7 @@ const MovieCards = props => {
               </Text>
             </View>
             {
-              !isSmallScreen() &&
+              !(isSmallScreen() && props.type == 'discover') &&
               <View style={styles(theme).text}>
                 <Text 
                   style={styles(theme).rating} 
@@ -61,10 +61,10 @@ const styles = theme => {
     },  
     movie: {
       flex: 1,
-      width: 135,
-      marginTop: isSmallScreen() ? 5 : 8, 
-      marginBottom: isSmallScreen() ? 5 : 26, 
-      marginRight: isSmallScreen() ? 0 : 15,
+      width: isSmallScreen() ? 120 : 135,
+      marginTop: isSmallScreen() ? 10 : 8, 
+      marginBottom: isSmallScreen() ? 10 : 26, 
+      marginRight: isSmallScreen() ? 15 : 15,
     },
     text: {
       paddingHorizontal: 10,

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, ActivityIndicator } from 'react-native';
 import { ThemesContext } from '../../../Context/ThemesContext';
 import API from '../../../API/Movies';
+import isSmallScreen from '../../../utils/isSmallScreen';
 
 import MovieCardsRow from '../../../Components/MovieCardsRow';
 
@@ -45,6 +46,7 @@ const List = props => {
         {props.listType.toUpperCase().replace('_', ' ')}
       </Text>
       <MovieCardsRow 
+        type='list'
         movies={
           props.listType == 'upcoming' ?
           list.filter(movie => new Date(movie.release_date).getTime() > new Date().getTime()) :
@@ -60,7 +62,8 @@ const List = props => {
 const styles = theme => {
   return {
     container: {
-      height: 340
+      height: isSmallScreen() ? 300 : 340,
+      paddingBottom: isSmallScreen() ? 15 : 0
     },
     heading: {
       color: theme.heading,

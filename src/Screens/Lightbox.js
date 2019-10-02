@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const { width } = Dimensions.get('window');
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { ThemesContext } from '../Context/ThemesContext';
+import isSmallScreen from '../utils/isSmallScreen';
 
 const Lightbox = props => {
 
@@ -70,7 +71,7 @@ const styles = theme => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       position: 'absolute',
-      top: 50,
+      top: isSmallScreen() ? 10 : 50,
       width: width,
       paddingLeft: 14,
       paddingRight: 20,

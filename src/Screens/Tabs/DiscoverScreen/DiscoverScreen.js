@@ -97,6 +97,7 @@ const DiscoverScreen = props => {
         {
           (!error && !isLoading) &&
           <MovieCardsRow 
+            type='discover'
             movies={movies.filter(movie => !hidelist.includes(movie.id))} 
             loadMovies={() => loadMovies(page)}
             selectMovie={movie => {
