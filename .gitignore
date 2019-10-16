@@ -11,4 +11,6 @@ web-build/
 web-report/
 
 env.*
-API_REQUESTS.txt
+API_REQUESTS.md
+dummyData.js
+movie-cards.md
