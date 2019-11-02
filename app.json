@@ -25,6 +25,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.guyarieli.filmless",
       "supportsTablet": false
     }
   }
