@@ -2,9 +2,9 @@
 
 Find the perfect movie to watch you didn’t even know exist. Just tell filmless what you’re into, and we’ll do the rest.
 
-![showcase](https://user-images.githubusercontent.com/42813496/116150252-cf471680-a6eb-11eb-9d5c-7833d5343d9c.png)
+![photo showcase](https://user-images.githubusercontent.com/42813496/116150252-cf471680-a6eb-11eb-9d5c-7833d5343d9c.png)
 
-![showcase](https://media.giphy.com/media/ObeV9zJF9VeNygyaHZ/giphy.gif)
+[Example Video](https://user-images.githubusercontent.com/42813496/116152422-9197bd00-a6ee-11eb-9f41-25b919927ca4.mov)
 
 # running the project
 
