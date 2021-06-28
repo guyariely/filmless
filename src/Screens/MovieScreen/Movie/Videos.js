@@ -1,40 +1,45 @@
 import React, { useContext } from "react";
-import { Text, View, ScrollView, WebView, ActivityIndicator } from 'react-native';
-import { ThemesContext } from '../../../Context/ThemesContext';
+import { Text, View, ScrollView, ActivityIndicator } from "react-native";
+import WebView from "react-native-webview";
+import { ThemesContext } from "../../../Context/ThemesContext";
 
 const Videos = props => {
-
   const { theme } = useContext(ThemesContext);
 
   return (
     <View>
       <Text style={styles(theme).heading}>VIDEOS</Text>
-      {
-        props.videos &&
-        <ScrollView horizontal={true} contentContainerStyle={styles(theme).scrollView}>
-        {
-          props.videos.map(video => {
+      {props.videos && (
+        <ScrollView
+          horizontal={true}
+          contentContainerStyle={styles(theme).scrollView}
+        >
+          {props.videos.map(video => {
             return (
               <View style={styles(theme).videoShadow} key={video.id}>
                 <View style={styles(theme).videoContainer}>
                   <WebView
                     style={styles(theme).video}
                     javaScriptEnabled={true}
-                    renderLoading={() => 
+                    renderLoading={() => (
                       <View style={styles(theme).loadingScreen}>
                         <ActivityIndicator />
                       </View>
-                    }
+                    )}
                     startInLoadingState
-                    source={{uri: 'https://www.youtube.com/embed/' + video.key + '?&modestbranding=1'}}
+                    source={{
+                      uri:
+                        "https://www.youtube.com/embed/" +
+                        video.key +
+                        "?&modestbranding=1",
+                    }}
                   />
+                </View>
               </View>
-            </View>
             );
-          })
-        }
+          })}
         </ScrollView>
-      }
+      )}
     </View>
   );
 };
@@ -43,14 +48,14 @@ const styles = theme => {
   return {
     heading: {
       color: theme.heading,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       fontSize: 20,
       paddingHorizontal: 20,
-      paddingVertical: 15
+      paddingVertical: 15,
     },
     scrollView: {
       paddingLeft: 5,
-      paddingRight: 20
+      paddingRight: 20,
     },
     videoShadow: {
       shadowColor: theme.shadow,
@@ -67,17 +72,17 @@ const styles = theme => {
       borderRadius: 15,
       height: 160,
       width: 280,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     video: {
       flex: 1,
     },
     loadingScreen: {
       backgroundColor: theme.base02,
-      justifyContent: 'center',
-      flex: 1
-    }
-  }
+      justifyContent: "center",
+      flex: 1,
+    },
+  };
 };
 
 export default Videos;
