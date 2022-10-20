@@ -19,7 +19,7 @@
     "react-native-image-zoom-viewer": "^2.2.27",
     "react-native-paper": "^2.16.0",
     "react-native-picker-select": "^6.6.0",
-    "react-native-reanimated": "~2.1.0",
+    "react-native-reanimated": "~2.10.0",
     "react-native-screens": "^3.4.0",
     "react-native-sectioned-multi-select": "^0.7.7",
     "react-native-snap-carousel": "^3.9.1",
